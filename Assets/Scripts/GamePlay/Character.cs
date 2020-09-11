@@ -30,14 +30,19 @@ namespace GamePlay
             transform.localPosition += new Vector3(distance.x, 0, distance.y);
         }
 
+        /// <summary>
+        /// Rotate the character toward the <c>toDeg</c> in global space.<para />
+        /// It will rotate smoothly, according to the object's <c>rotatingAccelTime</c>.
+        /// </summary>
+        /// <param name="toDeg">The degree to rotate to</param>
         protected void Look(float toDeg)
         {
-            var oldEulerAngle = transform.localEulerAngles;
+            var oldEulerAngle = transform.eulerAngles;
             var curDeg = Mathf.SmoothDampAngle(
                 oldEulerAngle.y, toDeg,
                 ref _curRotatingVelocity, characterData.rotatingAccelTime);
             oldEulerAngle.y = curDeg;
-            transform.localEulerAngles = oldEulerAngle;
+            transform.eulerAngles = oldEulerAngle;
         }
     }
 }
