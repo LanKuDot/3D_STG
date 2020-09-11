@@ -458,7 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac81872dceede2a4b8bba474bd542cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 1847775171}
+  bulletPools:
+  - {fileID: 1847775171}
   playerData: {fileID: 11400000, guid: 1353d26c8bbc2c0438993144b55ba2d1, type: 2}
   targetCamera: {fileID: 534669904}
 --- !u!65 &845479127
