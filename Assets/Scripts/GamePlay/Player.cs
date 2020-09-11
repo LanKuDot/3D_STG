@@ -5,6 +5,7 @@ namespace GamePlay
 {
     public class Player : Character
     {
+        public PlayerData playerData;
         public Camera targetCamera;
 
         private Vector2 _movingDirection;
@@ -13,6 +14,7 @@ namespace GamePlay
 
         private void Start()
         {
+            characterData = playerData.characterData;
             _cameraCenterPos = targetCamera.pixelRect.size / 2;
         }
 
