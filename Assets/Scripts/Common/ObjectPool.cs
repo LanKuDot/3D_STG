@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class ObjectPool
+public class ObjectPool : MonoBehaviour
 {
-    private readonly GameObject _targetObject;
-    private readonly Queue<GameObject> _pool = new Queue<GameObject>();
+    public GameObject targetObject;
 
-    public ObjectPool(GameObject targetObject)
-    {
-        _targetObject = targetObject;
-    }
+    private readonly Queue<GameObject> _pool = new Queue<GameObject>();
 
     public GameObject GetObject()
     {
         var obj =
-            _pool.Count == 0 ? GameObject.Instantiate(_targetObject) : _pool.Dequeue();
+            _pool.Count == 0 ? Instantiate(targetObject) : _pool.Dequeue();
         obj.SetActive(true);
         return obj;
     }
@@ -22,6 +18,7 @@ public class ObjectPool
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);
+        obj.transform.SetParent(transform);
         _pool.Enqueue(obj);
     }
 }
