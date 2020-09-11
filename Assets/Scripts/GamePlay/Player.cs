@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace GamePlay
@@ -9,8 +10,10 @@ namespace GamePlay
         public Camera targetCamera;
 
         private Vector2 _movingDirection;
-        private float _lookingDeg;
         private Vector2 _cameraCenterPos;
+        private float _lookingDeg;
+        private bool _isFiring = false;
+        private Coroutine _lastFiringCoroutine;
 
         private void Start()
         {
@@ -29,10 +32,36 @@ namespace GamePlay
             _lookingDeg = -Vector2.SignedAngle(Vector2.up, pointerPos - _cameraCenterPos);
         }
 
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            if (context.performed) {
+                // Prevent the last coroutine from living while it's waiting
+                // and the _isFiring flag becomes true again.
+                if (_lastFiringCoroutine != null)
+                    StopCoroutine(_lastFiringCoroutine);
+                _isFiring = true;
+                _lastFiringCoroutine = StartCoroutine(Fire());
+            } else if (context.canceled) {
+                _isFiring = false;
+            }
+        }
+
         private void Update()
         {
             Move(_movingDirection);
             Look(_lookingDeg);
+        }
+
+        private IEnumerator Fire()
+        {
+            while (_isFiring) {
+                var direction =
+                    Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
+                base.Fire(direction / direction.magnitude, 0);
+                yield return new WaitForSeconds(playerData.firingInterval);
+            }
+
+            _lastFiringCoroutine = null;
         }
     }
 }

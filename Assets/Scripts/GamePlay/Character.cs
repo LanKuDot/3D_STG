@@ -1,10 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GamePlay
 {
     public class Character : MonoBehaviour
     {
+        public ObjectPool[] bulletPools;
         protected CharacterData characterData;
 
         private Vector2 _curMovingDirection = Vector2.zero;
@@ -26,7 +26,7 @@ namespace GamePlay
                 ref _curMovingVelocity, characterData.movingAccelTime);
 
             var distance =
-                _curMovingDirection * (characterData.movingVelocity * Time.deltaTime);
+                characterData.movingVelocity * Time.deltaTime * _curMovingDirection;
             transform.localPosition += new Vector3(distance.x, 0, distance.y);
         }
 
@@ -43,6 +43,22 @@ namespace GamePlay
                 ref _curRotatingVelocity, characterData.rotatingAccelTime);
             oldEulerAngle.y = curDeg;
             transform.eulerAngles = oldEulerAngle;
+        }
+
+        /// <summary>
+        /// Fire the bullet toward the <c>direction</c>
+        /// </summary>
+        /// <param name="direction">The direction in global space</param>
+        /// <param name="id">The id of the <c>objectPools</c> used to spawn bullets</param>
+        protected void Fire(Vector3 direction, int id)
+        {
+            var bulletObj = bulletPools[id].GetObject();
+            var bullet = bulletObj.GetComponent<Bullet>();
+
+            bulletObj.transform.SetParent(null);
+            bulletObj.transform.position = transform.position;
+            bullet.originObjectPool = bulletPools[id];
+            bullet.Fire(direction);
         }
     }
 }
