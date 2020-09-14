@@ -17,7 +17,7 @@ namespace GamePlay
 
         private void Start()
         {
-            characterData = playerData.characterData;
+            characterData = playerData;
             _cameraCenterPos = targetCamera.pixelRect.size / 2;
         }
 

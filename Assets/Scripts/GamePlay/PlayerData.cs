@@ -4,9 +4,8 @@ namespace GamePlay
 {
     [CreateAssetMenu(fileName = "PlayerData",
         menuName = "ScriptableObject/PlayerData", order = 1)]
-    public class PlayerData : ScriptableObject
+    public class PlayerData : CharacterData
     {
-        public CharacterData characterData = new CharacterData();
         public float firingInterval = 0.5f;
     }
 }
