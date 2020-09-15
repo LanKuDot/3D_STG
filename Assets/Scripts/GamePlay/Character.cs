@@ -47,17 +47,20 @@ namespace GamePlay
         /// <summary>
         /// Fire the bullet toward the <c>direction</c>
         /// </summary>
+        /// <param name="bulletName">The name of the bullet object registered
+        /// in the <c>ObjectPool</c></param>
         /// <param name="direction">The direction in global space</param>
-        /// <param name="id">The id of the <c>objectPools</c> used to spawn bullets</param>
-        protected void Fire(Vector3 direction, int id)
+        /// <param name="gap">The distance between the fired object and the bullet
+        /// along the <c>direction</c></param>
+        protected void Fire(string bulletName, Vector3 direction, float gap)
         {
-            var bulletObj = bulletPools[id].GetObject();
-            var bullet = bulletObj.GetComponent<Bullet>();
+            var bulletObj = ObjectPool.Instance.GetObject(bulletName);
+            var bulletTransform = bulletObj.transform;
 
-            bulletObj.transform.SetParent(null);
-            bulletObj.transform.position = transform.position;
-            bullet.originObjectPool = bulletPools[id];
-            bullet.Fire(direction);
+            bulletTransform.SetParent(null);
+            bulletTransform.position = transform.position + direction * gap;
+            bulletTransform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+            bulletObj.SetActive(true);
         }
     }
 }

@@ -12,13 +12,9 @@ namespace GamePlay
 
         private Vector3 _movingDirection;
 
-        public virtual void Fire(Vector3 direction)
-        {
-            _movingDirection = direction;
-        }
-
         protected void OnEnable()
         {
+            _movingDirection = transform.rotation * Vector3.up;
             StartCoroutine(LifeTimeCountDown());
         }
 

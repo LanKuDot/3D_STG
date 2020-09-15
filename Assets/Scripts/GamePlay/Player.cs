@@ -57,7 +57,7 @@ namespace GamePlay
             while (_isFiring) {
                 var direction =
                     Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
-                base.Fire(direction / direction.magnitude, 0);
+                base.Fire("playerBullet", direction.normalized, 1.5f);
                 yield return new WaitForSeconds(playerData.firingInterval);
             }
 
