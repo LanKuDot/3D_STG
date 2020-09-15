@@ -6,7 +6,7 @@ namespace GamePlay
 {
     public class Bullet : MonoBehaviour
     {
-        public ObjectPool originObjectPool;
+        public string bulletName = "bullet";
         public float velocity = 20.0f;
         public float lifeTime = 3.0f;
 
@@ -25,7 +25,8 @@ namespace GamePlay
         private IEnumerator LifeTimeCountDown()
         {
             yield return new WaitForSeconds(lifeTime);
-            originObjectPool.ReturnObject(gameObject);
+            gameObject.SetActive(false);
+            ObjectPool.Instance.ReturnObject(bulletName, gameObject);
         }
 
         protected void Update()

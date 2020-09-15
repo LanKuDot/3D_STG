@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2912097e5f41e0c4ba57ddbdac7949cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originObjectPool: {fileID: 0}
+  bulletName: playerBullet
   velocity: 20
   lifeTime: 1.5

@@ -4,7 +4,6 @@ namespace GamePlay
 {
     public class Character : MonoBehaviour
     {
-        public ObjectPool[] bulletPools;
         protected CharacterData characterData;
 
         private Vector2 _curMovingDirection = Vector2.zero;
