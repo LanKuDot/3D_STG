@@ -46,7 +46,7 @@ namespace GamePlay
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Move(_movingDirection);
             Look(_lookingDeg);

@@ -2,13 +2,20 @@
 
 namespace GamePlay
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Character : MonoBehaviour
     {
         protected CharacterData characterData;
 
+        private Rigidbody _rigidbody;
         private Vector2 _curMovingDirection = Vector2.zero;
         private Vector2 _curMovingVelocity = Vector2.zero;
         private float _curRotatingVelocity = 0.0f;
+
+        protected void Awake()
+        {
+            _rigidbody = gameObject.GetComponent<Rigidbody>();
+        }
 
         /// <summary>
         /// Move the character along the <c>direction</c>.<para />
@@ -21,12 +28,13 @@ namespace GamePlay
                 return;
 
             _curMovingDirection = Vector2.SmoothDamp(
-                _curMovingDirection, direction,
-                ref _curMovingVelocity, characterData.movingAccelTime);
+                _curMovingDirection, direction, ref _curMovingVelocity,
+                characterData.movingAccelTime, Mathf.Infinity, Time.fixedDeltaTime);
 
             var distance =
-                characterData.movingVelocity * Time.deltaTime * _curMovingDirection;
-            transform.localPosition += new Vector3(distance.x, 0, distance.y);
+                characterData.movingVelocity * Time.fixedDeltaTime * _curMovingDirection;
+            _rigidbody.MovePosition(
+                transform.localPosition + new Vector3(distance.x, 0, distance.y));
         }
 
         /// <summary>
@@ -38,10 +46,10 @@ namespace GamePlay
         {
             var oldEulerAngle = transform.eulerAngles;
             var curDeg = Mathf.SmoothDampAngle(
-                oldEulerAngle.y, toDeg,
-                ref _curRotatingVelocity, characterData.rotatingAccelTime);
+                oldEulerAngle.y, toDeg, ref _curRotatingVelocity,
+                characterData.rotatingAccelTime, Mathf.Infinity, Time.fixedDeltaTime);
             oldEulerAngle.y = curDeg;
-            transform.eulerAngles = oldEulerAngle;
+            _rigidbody.MoveRotation(Quaternion.Euler(oldEulerAngle));
         }
 
         /// <summary>
