@@ -8,48 +8,29 @@ namespace GamePlay
         protected CharacterData characterData;
 
         private Rigidbody _rigidbody;
-        private Vector2 _curMovingDirection = Vector2.zero;
-        private Vector2 _curMovingVelocity = Vector2.zero;
-        private float _curRotatingVelocity = 0.0f;
+        private SmoothMove _smoothMove;
 
         protected void Awake()
         {
             _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _smoothMove = new SmoothMove(
+                characterData.movingVelocity, characterData.movingAccelTime,
+                characterData.rotatingAccelTime);
         }
 
-        /// <summary>
-        /// Move the character along the <c>direction</c>.<para />
-        /// It will change the direction smoothly, according to the object's <c>movingAccelTime</c>.
-        /// </summary>
-        /// <param name="direction">The moving direction which is an unit vector</param>
         protected void Move(Vector2 direction)
         {
-            if (direction.magnitude < 0.01 && _curMovingDirection.magnitude < 0.01)
-                return;
-
-            _curMovingDirection = Vector2.SmoothDamp(
-                _curMovingDirection, direction, ref _curMovingVelocity,
-                characterData.movingAccelTime, Mathf.Infinity, Time.fixedDeltaTime);
-
-            var distance =
-                characterData.movingVelocity * Time.fixedDeltaTime * _curMovingDirection;
+            var moveDelta = _smoothMove.MoveDelta(direction, Time.fixedDeltaTime);
             _rigidbody.MovePosition(
-                transform.localPosition + new Vector3(distance.x, 0, distance.y));
+                transform.position + new Vector3(moveDelta.x, 0, moveDelta.y));
         }
 
-        /// <summary>
-        /// Rotate the character toward the <c>toDeg</c> in global space.<para />
-        /// It will rotate smoothly, according to the object's <c>rotatingAccelTime</c>.
-        /// </summary>
-        /// <param name="toDeg">The degree to rotate to</param>
         protected void Look(float toDeg)
         {
-            var oldEulerAngle = transform.eulerAngles;
-            var curDeg = Mathf.SmoothDampAngle(
-                oldEulerAngle.y, toDeg, ref _curRotatingVelocity,
-                characterData.rotatingAccelTime, Mathf.Infinity, Time.fixedDeltaTime);
-            oldEulerAngle.y = curDeg;
-            _rigidbody.MoveRotation(Quaternion.Euler(oldEulerAngle));
+            var curEulerAngle = transform.eulerAngles;
+            curEulerAngle.y += _smoothMove.RotateDelta(
+                curEulerAngle.y, toDeg, Time.fixedDeltaTime);
+            _rigidbody.MoveRotation(Quaternion.Euler(curEulerAngle));
         }
 
         /// <summary>

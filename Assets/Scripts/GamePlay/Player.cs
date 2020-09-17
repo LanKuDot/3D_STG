@@ -15,9 +15,14 @@ namespace GamePlay
         private bool _isFiring = false;
         private Coroutine _lastFiringCoroutine;
 
-        private void Start()
+        private new void Awake()
         {
             characterData = playerData;
+            base.Awake();
+        }
+
+        private void Start()
+        {
             _cameraCenterPos = targetCamera.pixelRect.size / 2;
         }
 
