@@ -2,17 +2,17 @@
 
 namespace GamePlay
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(CharacterController))]
     public class Character : MonoBehaviour
     {
         protected CharacterData characterData;
 
-        private Rigidbody _rigidbody;
+        private CharacterController _characterController;
         private SmoothMove _smoothMove;
 
         protected void Awake()
         {
-            _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _characterController = GetComponent<CharacterController>();
             _smoothMove = new SmoothMove(
                 characterData.movingVelocity, characterData.movingAccelTime,
                 characterData.rotatingAccelTime);
@@ -21,8 +21,7 @@ namespace GamePlay
         protected void Move(Vector2 direction)
         {
             var moveDelta = _smoothMove.MoveDelta(direction, Time.fixedDeltaTime);
-            _rigidbody.MovePosition(
-                transform.position + new Vector3(moveDelta.x, 0, moveDelta.y));
+            _characterController.Move(new Vector3(moveDelta.x, 0, moveDelta.y));
         }
 
         protected void Look(float toDeg)
@@ -30,7 +29,7 @@ namespace GamePlay
             var curEulerAngle = transform.eulerAngles;
             curEulerAngle.y += _smoothMove.RotateDelta(
                 curEulerAngle.y, toDeg, Time.fixedDeltaTime);
-            _rigidbody.MoveRotation(Quaternion.Euler(curEulerAngle));
+            transform.eulerAngles = curEulerAngle;
         }
 
         /// <summary>

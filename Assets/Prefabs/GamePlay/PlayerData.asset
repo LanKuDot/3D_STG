@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeea7ffdb33ef2a4f9a52ea321c7931d, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  characterData:
-    movingVelocity: 10
-    movingAccelTime: 0.1
-    rotatingAccelTime: 0.1
+  movingVelocity: 10
+  movingAccelTime: 0.1
+  rotatingAccelTime: 0.1
   firingInterval: 0.15
