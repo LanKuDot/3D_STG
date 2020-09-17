@@ -5,30 +5,22 @@ namespace GamePlay
     [RequireComponent(typeof(CharacterController))]
     public class Character : MonoBehaviour
     {
-        protected CharacterData characterData;
-
         private CharacterController _characterController;
-        private SmoothMove _smoothMove;
 
         protected void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-            _smoothMove = new SmoothMove(
-                characterData.movingVelocity, characterData.movingAccelTime,
-                characterData.rotatingAccelTime);
         }
 
-        protected void Move(Vector2 direction)
+        protected void Move(Vector3 motion)
         {
-            var moveDelta = _smoothMove.MoveDelta(direction, Time.fixedDeltaTime);
-            _characterController.Move(new Vector3(moveDelta.x, 0, moveDelta.y));
+            _characterController.Move(motion);
         }
 
-        protected void Look(float toDeg)
+        protected void Look(float deltaDeg)
         {
             var curEulerAngle = transform.eulerAngles;
-            curEulerAngle.y += _smoothMove.RotateDelta(
-                curEulerAngle.y, toDeg, Time.fixedDeltaTime);
+            curEulerAngle.y += deltaDeg;
             transform.eulerAngles = curEulerAngle;
         }
 

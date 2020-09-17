@@ -6,24 +6,24 @@ namespace GamePlay
 {
     public class Player : Character
     {
-        public PlayerData playerData;
-        public Camera targetCamera;
-
-        private Vector2 _movingDirection;
+        [SerializeField]
+        private PlayerData _data = null;
+        [SerializeField]
+        private Camera _targetCamera = null;
         private Vector2 _cameraCenterPos;
+
+        private SmoothMove _smoothMove;
+        private Vector2 _movingDirection;
         private float _lookingDeg;
         private bool _isFiring = false;
         private Coroutine _lastFiringCoroutine;
 
         private new void Awake()
         {
-            characterData = playerData;
             base.Awake();
-        }
-
-        private void Start()
-        {
-            _cameraCenterPos = targetCamera.pixelRect.size / 2;
+            _cameraCenterPos = _targetCamera.pixelRect.size / 2;
+            _smoothMove = new SmoothMove(
+                _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -53,8 +53,18 @@ namespace GamePlay
 
         private void FixedUpdate()
         {
-            Move(_movingDirection);
-            Look(_lookingDeg);
+            MoveAndLook();
+        }
+
+        private void MoveAndLook()
+        {
+            var deltaDistance =
+                _smoothMove.MoveDelta(_movingDirection, Time.fixedDeltaTime);
+            var deltaDeg =
+                _smoothMove.RotateDelta(transform.eulerAngles.y, _lookingDeg, Time.fixedDeltaTime);
+
+            Move(new Vector3(deltaDistance.x, 0, deltaDistance.y));
+            Look(deltaDeg);
         }
 
         private IEnumerator Fire()
@@ -63,7 +73,7 @@ namespace GamePlay
                 var direction =
                     Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
                 base.Fire("playerBullet", direction.normalized, 1.5f);
-                yield return new WaitForSeconds(playerData.firingInterval);
+                yield return new WaitForSeconds(_data.firingInterval);
             }
 
             _lastFiringCoroutine = null;
