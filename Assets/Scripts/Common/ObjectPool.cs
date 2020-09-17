@@ -25,8 +25,6 @@ public class ObjectPool : MonoBehaviour
             for (var i = 0; i < item.initialNum; ++i) {
                 var obj = Instantiate(item.objectToPool);
                 obj.SetActive(false);
-                obj.transform.SetParent(transform);
-                queue.Enqueue(obj);
             }
 
             _objectsToPool.Add(item.name, item.objectToPool);
