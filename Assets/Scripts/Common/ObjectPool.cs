@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool Instance;
+    public static ObjectPool Instance { get; private set; }
 
-    public ObjectPoolItem[] poolItems;
+    [SerializeField]
+    private ObjectPoolItem[] _poolItems = new ObjectPoolItem[1];
 
     private readonly Dictionary<string, Queue<GameObject>> _pools =
         new Dictionary<string, Queue<GameObject>>();
@@ -17,7 +18,7 @@ public class ObjectPool : MonoBehaviour
     {
         Instance = this;
 
-        foreach (var item in poolItems) {
+        foreach (var item in _poolItems) {
             var queue = new Queue<GameObject>();
             _pools.Add(item.name, queue);
 
