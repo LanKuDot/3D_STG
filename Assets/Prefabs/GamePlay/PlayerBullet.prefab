@@ -105,10 +105,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2844552749029423552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2912097e5f41e0c4ba57ddbdac7949cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a42a740137591849a4fc59338e7843e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletName: playerBullet
+  _nameInPool: playerBullet
   _velocity: 20
   _lifeTime: 3
 --- !u!54 &8145099201200424475
