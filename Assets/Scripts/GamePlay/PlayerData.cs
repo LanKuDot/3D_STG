@@ -3,7 +3,7 @@
 namespace GamePlay
 {
     [CreateAssetMenu(fileName = "PlayerData",
-        menuName = "ScriptableObject/PlayerData", order = 1)]
+        menuName = "Scriptable Object/Player Data", order = 1)]
     public class PlayerData : ScriptableObject
     {
         public float movingVelocity = 10.0f;
