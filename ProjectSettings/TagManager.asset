@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Barrier
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
