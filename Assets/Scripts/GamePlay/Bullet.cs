@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Object = System.Object;
 
 namespace GamePlay
 {
@@ -29,17 +30,6 @@ namespace GamePlay
             _countDownCoroutine = StartCoroutine(LifeTimeCountDown());
         }
 
-        private IEnumerator LifeTimeCountDown()
-        {
-            yield return new WaitForSeconds(_lifeTime);
-            gameObject.SetActive(false);
-        }
-
-        protected void OnDisable()
-        {
-            ObjectPool.Instance.ReturnObject(_bulletName, gameObject);
-        }
-
         protected void FixedUpdate()
         {
             Move();
@@ -55,7 +45,20 @@ namespace GamePlay
         protected void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Barrier"))
-                gameObject.SetActive(false);
+                ReturnToPool();
+        }
+
+        private IEnumerator LifeTimeCountDown()
+        {
+            yield return new WaitForSeconds(_lifeTime);
+            ReturnToPool();
+        }
+
+        private void ReturnToPool()
+        {
+            transform.SetParent(ObjectPool.Instance.gameObject.transform);
+            ObjectPool.Instance.ReturnObject(_bulletName, gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

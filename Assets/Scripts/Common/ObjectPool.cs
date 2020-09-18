@@ -23,7 +23,8 @@ public class ObjectPool : MonoBehaviour
             _pools.Add(item.name, queue);
 
             for (var i = 0; i < item.initialNum; ++i) {
-                var obj = Instantiate(item.objectToPool);
+                var obj = Instantiate(item.objectToPool, transform);
+                ReturnObject(item.name, obj);
                 obj.SetActive(false);
             }
 
@@ -41,7 +42,6 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(string objName, GameObject obj)
     {
-        obj.transform.SetParent(transform);
         _pools[objName].Enqueue(obj);
     }
 }
