@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-using Object = System.Object;
 
 namespace GamePlay
 {
@@ -9,25 +7,20 @@ namespace GamePlay
     public class Bullet : MonoBehaviour
     {
         [SerializeField]
-        private string _bulletName = "bullet";
-        [SerializeField]
-        private float _velocity = 20.0f;
-        [SerializeField]
-        private float _lifeTime = 3.0f;
+        private BulletData _data = null;
 
         private Rigidbody _rigidbody;
         private Vector3 _movingDirection;
-        private Coroutine _countDownCoroutine;
 
         protected void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            StartCoroutine(LifeTimeCountDown());
         }
 
         protected void OnEnable()
         {
             _movingDirection = transform.rotation * Vector3.up;
-            _countDownCoroutine = StartCoroutine(LifeTimeCountDown());
         }
 
         protected void FixedUpdate()
@@ -39,25 +32,26 @@ namespace GamePlay
         {
             _rigidbody.MovePosition(
                 transform.localPosition +
-                _velocity * Time.fixedDeltaTime * _movingDirection);
+                _data.velocity * Time.fixedDeltaTime * _movingDirection);
         }
 
         protected void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Barrier"))
+            if (other.gameObject.CompareTag("Barrier") ||
+                (other.gameObject.CompareTag("Bullet") && _data.isDestroyable))
                 ReturnToPool();
         }
 
         private IEnumerator LifeTimeCountDown()
         {
-            yield return new WaitForSeconds(_lifeTime);
+            yield return new WaitForSeconds(_data.lifeTime);
             ReturnToPool();
         }
 
         private void ReturnToPool()
         {
             transform.SetParent(ObjectPool.Instance.gameObject.transform);
-            ObjectPool.Instance.ReturnObject(_bulletName, gameObject);
+            ObjectPool.Instance.ReturnObject(_data.nameInPool, gameObject);
             gameObject.SetActive(false);
         }
     }
