@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4357c52ea81bfbe43858aadfec915efc, type: 3}
   m_Name: PlayerBulletData
   m_EditorClassIdentifier: 
-  nameInPool: bullet
-  velocity: 20
+  nameInPool: playerBullet
+  velocity: 15
   lifeTime: 3
   isDestroyable: 1
