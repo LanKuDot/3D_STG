@@ -6,6 +6,8 @@ namespace GamePlay
 {
     public class Player : Character
     {
+        public static Player Instance { get; private set; }
+
         [SerializeField]
         private PlayerData _data = null;
         [SerializeField]
@@ -24,6 +26,8 @@ namespace GamePlay
             _cameraCenterPos = _targetCamera.pixelRect.size / 2;
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
+
+            Instance = this;
         }
 
         public void OnMove(InputAction.CallbackContext context)
