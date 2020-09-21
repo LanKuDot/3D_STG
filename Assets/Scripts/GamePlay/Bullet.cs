@@ -39,7 +39,7 @@ namespace GamePlay
         // of the opposite side
         protected void OnTriggerEnter(Collider other)
         {
-            if (_data.isDestroyable)
+            if (!other.gameObject.CompareTag("Bullet") || _data.isDestroyable)
                 ReturnToPool();
         }
 
