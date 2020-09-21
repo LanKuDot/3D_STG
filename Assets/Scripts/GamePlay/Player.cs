@@ -49,7 +49,7 @@ namespace GamePlay
                 if (_lastFiringCoroutine != null)
                     StopCoroutine(_lastFiringCoroutine);
                 _isFiring = true;
-                _lastFiringCoroutine = StartCoroutine(Fire());
+                _lastFiringCoroutine = StartCoroutine(FireControl());
             } else if (context.canceled) {
                 _isFiring = false;
             }
@@ -71,12 +71,10 @@ namespace GamePlay
             Look(deltaDeg);
         }
 
-        private IEnumerator Fire()
+        private IEnumerator FireControl()
         {
             while (_isFiring) {
-                var direction =
-                    Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
-                base.Fire("playerBullet", direction.normalized, 1.5f);
+                base.Fire("playerBullet", Vector3.forward, 1.5f);
                 yield return new WaitForSeconds(_data.firingInterval);
             }
 
