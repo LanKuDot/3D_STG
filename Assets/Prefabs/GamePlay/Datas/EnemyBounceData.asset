@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   initialMovingDirection: {x: 1, y: 0, z: 1}
-  movingVelocity: 0
+  movingVelocity: 10

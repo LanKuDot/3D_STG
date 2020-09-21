@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d649b1a9fcd6c409dedce310784ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firingScript: {fileID: 11400000, guid: bf951ba88cd710d498acca99640c21ca, type: 2}
   _data: {fileID: 11400000, guid: 403d621af1b35dd4bb51a4380d7a4fd1, type: 2}
 --- !u!143 &1240976552
 CharacterController:
