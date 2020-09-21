@@ -35,10 +35,11 @@ namespace GamePlay
                 _data.velocity * Time.fixedDeltaTime * _movingDirection);
         }
 
+        // This event will be invoked when it hits the barrier, the bullet and the player
+        // of the opposite side
         protected void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Barrier") ||
-                (other.gameObject.CompareTag("Bullet") && _data.isDestroyable))
+            if (_data.isDestroyable)
                 ReturnToPool();
         }
 
