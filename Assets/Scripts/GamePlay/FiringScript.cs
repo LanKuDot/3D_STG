@@ -18,7 +18,7 @@ namespace GamePlay
         /// <summary>
         /// The actions in the firing loop
         /// </summary>
-        public FiringAction[] actions;
+        public FiringAction[] actions = { new FiringAction() };
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace GamePlay
         /// <summary>
         /// The data of bullets to be fired in this action
         /// </summary>
-        public FireData[] data;
+        public FireData[] data = { new FireData() };
 
         /// <summary>
         /// The time interval of cooling down after this action
