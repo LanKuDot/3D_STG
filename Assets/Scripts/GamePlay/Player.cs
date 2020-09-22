@@ -14,6 +14,7 @@ namespace GamePlay
         private Camera _targetCamera = null;
         private Vector2 _cameraCenterPos;
 
+        private int _hp;
         private SmoothMove _smoothMove;
         private Vector2 _movingDirection;
         private float _lookingDeg;
@@ -26,6 +27,7 @@ namespace GamePlay
             _cameraCenterPos = _targetCamera.pixelRect.size / 2;
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
+            _hp = _data.hp;
 
             Instance = this;
         }
@@ -55,6 +57,12 @@ namespace GamePlay
             }
         }
 
+        // This function is invoked only when it's hit by the bullet.
+        private void OnTriggerEnter(Collider other)
+        {
+            GetDamage();
+        }
+
         private void FixedUpdate()
         {
             MoveAndLook();
@@ -79,6 +87,13 @@ namespace GamePlay
             }
 
             _lastFiringCoroutine = null;
+        }
+
+        private void GetDamage()
+        {
+            if (--_hp == 0) {
+                gameObject.SetActive(false);
+            }
         }
     }
 }
