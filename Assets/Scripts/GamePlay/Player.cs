@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ namespace GamePlay
     public class Player : Character
     {
         public static Player Instance { get; private set; }
+
+        private Action _onPlayerDestroyed;
 
         [SerializeField]
         private PlayerData _data = null;
@@ -28,6 +31,8 @@ namespace GamePlay
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
+
+            _onPlayerDestroyed += LevelManager.Instance.GameOver;
 
             Instance = this;
         }
@@ -68,6 +73,15 @@ namespace GamePlay
             MoveAndLook();
         }
 
+        public void ResetPlayer(Vector3 respawnPoint)
+        {
+            _hp = _data.hp;
+            transform.position = respawnPoint;
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            if (!isActiveAndEnabled)
+                gameObject.SetActive(true);
+        }
+
         private void MoveAndLook()
         {
             var deltaDistance =
@@ -92,6 +106,7 @@ namespace GamePlay
         private void GetDamage()
         {
             if (--_hp == 0) {
+                _onPlayerDestroyed();
                 gameObject.SetActive(false);
             }
         }

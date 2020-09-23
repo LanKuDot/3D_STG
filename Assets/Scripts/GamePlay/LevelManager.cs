@@ -34,7 +34,6 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
-            Debug.Log("Game Over");
             LoadLevel();
         }
 
@@ -57,7 +56,7 @@ namespace GamePlay
         private void OnLevelLoaded(AsyncOperationHandle<SceneInstance> handle)
         {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
-                Debug.Log("level is loaded");
+                Player.Instance.ResetPlayer(Vector3.zero);
                 _curLevelHandle = handle;
             }
         }
