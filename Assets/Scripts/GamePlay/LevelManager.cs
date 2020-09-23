@@ -13,7 +13,7 @@ namespace GamePlay
         [SerializeField]
         private int _defaultLevelID = 0;
         [SerializeField]
-        private AssetReference[] _levels = null;
+        private LevelData[] _levelDatas = null;
         private int _curLevelID;
         private AsyncOperationHandle<SceneInstance> _curLevelHandle;
 
@@ -47,7 +47,8 @@ namespace GamePlay
                 SceneLoader.UnloadScene(_curLevelHandle, OnLevelUnLoaded);
 
             SceneLoader.LoadScene(
-                ref _levels[_curLevelID], LoadSceneMode.Additive, OnLevelLoaded);
+                _levelDatas[_curLevelID].levelScene, LoadSceneMode.Additive,
+                OnLevelLoaded);
         }
 
         /// <summary>
@@ -56,14 +57,14 @@ namespace GamePlay
         private void OnLevelLoaded(AsyncOperationHandle<SceneInstance> handle)
         {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
-                Player.Instance.ResetPlayer(Vector3.zero);
+                Player.Instance.ResetPlayer(_levelDatas[_curLevelID].playerSpawnPoint);
                 _curLevelHandle = handle;
             }
         }
 
         private void OnLevelUnLoaded(AsyncOperationHandle<SceneInstance> handle)
         {
-            Debug.Log(handle.ToString());
+            Debug.Log("Scene is unloaded");
         }
     }
 }

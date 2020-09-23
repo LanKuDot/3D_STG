@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public static class SceneLoader
 {
     public static void LoadScene(
-        ref AssetReference scene, LoadSceneMode mode,
+        AssetReference scene, LoadSceneMode mode,
         Action<AsyncOperationHandle<SceneInstance>> onLoadCompleted)
     {
         Addressables.LoadSceneAsync(scene, mode).Completed += onLoadCompleted;
