@@ -46,7 +46,7 @@ namespace GamePlay
             while (true) {
                 foreach (var action in _firingScript.actions) {
                     foreach (var data in action.data) {
-                        Fire(data.bulletName, data.direction.normalized, 1.0f);
+                        Fire(data.bulletNameInPool, data.direction.normalized, 1.0f);
                     }
                     yield return new WaitForSeconds(action.coolDownTime);
                 }

@@ -47,7 +47,7 @@ namespace GamePlay
         /// <summary>
         /// The bullet name in the ObjectPool
         /// </summary>
-        public string bulletName = "bullet";
+        public string bulletNameInPool = "bullet";
         /// <summary>
         /// The initial direction relative to the firing source
         /// </summary>
