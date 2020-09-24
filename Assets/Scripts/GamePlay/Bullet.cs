@@ -52,7 +52,7 @@ namespace GamePlay
         private void ReturnToPool()
         {
             transform.SetParent(ObjectPool.Instance.gameObject.transform);
-            ObjectPool.Instance.ReturnObject(_data.nameInPool, gameObject);
+            ObjectPool.Instance.ReturnObject(gameObject);
             gameObject.SetActive(false);
         }
     }

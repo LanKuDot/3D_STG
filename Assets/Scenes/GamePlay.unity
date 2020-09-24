@@ -439,15 +439,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolItems:
-  - name: playerBullet
+  - name: PlayerBullet
     objectToPool: {fileID: 2844552749029423552, guid: 70aa3d25aed12fb4795eb7abdbe49384,
       type: 3}
     initialNum: 10
-  - name: enemyBullet
+  - name: EnemyBullet
     objectToPool: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
       type: 3}
     initialNum: 8
-  - name: enemyBullet_Undestroyable
+  - name: EnemyBullet_Undestroyable
     objectToPool: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
       type: 3}
     initialNum: 8

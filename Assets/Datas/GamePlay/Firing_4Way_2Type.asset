@@ -15,22 +15,30 @@ MonoBehaviour:
   initialDelay: 0.1
   actions:
   - data:
-    - bulletName: enemyBullet
+    - bulletObject: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
+        type: 3}
       direction: {x: 1, y: 0, z: 0}
-    - bulletName: enemyBullet
+    - bulletObject: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
+        type: 3}
       direction: {x: -1, y: 0, z: 0}
-    - bulletName: enemyBullet
+    - bulletObject: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
+        type: 3}
       direction: {x: 0, y: 0, z: 1}
-    - bulletName: enemyBullet
+    - bulletObject: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
+        type: 3}
       direction: {x: 0, y: 0, z: -1}
     coolDownTime: 0.7
   - data:
-    - bulletName: enemyBullet_Undestroyable
+    - bulletObject: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
+        type: 3}
       direction: {x: 1, y: 0, z: 0}
-    - bulletName: enemyBullet_Undestroyable
+    - bulletObject: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
+        type: 3}
       direction: {x: -1, y: 0, z: 0}
-    - bulletName: enemyBullet_Undestroyable
+    - bulletObject: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
+        type: 3}
       direction: {x: 0, y: 0, z: 1}
-    - bulletName: enemyBullet_Undestroyable
+    - bulletObject: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
+        type: 3}
       direction: {x: 0, y: 0, z: -1}
     coolDownTime: 0.7

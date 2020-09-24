@@ -9,6 +9,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     private ObjectPoolItem[] _poolItems = new ObjectPoolItem[1];
 
+    // The name of the pool object will be the key of these dictionaries
     private readonly Dictionary<string, Queue<GameObject>> _pools =
         new Dictionary<string, Queue<GameObject>>();
     private readonly Dictionary<string, GameObject> _objectsToPool =
@@ -20,35 +21,42 @@ public class ObjectPool : MonoBehaviour
 
         foreach (var item in _poolItems) {
             var queue = new Queue<GameObject>();
-            _pools.Add(item.name, queue);
+            var originalObj = item.objectToPool;
+            var objName = originalObj.name;
+
+            _pools.Add(objName, queue);
 
             for (var i = 0; i < item.initialNum; ++i) {
-                var obj = Instantiate(item.objectToPool, transform);
-                ReturnObject(item.name, obj);
+                var obj = Instantiate(originalObj, transform);
+                obj.name = objName;
+                ReturnObject(obj);
                 obj.SetActive(false);
             }
 
-            _objectsToPool.Add(item.name, item.objectToPool);
+            _objectsToPool.Add(objName, originalObj);
         }
     }
 
     public GameObject GetObject(string objName)
     {
         var pool = _pools[objName];
+        var originalObj = _objectsToPool[objName];
         var obj = pool.Count == 0 ?
-            Instantiate(_objectsToPool[objName]) : pool.Dequeue();
+            Instantiate(originalObj) : pool.Dequeue();
+        obj.name = originalObj.name;
         return obj;
     }
 
-    public void ReturnObject(string objName, GameObject obj)
+    public void ReturnObject(GameObject obj)
     {
-        _pools[objName].Enqueue(obj);
+        _pools[obj.name].Enqueue(obj);
     }
 }
 
 [Serializable]
 public class ObjectPoolItem
 {
+    [ShowOnly]
     public string name;
     public GameObject objectToPool;
     public int initialNum;

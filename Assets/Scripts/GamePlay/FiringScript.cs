@@ -18,7 +18,7 @@ namespace GamePlay
         /// <summary>
         /// The actions in the firing loop
         /// </summary>
-        public FiringAction[] actions = { new FiringAction() };
+        public FiringAction[] actions = {new FiringAction()};
     }
 
     /// <summary>
@@ -45,9 +45,10 @@ namespace GamePlay
     public class FireData
     {
         /// <summary>
-        /// The bullet name in the ObjectPool
+        /// The bullet object to be fired
         /// </summary>
-        public string bulletNameInPool = "bullet";
+        public GameObject bulletObject;
+
         /// <summary>
         /// The initial direction relative to the firing source
         /// </summary>

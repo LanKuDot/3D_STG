@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace GamePlay
 {
     public class Enemy : Character
     {
+        [SerializeField]
+        private EnemySpawnCondition _spawnCondition = null;
         [SerializeField]
         private FiringScript _firingScript = null;
         // The hp should be initialized by the derived class when the object is activated.
@@ -13,6 +16,10 @@ namespace GamePlay
         protected new void Awake()
         {
             base.Awake();
+        }
+
+        protected void Start()
+        {
         }
 
         protected void OnEnable()
@@ -46,7 +53,7 @@ namespace GamePlay
             while (true) {
                 foreach (var action in _firingScript.actions) {
                     foreach (var data in action.data) {
-                        Fire(data.bulletNameInPool, data.direction.normalized, 1.0f);
+                        Fire(data.bulletObject.name, data.direction.normalized, 1.0f);
                     }
                     yield return new WaitForSeconds(action.coolDownTime);
                 }
@@ -62,5 +69,13 @@ namespace GamePlay
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    [Serializable]
+    public class EnemySpawnCondition
+    {
+        [SerializeField]
+        private int _spawnStage = 0;
+        public int spawnStage => _spawnStage;
     }
 }

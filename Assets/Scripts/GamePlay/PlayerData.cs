@@ -10,6 +10,7 @@ namespace GamePlay
         public float movingVelocity = 10.0f;
         public float movingAccelTime = 0.1f;
         public float rotatingAccelTime = 0.1f;
+        public GameObject bullet;
         public float firingInterval = 0.5f;
     }
 }

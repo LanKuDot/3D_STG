@@ -32,9 +32,12 @@ namespace GamePlay
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
 
-            _onPlayerDestroyed += LevelManager.Instance.GameOver;
-
             Instance = this;
+        }
+
+        private void Start()
+        {
+            _onPlayerDestroyed += LevelManager.Instance.GameOver;
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -96,7 +99,7 @@ namespace GamePlay
         private IEnumerator FireControl()
         {
             while (_isFiring) {
-                base.Fire("playerBullet", Vector3.forward, 1.5f);
+                Fire(_data.bullet.name, Vector3.forward, 1.5f);
                 yield return new WaitForSeconds(_data.firingInterval);
             }
 
