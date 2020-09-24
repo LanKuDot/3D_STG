@@ -508,9 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197778378dfe2fd42860f085a551319f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultLevelID: 0
-  _levelDatas:
-  - {fileID: 11400000, guid: eebe4f6410aa2c743a8b5a067c0bd45c, type: 2}
+  _levelData: {fileID: 11400000, guid: 85cccfe25e98bd148a6bf31c6505a4ea, type: 2}
 --- !u!4 &2021442163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7197145423520398699, guid: ebed2a69232af6f4bbae922160c80de7,

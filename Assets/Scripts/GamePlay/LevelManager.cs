@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
@@ -11,9 +10,7 @@ namespace GamePlay
         public static LevelManager Instance { get; private set; }
 
         [SerializeField]
-        private int _defaultLevelID = 0;
-        [SerializeField]
-        private LevelData[] _levelDatas = null;
+        private LevelData _levelData = null;
         private int _curLevelID;
         private AsyncOperationHandle<SceneInstance> _curLevelHandle;
 
@@ -24,7 +21,7 @@ namespace GamePlay
 
         private void Start()
         {
-            _curLevelID = _defaultLevelID;
+            _curLevelID = _levelData.defaultLevelID;
             LoadLevel();
         }
 
@@ -47,7 +44,7 @@ namespace GamePlay
                 SceneLoader.UnloadScene(_curLevelHandle, OnLevelUnLoaded);
 
             SceneLoader.LoadScene(
-                _levelDatas[_curLevelID].levelScene, LoadSceneMode.Additive,
+                _levelData.GetLevelScene(_curLevelID), LoadSceneMode.Additive,
                 OnLevelLoaded);
         }
 
@@ -57,7 +54,7 @@ namespace GamePlay
         private void OnLevelLoaded(AsyncOperationHandle<SceneInstance> handle)
         {
             if (handle.Status == AsyncOperationStatus.Succeeded) {
-                Player.Instance.ResetPlayer(_levelDatas[_curLevelID].playerSpawnPoint);
+                Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(_curLevelID));
                 _curLevelHandle = handle;
             }
         }

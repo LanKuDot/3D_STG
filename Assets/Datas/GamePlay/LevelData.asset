@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfb898ca3d4786f46b91283e58557f40, type: 3}
-  m_Name: Level 1
+  m_Name: LevelData
   m_EditorClassIdentifier: 
-  levelScene:
-    m_AssetGUID: 79b34446249eb634896f469ca7d483ca
-    m_SubObjectName: 
-  playerSpawnPoint: {x: 0, y: 0, z: 0}
+  _defaultLevelID: 0
+  _levels:
+  - levelScene:
+      m_AssetGUID: 79b34446249eb634896f469ca7d483ca
+      m_SubObjectName: 
+    playerSpawnPoint: {x: 0, y: 0, z: 0}
