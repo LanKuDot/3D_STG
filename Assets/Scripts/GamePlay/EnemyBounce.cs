@@ -11,7 +11,7 @@ namespace GamePlay
 
         private new void OnEnable()
         {
-            _hp = _data.hp;
+            hp = _data.hp;
             _movingDirection = _data.initialMovingDirection.normalized;
             base.OnEnable();
         }

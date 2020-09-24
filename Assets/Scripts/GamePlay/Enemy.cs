@@ -6,9 +6,9 @@ namespace GamePlay
     public class Enemy : Character
     {
         [SerializeField]
-        protected FiringScript _firingScript = null;
+        private FiringScript _firingScript = null;
         // The hp should be initialized by the derived class when the object is activated.
-        protected int _hp = 0;
+        protected int hp { get; set; } = 0;
 
         protected new void Awake()
         {
@@ -58,7 +58,7 @@ namespace GamePlay
         /// </summary>
         private void GetDamage()
         {
-            if (--_hp == 0) {
+            if (--hp == 0) {
                 gameObject.SetActive(false);
             }
         }
