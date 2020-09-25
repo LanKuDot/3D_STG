@@ -15,12 +15,12 @@ namespace GamePlay
         protected void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            StartCoroutine(LifeTimeCountDown());
         }
 
         protected void OnEnable()
         {
             _movingDirection = transform.rotation * Vector3.up;
+            StartCoroutine(LifeTimeCountDown());
         }
 
         protected void FixedUpdate()
