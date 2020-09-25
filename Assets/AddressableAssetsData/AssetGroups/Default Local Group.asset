@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: bc32642015abc41408f1be81401a0fb9
   m_SerializeEntries:
+  - m_GUID: 2d87b8aae7c6fd04bbba5de33489396a
+    m_Address: Assets/Scenes/Levels/Level 2.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 79b34446249eb634896f469ca7d483ca
     m_Address: Assets/Scenes/Levels/Level 1.unity
     m_ReadOnly: 0
