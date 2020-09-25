@@ -20,6 +20,7 @@ namespace GamePlay
 
         protected void Start()
         {
+            EnemyManager.Instance.RegisterEnemy(gameObject, _spawnCondition);
         }
 
         protected void OnEnable()
@@ -66,6 +67,7 @@ namespace GamePlay
         private void GetDamage()
         {
             if (--hp == 0) {
+                EnemyManager.Instance.DestroyEnemy();
                 gameObject.SetActive(false);
             }
         }

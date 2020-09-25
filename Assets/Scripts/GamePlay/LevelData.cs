@@ -10,10 +10,12 @@ namespace GamePlay
     {
         [SerializeField]
         private int _defaultLevelID = 0;
-        public int defaultLevelID => _defaultLevelID;
 
         [SerializeField]
         private Level[] _levels = { new Level() };
+
+        public int defaultLevelID => _defaultLevelID;
+        public int Length => _levels.Length;
 
         public AssetReference GetLevelScene(int levelID)
         {

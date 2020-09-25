@@ -31,6 +31,22 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
+            EnemyManager.Instance.ResetData();
+            LoadLevel();
+        }
+
+        /// <summary>
+        /// The things to do when a level is passed.<para />
+        /// The function is invoked by the EnemyManager when all enemies are destroyed
+        /// in a level.
+        /// </summary>
+        public void LevelPass()
+        {
+            if (++_curLevelID == _levelData.Length) {
+                Debug.Log("Level Passed");
+                return;
+            }
+
             LoadLevel();
         }
 
