@@ -11,6 +11,7 @@ namespace GamePlay
 
         [SerializeField]
         private LevelData _levelData = null;
+        private string _initialLoadedScenePath = "";
         private int _curLevelID;
         private AsyncOperationHandle<SceneInstance> _curLevelHandle;
 
@@ -21,6 +22,12 @@ namespace GamePlay
 
         private void Start()
         {
+            _curLevelID = _levelData.GetLoadedLevelID();
+            if (_curLevelID >= 0) {
+                _initialLoadedScenePath = _levelData.GetLevelScenePath(_curLevelID);
+                return;
+            }
+
             _curLevelID = _levelData.defaultLevelID;
             LoadLevel();
         }
@@ -31,7 +38,6 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
-            EnemyManager.Instance.ResetData();
             LoadLevel();
         }
 
@@ -56,9 +62,15 @@ namespace GamePlay
         /// </summary>
         private void LoadLevel()
         {
-            if (_curLevelHandle.IsValid())
+            // If the level is loaded before the game started, unload it by SceneManager
+            // Because it's not loaded by the SceneLoader
+            if (!string.IsNullOrEmpty(_initialLoadedScenePath)) {
+                SceneManager.UnloadSceneAsync(_initialLoadedScenePath);
+                _initialLoadedScenePath = "";
+            } else if (_curLevelHandle.IsValid())
                 SceneLoader.UnloadScene(_curLevelHandle, OnLevelUnLoaded);
 
+            EnemyManager.Instance.ResetData();
             SceneLoader.LoadScene(
                 _levelData.GetLevelScene(_curLevelID), LoadSceneMode.Additive,
                 OnLevelLoaded);
