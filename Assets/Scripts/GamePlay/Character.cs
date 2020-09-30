@@ -35,6 +35,9 @@ namespace GamePlay
         /// along the <c>direction</c></param>
         protected void Fire(string bulletName, Vector3 direction, float gap)
         {
+            if (LevelManager.isGamePaused)
+                return;
+
             var bulletObj = ObjectPool.Instance.GetObject(bulletName);
             var bulletTransform = bulletObj.transform;
             var globalDirection = transform.rotation * direction;
