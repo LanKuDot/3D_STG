@@ -17,6 +17,15 @@ namespace GamePlay
             _rigidbody = GetComponent<Rigidbody>();
         }
 
+        protected void Start()
+        {
+            LevelManager.Instance.OnLevelEnded += () =>
+            {
+                if (isActiveAndEnabled)
+                    ReturnToPool();
+            };
+        }
+
         protected void OnEnable()
         {
             _movingDirection = transform.rotation * Vector3.up;
