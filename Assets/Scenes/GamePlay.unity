@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
@@ -509,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197778378dfe2fd42860f085a551319f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cinemachineBrain: {fileID: 534669906}
   _levelData: {fileID: 11400000, guid: 85cccfe25e98bd148a6bf31c6505a4ea, type: 2}
 --- !u!114 &1787588086
 MonoBehaviour:

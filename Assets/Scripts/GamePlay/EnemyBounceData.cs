@@ -3,7 +3,7 @@
 namespace GamePlay
 {
     [CreateAssetMenu(fileName = "EnemyBounceData",
-        menuName = "Scriptable Object/Enemy Bounce Data", order = 2)]
+        menuName = "Scriptable Object/Enemy/Enemy Bounce Data", order = 1)]
     public class EnemyBounceData : ScriptableObject
     {
         public int hp = 3;

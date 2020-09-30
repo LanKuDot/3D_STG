@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4357c52ea81bfbe43858aadfec915efc, type: 3}
-  m_Name: PlayerBullet
+  m_Script: {fileID: 11500000, guid: ddb9792b0b76ee647b5562befb6865aa, type: 3}
+  m_Name: EnemyTraceData
   m_EditorClassIdentifier: 
-  velocity: 20
-  lifeTime: 3
-  isDestroyable: 1
+  _hp: 3
+  _movingVelocity: 5
+  _movingAccelTime: 1
+  _rotateAccelTime: 0.5
