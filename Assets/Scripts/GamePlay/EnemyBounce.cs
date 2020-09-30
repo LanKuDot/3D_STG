@@ -18,7 +18,7 @@ namespace GamePlay
 
         private void FixedUpdate()
         {
-            Move(_data.movingVelocity * Time.fixedDeltaTime * _movingDirection);
+            Move(_data.movingVelocity * Time.deltaTime * _movingDirection);
         }
 
         // This event will be invoked only when it hits the barrier.

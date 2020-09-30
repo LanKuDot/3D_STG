@@ -32,7 +32,7 @@ namespace GamePlay
         {
             _rigidbody.MovePosition(
                 transform.localPosition +
-                _data.velocity * Time.fixedDeltaTime * _movingDirection);
+                _data.velocity * Time.deltaTime * _movingDirection);
         }
 
         // This event will be invoked when it hits the barrier, the bullet and the player

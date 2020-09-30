@@ -88,9 +88,9 @@ namespace GamePlay
         private void MoveAndLook()
         {
             var deltaDistance =
-                _smoothMove.MoveDelta(_movingDirection, Time.fixedDeltaTime);
+                _smoothMove.MoveDelta(_movingDirection, Time.deltaTime);
             var deltaDeg =
-                _smoothMove.RotateDelta(transform.eulerAngles.y, _lookingDeg, Time.fixedDeltaTime);
+                _smoothMove.RotateDelta(transform.eulerAngles.y, _lookingDeg, Time.deltaTime);
 
             Move(new Vector3(deltaDistance.x, 0, deltaDistance.y));
             Look(deltaDeg);

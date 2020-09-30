@@ -37,7 +37,7 @@ public class SmoothMove
     /// <returns>The delta distance in the specified time interval</returns>
     public Vector2 MoveDelta(Vector2 toDirection, float deltaTime)
     {
-        if (toDirection.magnitude < 0.01f &&  _curMovingDirection.magnitude < 0.01f)
+        if (toDirection.magnitude < 0.01f && _curMovingDirection.magnitude < 0.01f)
             return Vector2.zero;
 
         _curMovingDirection = Vector2.SmoothDamp(
