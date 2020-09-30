@@ -13,7 +13,12 @@ namespace GamePlay
             Instance = this;
         }
 
-        public void ResetData()
+        private void Start()
+        {
+            LevelManager.Instance.OnLevelEnded += ResetData;
+        }
+
+        private void ResetData()
         {
             _numOfEnemy = 0;
         }

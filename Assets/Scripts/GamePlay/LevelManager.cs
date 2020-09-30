@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -11,6 +12,11 @@ namespace GamePlay
     {
         public static LevelManager Instance { get; private set; }
         public static bool isGamePaused { get; private set; }
+
+        /// <summary>
+        /// The event will be invoked when the level is ended
+        /// </summary>
+        public Action OnLevelEnded = () => {};
 
         [SerializeField]
         private CinemachineBrain _cinemachineBrain = null;
@@ -90,7 +96,7 @@ namespace GamePlay
                 SceneLoader.UnloadScene(_curLevelHandle, OnLevelUnLoaded);
 
             GamePause();
-            EnemyManager.Instance.ResetData();
+            OnLevelEnded();
 
             SceneLoader.LoadScene(
                 _levelData.GetLevelScene(_curLevelID), LoadSceneMode.Additive,
