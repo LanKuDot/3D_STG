@@ -13,8 +13,6 @@ namespace GamePlay
 
         [SerializeField]
         private PlayerData _data = null;
-        [SerializeField]
-        private Camera _targetCamera = null;
         private Vector2 _cameraCenterPos;
 
         private int _hp;
@@ -27,7 +25,7 @@ namespace GamePlay
         private new void Awake()
         {
             base.Awake();
-            _cameraCenterPos = _targetCamera.pixelRect.size / 2;
+            _cameraCenterPos = new Vector2(Screen.width, Screen.height) / 2;
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
