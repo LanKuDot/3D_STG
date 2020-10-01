@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ namespace GamePlay
         public static Player Instance { get; private set; }
 
         private Action _onPlayerDestroyed;
+        private Action<Vector2> _lookAction;
 
         [SerializeField]
         private PlayerData _data = null;
@@ -29,6 +31,8 @@ namespace GamePlay
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
+            // Default look action is controlled by the mouse
+            _lookAction = LookAtPointer;
 
             Instance = this;
         }
@@ -38,6 +42,14 @@ namespace GamePlay
             _onPlayerDestroyed += LevelManager.Instance.GameOver;
         }
 
+        public void OnInputDeviceChanged(PlayerInput input)
+        {
+            if (input.currentControlScheme.Equals("Gamepad"))
+                _lookAction = LookByStick;
+            else
+                _lookAction = LookAtPointer;
+        }
+
         public void OnMove(InputAction.CallbackContext context)
         {
             _movingDirection = context.ReadValue<Vector2>();
@@ -45,13 +57,31 @@ namespace GamePlay
 
         public void OnLook(InputAction.CallbackContext context)
         {
-            var pointerPos = context.ReadValue<Vector2>();
+            _lookAction(context.ReadValue<Vector2>());
+        }
+
+        private void LookAtPointer(Vector2 pointerPos)
+        {
             _lookingDeg = -Vector2.SignedAngle(Vector2.up, pointerPos - _cameraCenterPos);
+        }
+
+        private void LookByStick(Vector2 direction)
+        {
+            // Prevent the huge value when the stick is at the reset position
+            if (Mathf.Abs(direction.x) > 1.0f)
+                direction.x = 0.0f;
+            if (Mathf.Abs(direction.y) > 1.0f)
+                direction.y = 0.0f;
+
+            if (direction.magnitude < 0.1)
+                return;
+
+            _lookingDeg = -Vector2.SignedAngle(Vector2.up, direction);
         }
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            if (context.performed) {
+            if (context.started) {
                 // Prevent the last coroutine from living while it's waiting
                 // and the _isFiring flag becomes true again.
                 if (_lastFiringCoroutine != null)
