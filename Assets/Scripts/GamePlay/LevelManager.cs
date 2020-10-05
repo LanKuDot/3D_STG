@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using Cinemachine;
+using GamePlay.UI;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
@@ -22,6 +22,8 @@ namespace GamePlay
         private CinemachineBrain _cinemachineBrain = null;
         [SerializeField]
         private LevelData _levelData = null;
+        [SerializeField]
+        private LevelCurtain _levelCurtain = null;
         private string _initialLoadedScenePath = "";
         private int _curLevelID;
         private AsyncOperationHandle<SceneInstance> _curLevelHandle;
@@ -33,16 +35,18 @@ namespace GamePlay
 
         private void Start()
         {
+            if (!_levelCurtain.isActiveAndEnabled)
+                _levelCurtain.gameObject.SetActive(true);
+
             _curLevelID = _levelData.GetLoadedLevelID();
             if (_curLevelID >= 0) {
                 _initialLoadedScenePath = _levelData.GetLevelScenePath(_curLevelID);
                 GamePause();
                 InitializeLevel();
-                return;
+            } else {
+                _curLevelID = _levelData.defaultLevelID;
+                LoadLevel();
             }
-
-            _curLevelID = _levelData.defaultLevelID;
-            LoadLevel();
         }
 
         private static void GamePause()
@@ -63,7 +67,7 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
-            LoadLevel();
+            _levelCurtain.CloseCurtain("LEVEL FAILED");
         }
 
         /// <summary>
@@ -78,14 +82,14 @@ namespace GamePlay
                 return;
             }
 
-            LoadLevel();
+            _levelCurtain.CloseCurtain("LEVEL PASSED");
         }
 
         /// <summary>
         /// Load the level according to <c>_curLevelID</c>,
         /// unload the previous loaded level, and reset the static manager
         /// </summary>
-        private void LoadLevel()
+        public void LoadLevel()
         {
             // If the level is loaded before the game started, unload it by SceneManager
             // Because it's not loaded by the SceneLoader
@@ -134,15 +138,14 @@ namespace GamePlay
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
             Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(_curLevelID));
 
-            StartCoroutine(StartWait());
+            _levelCurtain.OpenCurtain($"LEVEL {_curLevelID}");
         }
 
         /// <summary>
-        /// The time pausing before the game starts
+        /// Start the level
         /// </summary>
-        private IEnumerator StartWait()
+        public void StartLevel()
         {
-            yield return new WaitForSecondsRealtime(1.0f);
             // Set the update method back to the SmartUpdate before the game resumes.
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
             GameResume();
