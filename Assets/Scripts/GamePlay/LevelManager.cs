@@ -16,7 +16,7 @@ namespace GamePlay
         /// <summary>
         /// The event will be invoked when the level is ended
         /// </summary>
-        public Action OnLevelEnded = () => {};
+        public Action OnLevelEnded = null;
 
         [SerializeField]
         private CinemachineBrain _cinemachineBrain = null;
@@ -100,7 +100,7 @@ namespace GamePlay
                 SceneLoader.UnloadScene(_curLevelHandle, OnLevelUnLoaded);
 
             GamePause();
-            OnLevelEnded();
+            OnLevelEnded?.Invoke();
 
             SceneLoader.LoadScene(
                 _levelData.GetLevelScene(_curLevelID), LoadSceneMode.Additive,
