@@ -19,7 +19,8 @@ namespace GamePlay
 
         protected void Start()
         {
-            EnemyManager.Instance.RegisterEnemy(gameObject, _spawnCondition);
+            _spawnCondition.gameObject = gameObject;
+            EnemyManager.Instance.RegisterEnemy(_spawnCondition);
         }
 
         protected void OnEnable()

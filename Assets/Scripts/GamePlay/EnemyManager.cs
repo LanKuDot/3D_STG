@@ -8,7 +8,9 @@ namespace GamePlay
     {
         public static EnemyManager Instance { get; private set; }
 
-        private List<List<GameObject>> _storedEnemies = new List<List<GameObject>>();
+        private List<List<EnemySpawnCondition>> _enemyStageList =
+            new List<List<EnemySpawnCondition>>();
+        private int _curStage = 0;
         private int _numOfCurEnemy = 0;
 
         private void Awake()
@@ -23,18 +25,33 @@ namespace GamePlay
 
         private void ResetData()
         {
-            _storedEnemies.Clear();
+            foreach (var stage in _enemyStageList)
+                stage.Clear();
+
+            _curStage = 0;
             _numOfCurEnemy = 0;
         }
 
         /// <summary>
         /// Register the enemy by itself to the manager
         /// </summary>
-        /// <param name="enemy">The game object of the enemy</param>
         /// <param name="spawnCondition">The spawn condition of the enemy</param>
-        public void RegisterEnemy(GameObject enemy, EnemySpawnCondition spawnCondition)
+        public void RegisterEnemy(EnemySpawnCondition spawnCondition)
         {
-            ++_numOfCurEnemy;
+            var spawnStage = spawnCondition.spawnStage;
+
+            // Create new stage list if it's not enough
+            while (spawnStage > _enemyStageList.Count) {
+                _enemyStageList.Add(new List<EnemySpawnCondition>());
+            }
+
+            // Store the enemy if the current stage is not its stage
+            if (spawnStage > _curStage) {
+                _enemyStageList[spawnStage - 1].Add(spawnCondition);
+                spawnCondition.InactivateEnemy();
+            } else {
+                ++_numOfCurEnemy;
+            }
         }
 
         /// <summary>
@@ -44,16 +61,26 @@ namespace GamePlay
         {
             --_numOfCurEnemy;
             if (_numOfCurEnemy == 0)
-                OnEnemyAllCleared();
+                NextStage();
         }
 
         /// <summary>
-        /// The things to do when the spawned enemies are cleared<para />
         /// Spawn new stage of enemies or inform the level is passed.
         /// </summary>
-        private void OnEnemyAllCleared()
+        private void NextStage()
         {
-            LevelManager.Instance.LevelPass();
+            ++_curStage;
+
+            if (_curStage > _enemyStageList.Count) {
+                LevelManager.Instance.LevelPass();
+                return;
+            }
+
+            foreach (var enemy in _enemyStageList[_curStage - 1]) {
+                ++_numOfCurEnemy;
+                if (enemy.wakeBy == EnemySpawnCondition.WakeBy.Manager)
+                    enemy.ActivateEnemy();
+            }
         }
     }
 
@@ -66,12 +93,27 @@ namespace GamePlay
             Others
         }
 
+        private GameObject _gameObject;
         [SerializeField]
         private int _spawnStage = 0;
         [SerializeField]
         private WakeBy _wakeBy = WakeBy.Manager;
 
+        public GameObject gameObject
+        {
+            set => _gameObject = value;
+        }
         public int spawnStage => _spawnStage;
         public WakeBy wakeBy => _wakeBy;
+
+        public void ActivateEnemy()
+        {
+            _gameObject.SetActive(true);
+        }
+
+        public void InactivateEnemy()
+        {
+            _gameObject.SetActive(false);
+        }
     }
 }
