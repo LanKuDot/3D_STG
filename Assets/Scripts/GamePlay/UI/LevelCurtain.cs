@@ -1,6 +1,5 @@
-﻿using System.Text;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GamePlay.UI
 {
@@ -8,7 +7,7 @@ namespace GamePlay.UI
     {
         private Animator _animator;
         [SerializeField]
-        private Text _msgText = null;
+        private TextMeshProUGUI _msgText = null;
 
         private void Awake()
         {
@@ -25,7 +24,7 @@ namespace GamePlay.UI
             if (!isActiveAndEnabled)
                 gameObject.SetActive(true);
 
-            _msgText.text = ExpandText(msgText);
+            _msgText.text = msgText;
             _animator.Play("Level Curtain In");
         }
 
@@ -39,7 +38,7 @@ namespace GamePlay.UI
             if (!isActiveAndEnabled)
                 gameObject.SetActive(true);
 
-            _msgText.text = ExpandText(msgText);
+            _msgText.text = msgText;
             _animator.Play("Level Curtain Out");
         }
 
@@ -52,29 +51,6 @@ namespace GamePlay.UI
         {
             gameObject.SetActive(false);
             LevelManager.Instance.StartLevel();
-        }
-
-        /// <summary>
-        /// Insert a space between each text
-        /// </summary>
-        /// <param name="originText">The origin string text</param>
-        /// <returns>The expanded text</returns>
-        private static string ExpandText(string originText)
-        {
-            var builder = new StringBuilder("");
-            foreach (var ch in originText) {
-                // Append one more space for the space
-                if (ch == ' ') {
-                    builder.Append(' ');
-                }
-
-                builder.Append($"{ch} ");
-            }
-
-            // Remove the last space
-            builder.Remove(builder.Length - 1, 1);
-
-            return builder.ToString();
         }
     }
 }

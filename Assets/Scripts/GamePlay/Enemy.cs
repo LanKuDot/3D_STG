@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace GamePlay
@@ -71,13 +70,5 @@ namespace GamePlay
                 gameObject.SetActive(false);
             }
         }
-    }
-
-    [Serializable]
-    public class EnemySpawnCondition
-    {
-        [SerializeField]
-        private int _spawnStage = 0;
-        public int spawnStage => _spawnStage;
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GamePlay
 {
@@ -6,7 +8,8 @@ namespace GamePlay
     {
         public static EnemyManager Instance { get; private set; }
 
-        private int _numOfEnemy = 0;
+        private List<List<GameObject>> _storedEnemies = new List<List<GameObject>>();
+        private int _numOfCurEnemy = 0;
 
         private void Awake()
         {
@@ -20,7 +23,8 @@ namespace GamePlay
 
         private void ResetData()
         {
-            _numOfEnemy = 0;
+            _storedEnemies.Clear();
+            _numOfCurEnemy = 0;
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace GamePlay
         /// <param name="spawnCondition">The spawn condition of the enemy</param>
         public void RegisterEnemy(GameObject enemy, EnemySpawnCondition spawnCondition)
         {
-            ++_numOfEnemy;
+            ++_numOfCurEnemy;
         }
 
         /// <summary>
@@ -38,8 +42,8 @@ namespace GamePlay
         /// </summary>
         public void DestroyEnemy()
         {
-            --_numOfEnemy;
-            if (_numOfEnemy == 0)
+            --_numOfCurEnemy;
+            if (_numOfCurEnemy == 0)
                 OnEnemyAllCleared();
         }
 
@@ -51,5 +55,23 @@ namespace GamePlay
         {
             LevelManager.Instance.LevelPass();
         }
+    }
+
+    [Serializable]
+    public class EnemySpawnCondition
+    {
+        public enum WakeBy
+        {
+            Manager,
+            Others
+        }
+
+        [SerializeField]
+        private int _spawnStage = 0;
+        [SerializeField]
+        private WakeBy _wakeBy = WakeBy.Manager;
+
+        public int spawnStage => _spawnStage;
+        public WakeBy wakeBy => _wakeBy;
     }
 }
