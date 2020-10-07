@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddb9792b0b76ee647b5562befb6865aa, type: 3}
-  m_Name: EnemyTraceData
+  m_Name: EnemyTrace_Unmovable
   m_EditorClassIdentifier: 
   _hp: 3
-  _movingVelocity: 5
-  _movingAccelTime: 1
+  _movingVelocity: 0
+  _movingAccelTime: 10
   _rotateAccelTime: 0.5
