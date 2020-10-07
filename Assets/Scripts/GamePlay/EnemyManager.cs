@@ -8,6 +8,8 @@ namespace GamePlay
     {
         public static EnemyManager Instance { get; private set; }
 
+        public Action<int> OnStageCleared = null;
+
         private List<List<EnemySpawnCondition>> _enemyStageList =
             new List<List<EnemySpawnCondition>>();
         private int _curStage = 0;
@@ -30,6 +32,9 @@ namespace GamePlay
 
             _curStage = 0;
             _numOfCurEnemy = 0;
+
+            // Clear all registered delegates
+            OnStageCleared = null;
         }
 
         /// <summary>
@@ -59,9 +64,11 @@ namespace GamePlay
         /// </summary>
         public void DestroyEnemy()
         {
-            --_numOfCurEnemy;
-            if (_numOfCurEnemy == 0)
-                NextStage();
+            if (--_numOfCurEnemy != 0)
+                return;
+
+            OnStageCleared?.Invoke(_curStage);
+            NextStage();
         }
 
         /// <summary>
