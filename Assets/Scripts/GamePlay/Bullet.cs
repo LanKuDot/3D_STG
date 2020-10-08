@@ -10,7 +10,6 @@ namespace GamePlay
         private BulletData _data = null;
 
         private Rigidbody _rigidbody;
-        private Vector3 _movingDirection;
 
         protected void Awake()
         {
@@ -28,7 +27,6 @@ namespace GamePlay
 
         protected void OnEnable()
         {
-            _movingDirection = transform.rotation * Vector3.up;
             StartCoroutine(LifeTimeCountDown());
         }
 
@@ -39,9 +37,8 @@ namespace GamePlay
 
         protected void Move()
         {
-            _rigidbody.MovePosition(
-                transform.localPosition +
-                _data.velocity * Time.deltaTime * _movingDirection);
+            _rigidbody.position +=
+                _data.velocity * Time.deltaTime * (transform.rotation * Vector3.up);
         }
 
         // This event will be invoked when it hits the barrier, the bullet and the player
