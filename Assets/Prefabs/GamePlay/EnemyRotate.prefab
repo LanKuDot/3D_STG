@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6453282471467297501}
   - component: {fileID: 6453282471467297502}
   - component: {fileID: 6453282471467297503}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: EnemyRotate
   m_TagString: Enemy
   m_Icon: {fileID: 0}

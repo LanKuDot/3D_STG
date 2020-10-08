@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2383850051565470544}
   - component: {fileID: 2383850051565470545}
   - component: {fileID: 2383850051565470558}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: EnemyBounce
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2383850051565470559}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -127,5 +127,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnCondition:
     _spawnStage: 0
+    _wakeBy: 0
   _firingScript: {fileID: 11400000, guid: 1e6aaa4892f50c54797b7fd3134bad84, type: 2}
   _data: {fileID: 11400000, guid: 403d621af1b35dd4bb51a4380d7a4fd1, type: 2}

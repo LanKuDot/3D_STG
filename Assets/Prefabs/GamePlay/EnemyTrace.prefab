@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3774977997779414339}
   - component: {fileID: 3774977997779414341}
   - component: {fileID: 3774977997779414338}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3774977999330143362}
   - component: {fileID: 3774977999330143363}
   - component: {fileID: 3774977999330143360}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: EnemyTrace
   m_TagString: Enemy
   m_Icon: {fileID: 0}
