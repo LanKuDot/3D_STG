@@ -93,10 +93,10 @@ namespace GamePlay
             }
         }
 
-        // This function is invoked only when it's hit by the bullet.
         private void OnTriggerEnter(Collider other)
         {
-            GetDamage();
+            if (other.CompareTag("Bullet"))
+                GetDamage();
         }
 
         private void FixedUpdate()
