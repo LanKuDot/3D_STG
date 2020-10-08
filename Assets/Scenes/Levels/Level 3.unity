@@ -793,6 +793,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1330437231}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
@@ -807,6 +812,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _stage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
@@ -1966,10 +1976,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1028761108}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
-      value: BarrierDestoryable (2)
+      value: Brick_U
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
@@ -2471,6 +2491,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1330437231}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
@@ -2485,6 +2510,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _stage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
@@ -2817,10 +2847,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1028761108}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
-      value: BarrierDestoryable (1)
+      value: Brick_D
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
@@ -2980,7 +3020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1028761108}
   m_Layer: 0
-  m_Name: BarrierDoors
+  m_Name: Bricks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4811,10 +4851,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1028761108}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
-      value: BarrierDestoryable
+      value: Brick_C
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
@@ -5156,6 +5206,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1330437231}
     m_Modifications:
+    - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_Name
@@ -5170,6 +5225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _stage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488180811068834421, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: _destroyableTiming
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488180811068834423, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}

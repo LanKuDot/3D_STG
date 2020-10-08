@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3344773158156205976}
   - component: {fileID: 3344773158156205983}
   m_Layer: 0
-  m_Name: BarrierProtector
+  m_Name: BrickProtector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3344773158156205982
 Transform:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 8488180811068834422}
   - component: {fileID: 8488180811068834421}
   m_Layer: 0
-  m_Name: BarrierDestoryable
+  m_Name: Brick
   m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,5 +187,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 3
-  _condition: 1
+  _destroyableTiming: 0
   _stage: 1

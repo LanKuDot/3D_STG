@@ -2,9 +2,9 @@
 
 namespace GamePlay
 {
-    public class BarrierDestroyable : MonoBehaviour
+    public class Brick : MonoBehaviour
     {
-        public enum Condition
+        public enum DestroyableTiming
         {
             AtStart,
             AtStage
@@ -13,7 +13,7 @@ namespace GamePlay
         [SerializeField]
         private int _hp = 3;
         [SerializeField]
-        private Condition _condition = Condition.AtStart;
+        private DestroyableTiming _destroyableTiming = DestroyableTiming.AtStart;
         [SerializeField]
         [Min(1)]
         private int _stage = 1;
@@ -25,14 +25,14 @@ namespace GamePlay
         {
             _playerLayer = LayerMask.NameToLayer("Player");
 
-            if (_condition == Condition.AtStart)
+            if (_destroyableTiming == DestroyableTiming.AtStart)
                 SetDestroyable();
             else
                 EnemyManager.Instance.OnStageCleared += OnStageCleared;
         }
 
         /// <summary>
-        /// Check if the barrier is destroyable in the next stage
+        /// Check if the brick is destroyable in the next stage
         /// </summary>
         /// <param name="stage">The stage cleared</param>
         private void OnStageCleared(int stage)
@@ -44,7 +44,7 @@ namespace GamePlay
         private void SetDestroyable()
         {
             _isDestroyable = true;
-            // Inactivate the barrier protector
+            // Inactivate the protector
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
