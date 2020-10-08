@@ -48,8 +48,10 @@ namespace GamePlay
         // of the opposite side
         protected void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Trigger") ||
-                (other.CompareTag("Bullet") && _data.isDestroyable))
+            if (other.CompareTag("Trigger"))
+                return;
+
+            if (!other.CompareTag("Bullet") || _data.isDestroyable)
                 ReturnToPool();
         }
 
