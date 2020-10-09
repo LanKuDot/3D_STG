@@ -15,6 +15,8 @@ namespace GamePlay
 
         [SerializeField]
         private PlayerData _data = null;
+        [SerializeField]
+        private GameObject _protector = null;
         private Vector2 _cameraCenterPos;
 
         private int _hp;
@@ -139,7 +141,8 @@ namespace GamePlay
             if (--_hp == 0) {
                 _onPlayerDestroyed();
                 gameObject.SetActive(false);
-            }
+            } else
+                _protector.SetActive(true);
         }
     }
 }
