@@ -5,28 +5,23 @@ namespace GamePlay
     public class EnemyTrace : Enemy
     {
         [SerializeField]
-        private EnemyTraceData _data = null;
+        private new EnemyTraceData _data = null;
 
         private GameObject _playerTarget = null;
         private SmoothMove _smoothMove;
 
         private new void Awake()
         {
-            base.Awake();
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotateAccelTime);
+            base._data = _data;
+            base.Awake();
         }
 
         private new void Start()
         {
-            base.Start();
             _playerTarget = Player.Instance.gameObject;
-        }
-
-        private new void OnEnable()
-        {
-            base.OnEnable();
-            hp = _data.hp;
+            base.Start();
         }
 
         private void FixedUpdate()

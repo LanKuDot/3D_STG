@@ -5,12 +5,12 @@ namespace GamePlay
     public class EnemyRotate : Enemy
     {
         [SerializeField]
-        private EnemyRotateData _data = null;
+        private new EnemyRotateData _data = null;
 
-        private new void OnEnable()
+        private new void Awake()
         {
-            hp = _data.hp;
-            base.OnEnable();
+            base._data = _data;
+            base.Awake();
         }
 
         private void FixedUpdate()

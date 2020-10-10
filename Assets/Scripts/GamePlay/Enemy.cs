@@ -5,12 +5,11 @@ namespace GamePlay
 {
     public class Enemy : Character
     {
+        protected EnemyData _data { set; get; }
+
         [SerializeField]
         private EnemySpawnCondition _spawnCondition = null;
-        [SerializeField]
-        private FiringScript _firingScript = null;
-        // The hp should be initialized by the derived class when the object is activated.
-        protected int hp { get; set; } = 0;
+        private int _hp = 0;
 
         protected new void Awake()
         {
@@ -25,6 +24,7 @@ namespace GamePlay
 
         protected void OnEnable()
         {
+            _hp = _data.hp;
             StartCoroutine(FireControl());
         }
 
@@ -49,12 +49,15 @@ namespace GamePlay
         /// </summary>
         private IEnumerator FireControl()
         {
-            yield return new WaitForSeconds(_firingScript.initialDelay);
+            yield return new WaitForSeconds(_data.firingScript.initialDelay);
 
             while (true) {
-                foreach (var action in _firingScript.actions) {
-                    foreach (var data in action.data) {
-                        Fire(data.bulletObject.name, data.direction.normalized, 1.0f);
+                foreach (var action in _data.firingScript.actions) {
+                    foreach (var bullet in action.bullets) {
+                        Fire(
+                            bullet.prefab.name,
+                            Quaternion.Euler(0.0f, bullet.degree, 0.0f) * Vector3.forward,
+                            1.0f);
                     }
                     yield return new WaitForSeconds(action.coolDownTime);
                 }
@@ -66,7 +69,7 @@ namespace GamePlay
         /// </summary>
         private void GetDamage()
         {
-            if (--hp == 0) {
+            if (--_hp == 0) {
                 EnemyManager.Instance.DestroyEnemy();
                 gameObject.SetActive(false);
             }

@@ -5,13 +5,18 @@ namespace GamePlay
     public class EnemyBounce : Enemy
     {
         [SerializeField]
-        private EnemyBounceData _data = null;
+        private new EnemyBounceData _data = null;
 
         private Vector3 _movingDirection;
 
+        private new void Awake()
+        {
+            base._data = _data;
+            base.Awake();
+        }
+
         private new void OnEnable()
         {
-            hp = _data.hp;
             _movingDirection = _data.initialMovingDirection.normalized;
             base.OnEnable();
         }

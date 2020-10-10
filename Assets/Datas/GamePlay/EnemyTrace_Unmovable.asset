@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: EnemyTrace_Unmovable
   m_EditorClassIdentifier: 
   _hp: 3
+  _firingScript:
+    _initialDelay: 0.1
+    _actions:
+    - _coolDownTime: 0.15
+      _bullets:
+      - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
+          type: 3}
+        _degree: 0
   _movingVelocity: 0
   _movingAccelTime: 10
   _rotateAccelTime: 0.5

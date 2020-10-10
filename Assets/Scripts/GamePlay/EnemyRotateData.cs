@@ -4,14 +4,12 @@ namespace GamePlay
 {
     [CreateAssetMenu(fileName = "EnemyRotateData",
         menuName = "Scriptable Object/Enemy/Enemy Rotate Data", order = 3)]
-    public class EnemyRotateData : ScriptableObject
+    public class EnemyRotateData : EnemyData
     {
-        [SerializeField]
-        private int _hp = 3;
+        [Tooltip("The rotating velocity in degree per second")]
         [SerializeField]
         private float _rotatingVelocity = 120f;
 
-        public int hp => _hp;
         public float rotatingVelocity => _rotatingVelocity;
     }
 }
