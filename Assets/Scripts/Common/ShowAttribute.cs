@@ -17,3 +17,18 @@ public class BeginShowOnlyGroupAttribute : PropertyAttribute
 /// </summary>
 public class EndShowOnlyGroupAttribute : PropertyAttribute
 { }
+
+/// <summary>
+/// The attribute for showing a property when another enum value matches the value
+/// </summary>
+public class ShowIfEnumAttribute : PropertyAttribute
+{
+    public readonly string enumProperty;
+    public readonly int[] targetValues;
+
+    public ShowIfEnumAttribute(string enumProperty, params int[] targetValues)
+    {
+        this.enumProperty = enumProperty;
+        this.targetValues = targetValues;
+    }
+}
