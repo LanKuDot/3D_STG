@@ -138,7 +138,7 @@ namespace GamePlay
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
             Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(_curLevelID));
 
-            _levelCurtain.OpenCurtain($"LEVEL {_curLevelID}");
+            _levelCurtain.OpenCurtain($"LEVEL {_curLevelID + 1}");
         }
 
         /// <summary>
