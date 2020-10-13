@@ -16,7 +16,7 @@ namespace GamePlay
         /// <summary>
         /// The event will be invoked when the level is ended
         /// </summary>
-        public Action OnLevelEnded = null;
+        public event Action OnLevelEnded = null;
 
         [SerializeField]
         private CinemachineBrain _cinemachineBrain = null;

@@ -8,7 +8,7 @@ namespace GamePlay
     {
         public static EnemyManager Instance { get; private set; }
 
-        public Action<int> OnStageCleared = null;
+        public event Action<int> OnStageCleared = null;
 
         private List<List<EnemySpawnCondition>> _enemyStageList =
             new List<List<EnemySpawnCondition>>();

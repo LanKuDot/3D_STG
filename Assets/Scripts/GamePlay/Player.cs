@@ -10,7 +10,6 @@ namespace GamePlay
     {
         public static Player Instance { get; private set; }
 
-        private Action _onPlayerDestroyed;
         private Action<Vector2> _lookAction;
 
         [SerializeField]
@@ -37,11 +36,6 @@ namespace GamePlay
             _lookAction = LookAtPointer;
 
             Instance = this;
-        }
-
-        private void Start()
-        {
-            _onPlayerDestroyed += LevelManager.Instance.GameOver;
         }
 
         public void OnInputDeviceChanged(PlayerInput input)
@@ -139,7 +133,7 @@ namespace GamePlay
         private void GetDamage()
         {
             if (--_hp == 0) {
-                _onPlayerDestroyed();
+                LevelManager.Instance.GameOver();
                 gameObject.SetActive(false);
             } else
                 _protector.SetActive(true);
