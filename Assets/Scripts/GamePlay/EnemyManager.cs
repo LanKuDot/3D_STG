@@ -13,6 +13,7 @@ namespace GamePlay
         private List<List<EnemySpawnCondition>> _enemyStageList =
             new List<List<EnemySpawnCondition>>();
         private int _curStage = 0;
+        private int _numOfStage = 0;
         private int _numOfCurEnemy = 0;
 
         private void Awake()
@@ -31,6 +32,7 @@ namespace GamePlay
                 stage.Clear();
 
             _curStage = 0;
+            _numOfStage = 0;
             _numOfCurEnemy = 0;
 
             // Clear all registered delegates
@@ -44,6 +46,8 @@ namespace GamePlay
         public void RegisterEnemy(EnemySpawnCondition spawnCondition)
         {
             var spawnStage = spawnCondition.spawnStage;
+
+            _numOfStage = Mathf.Max(_numOfStage, spawnStage);
 
             // Create new stage list if it's not enough
             while (spawnStage > _enemyStageList.Count) {
@@ -78,7 +82,7 @@ namespace GamePlay
         {
             ++_curStage;
 
-            if (_curStage > _enemyStageList.Count) {
+            if (_curStage > _numOfStage) {
                 LevelManager.Instance.LevelPass();
                 return;
             }
