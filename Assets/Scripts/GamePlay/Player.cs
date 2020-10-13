@@ -38,6 +38,8 @@ namespace GamePlay
             Instance = this;
         }
 
+        #region Input System Event
+
         public void OnInputDeviceChanged(PlayerInput input)
         {
             if (input.currentControlScheme.Equals("Gamepad"))
@@ -89,6 +91,8 @@ namespace GamePlay
             }
         }
 
+        #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Bullet"))
@@ -99,6 +103,8 @@ namespace GamePlay
         {
             MoveAndLook();
         }
+
+        #region Player Logic
 
         public void ResetPlayer(Vector3 respawnPoint)
         {
@@ -140,5 +146,7 @@ namespace GamePlay
             } else
                 _protector.SetActive(true);
         }
+
+        #endregion
     }
 }
