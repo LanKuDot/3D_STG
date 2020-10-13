@@ -107,6 +107,8 @@ namespace GamePlay
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             if (!isActiveAndEnabled)
                 gameObject.SetActive(true);
+            if (_protector.activeSelf)
+                _protector.SetActive(false);
         }
 
         private void MoveAndLook()
