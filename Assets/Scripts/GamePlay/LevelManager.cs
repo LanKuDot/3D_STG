@@ -25,8 +25,10 @@ namespace GamePlay
         [SerializeField]
         private LevelCurtain _levelCurtain = null;
         private string _initialLoadedScenePath = "";
-        private int _curLevelID;
         private AsyncOperationHandle<SceneInstance> _curLevelHandle;
+
+        public int curLevelID { private set; get; }
+        public int numOfLevel => _levelData.Length;
 
         private void Awake()
         {
@@ -38,13 +40,13 @@ namespace GamePlay
             if (!_levelCurtain.isActiveAndEnabled)
                 _levelCurtain.gameObject.SetActive(true);
 
-            _curLevelID = _levelData.GetLoadedLevelID();
-            if (_curLevelID >= 0) {
-                _initialLoadedScenePath = _levelData.GetLevelScenePath(_curLevelID);
+            curLevelID = _levelData.GetLoadedLevelID();
+            if (curLevelID >= 0) {
+                _initialLoadedScenePath = _levelData.GetLevelScenePath(curLevelID);
                 GamePause();
                 InitializeLevel();
             } else {
-                _curLevelID = _levelData.defaultLevelID;
+                curLevelID = _levelData.defaultLevelID;
                 LoadLevel();
             }
         }
@@ -77,7 +79,7 @@ namespace GamePlay
         /// </summary>
         public void LevelPass()
         {
-            if (++_curLevelID == _levelData.Length) {
+            if (++curLevelID == _levelData.Length) {
                 Debug.Log("Level Passed");
                 return;
             }
@@ -103,7 +105,7 @@ namespace GamePlay
             OnLevelEnded?.Invoke();
 
             SceneLoader.LoadScene(
-                _levelData.GetLevelScene(_curLevelID), LoadSceneMode.Additive,
+                _levelData.GetLevelScene(curLevelID), LoadSceneMode.Additive,
                 OnLevelLoaded);
         }
 
@@ -136,9 +138,9 @@ namespace GamePlay
             // Set the update method to LateUpdate to make the VC move
             // to the new player position while the game is paused.
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
-            Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(_curLevelID));
+            Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(curLevelID));
 
-            _levelCurtain.OpenCurtain($"LEVEL {_curLevelID + 1}");
+            _levelCurtain.OpenCurtain($"LEVEL {curLevelID + 1}");
         }
 
         /// <summary>
