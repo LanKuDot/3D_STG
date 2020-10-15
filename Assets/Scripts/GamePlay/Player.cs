@@ -25,6 +25,8 @@ namespace GamePlay
         private bool _isFiring = false;
         private Coroutine _lastFiringCoroutine;
 
+        public bool takeNoDamage { set; get; } = false;
+
         private new void Awake()
         {
             base.Awake();
@@ -140,7 +142,7 @@ namespace GamePlay
 
         private void GetDamage()
         {
-            if (--_hp == 0) {
+            if (!takeNoDamage && --_hp == 0) {
                 LevelManager.Instance.GameOver();
                 gameObject.SetActive(false);
             } else

@@ -14,6 +14,10 @@ namespace GamePlay
         public static bool isGamePaused { get; private set; }
 
         /// <summary>
+        /// The event will be invoked when the level is started
+        /// </summary>
+        public event Action<int> OnLevelStarted = null;
+        /// <summary>
         /// The event will be invoked when the level is ended
         /// </summary>
         public event Action OnLevelEnded = null;
@@ -87,6 +91,25 @@ namespace GamePlay
             _levelCurtain.CloseCurtain("LEVEL PASSED");
         }
 
+        #if UNITY_EDITOR
+
+        /// <summary>
+        /// Change the level immediately
+        /// </summary>
+        /// <param name="levelID">The level ID</param>
+        public void LevelChange(int levelID)
+        {
+            if (levelID >= _levelData.Length) {
+                Debug.LogError("The level ID is out of the number of level data");
+                return;
+            }
+
+            curLevelID = levelID;
+            _levelCurtain.CloseCurtain("LEVEL CHANGED");
+        }
+
+        #endif
+
         /// <summary>
         /// Load the level according to <c>_curLevelID</c>,
         /// unload the previous loaded level, and reset the static manager
@@ -150,6 +173,7 @@ namespace GamePlay
         {
             // Set the update method back to the SmartUpdate before the game resumes.
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
+            OnLevelStarted?.Invoke(curLevelID);
             GameResume();
         }
     }
