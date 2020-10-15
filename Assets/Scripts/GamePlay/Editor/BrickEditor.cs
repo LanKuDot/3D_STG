@@ -29,5 +29,22 @@ namespace GamePlay.Editor
                     protector.SetActive(true);
             }
         }
+
+        [DrawGizmo(GizmoType.InSelectionHierarchy)]
+        private static void DrawGizmos(Brick brick, GizmoType gizmoType)
+        {
+            var transform = brick.transform;
+
+            var labelStr =
+                $"HP: {brick.hp}" +
+                (brick.destroyableTiming == Brick.DestroyableTiming.AtStage ?
+                    $"\nDestroyable at stage {brick.stage}" : "");
+            var labelStyle = new GUIStyle {
+                normal = {textColor = Color.black}
+            };
+
+            Handles.Label(
+                transform.position + transform.right * 1, labelStr, labelStyle);
+        }
     }
 }

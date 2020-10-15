@@ -18,6 +18,10 @@ namespace GamePlay
         [Min(1)]
         private int _stage = 1;
 
+        public int hp => _hp;
+        public DestroyableTiming destroyableTiming => _destroyableTiming;
+        public int stage => _stage;
+
         private bool _isDestroyable = false;
         private int _playerLayer;
 
