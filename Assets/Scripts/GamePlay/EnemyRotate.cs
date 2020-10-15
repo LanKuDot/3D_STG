@@ -7,10 +7,9 @@ namespace GamePlay
         [SerializeField]
         private new EnemyRotateData _data = null;
 
-        private new void Awake()
+        private void Awake()
         {
             base._data = _data;
-            base.Awake();
         }
 
         private void FixedUpdate()

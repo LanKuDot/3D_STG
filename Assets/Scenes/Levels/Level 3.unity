@@ -3471,7 +3471,7 @@ Transform:
   - {fileID: 1028761108}
   - {fileID: 2040701862}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1196287904
 PrefabInstance:
@@ -3591,7 +3591,7 @@ Transform:
   - {fileID: 1071070002}
   - {fileID: 702376430}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1215714397
 PrefabInstance:
@@ -4672,7 +4672,7 @@ Transform:
   - {fileID: 1017638031}
   - {fileID: 705722261}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1694771325
 PrefabInstance:
@@ -4929,36 +4929,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1839612134}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1860095495
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1860095496}
-  m_Layer: 0
-  m_Name: Barriers
-  m_TagString: Barrier
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1860095496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860095495}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1906878326
 PrefabInstance:
   m_ObjectHideFlags: 0

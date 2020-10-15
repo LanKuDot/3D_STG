@@ -10,12 +10,11 @@ namespace GamePlay
         private GameObject _playerTarget = null;
         private SmoothMove _smoothMove;
 
-        private new void Awake()
+        private void Awake()
         {
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotateAccelTime);
             base._data = _data;
-            base.Awake();
         }
 
         private new void Start()

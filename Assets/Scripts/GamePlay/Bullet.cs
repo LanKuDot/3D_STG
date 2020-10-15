@@ -6,12 +6,12 @@ namespace GamePlay
     [RequireComponent(typeof(Rigidbody))]
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] [ShowOnly]
+        private Rigidbody _rigidbody;
         [SerializeField]
         private BulletData _data = null;
 
-        private Rigidbody _rigidbody;
-
-        protected void Awake()
+        private void Reset()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }

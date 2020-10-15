@@ -27,9 +27,8 @@ namespace GamePlay
 
         public bool takeNoDamage { set; get; } = false;
 
-        private new void Awake()
+        private void Awake()
         {
-            base.Awake();
             _cameraCenterPos = new Vector2(Screen.width, Screen.height) / 2;
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);

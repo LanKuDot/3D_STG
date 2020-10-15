@@ -11,11 +11,6 @@ namespace GamePlay
         private EnemySpawnCondition _spawnCondition = null;
         private int _hp = 0;
 
-        protected new void Awake()
-        {
-            base.Awake();
-        }
-
         protected void Start()
         {
             _spawnCondition.gameObject = gameObject;

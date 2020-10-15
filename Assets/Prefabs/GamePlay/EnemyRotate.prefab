@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdc0700fe3958248a2f53e4658fbccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 6453282471467297502}
   _spawnCondition:
     _spawnStage: 0
     _wakeBy: 0
-  _firingScript: {fileID: 11400000, guid: eac7fc86d3beeee4b855385dada990a5, type: 2}
   _data: {fileID: 11400000, guid: a2a3cae307482a241a3dc25286286f8c, type: 2}

@@ -9,10 +9,9 @@ namespace GamePlay
 
         private Vector3 _movingDirection;
 
-        private new void Awake()
+        private void Awake()
         {
             base._data = _data;
-            base.Awake();
         }
 
         private new void OnEnable()

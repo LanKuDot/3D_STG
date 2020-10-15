@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 7197145423520398696}
   - component: {fileID: 7197145423520398697}
   - component: {fileID: 7197145423520398694}
-  - component: {fileID: 7197145423520398695}
+  - component: {fileID: 3756246815543103359}
   - component: {fileID: 7197145423520398698}
   - component: {fileID: 7197145423520398701}
   m_Layer: 9
@@ -285,7 +285,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.25}
---- !u!114 &7197145423520398695
+--- !u!114 &3756246815543103359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac81872dceede2a4b8bba474bd542cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 7197145423520398701}
   _data: {fileID: 11400000, guid: 1353d26c8bbc2c0438993144b55ba2d1, type: 2}
   _protector: {fileID: 752882071758116789}
 --- !u!114 &7197145423520398698
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7197145423520398695}
+      - m_Target: {fileID: 3756246815543103359}
         m_MethodName: OnInputDeviceChanged
         m_Mode: 0
         m_Arguments:
@@ -338,7 +339,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7197145423520398695}
+      - m_Target: {fileID: 3756246815543103359}
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -353,7 +354,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7197145423520398695}
+      - m_Target: {fileID: 3756246815543103359}
         m_MethodName: OnLook
         m_Mode: 0
         m_Arguments:
@@ -368,7 +369,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7197145423520398695}
+      - m_Target: {fileID: 3756246815543103359}
         m_MethodName: OnFire
         m_Mode: 0
         m_Arguments:

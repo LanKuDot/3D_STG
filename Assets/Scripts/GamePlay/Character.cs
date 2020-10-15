@@ -5,9 +5,10 @@ namespace GamePlay
     [RequireComponent(typeof(CharacterController))]
     public class Character : MonoBehaviour
     {
+        [SerializeField] [ShowOnly]
         private CharacterController _characterController;
 
-        protected void Awake()
+        protected void Reset()
         {
             _characterController = GetComponent<CharacterController>();
         }
