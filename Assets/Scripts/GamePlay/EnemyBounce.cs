@@ -6,6 +6,12 @@ namespace GamePlay
     {
         [SerializeField]
         private new EnemyBounceData _data = null;
+        [Tooltip("The initial moving direction in degree " +
+                 "relative to the global forward direction")]
+        [SerializeField]
+        private float _initialMovingDegree = 0.0f;
+
+        public float initialMovingDegree => _initialMovingDegree;
 
         private Vector3 _movingDirection;
 
@@ -16,7 +22,8 @@ namespace GamePlay
 
         private new void OnEnable()
         {
-            _movingDirection = _data.initialMovingDirection.normalized;
+            _movingDirection =
+                Quaternion.Euler(0.0f, _initialMovingDegree, 0.0f) * Vector3.forward;
             base.OnEnable();
         }
 

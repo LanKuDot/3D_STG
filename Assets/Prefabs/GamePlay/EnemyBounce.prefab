@@ -130,3 +130,4 @@ MonoBehaviour:
     _spawnStage: 0
     _wakeBy: 0
   _data: {fileID: 11400000, guid: 403d621af1b35dd4bb51a4380d7a4fd1, type: 2}
+  _initialMovingDegree: 0
