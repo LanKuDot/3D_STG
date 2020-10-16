@@ -14,6 +14,7 @@ namespace GamePlay
         private GameObject[] _targetObjects = null;
 
         public BoxCollider boxCollider => _boxCollider;
+        public GameObject[] targetObjects => _targetObjects;
 
         private void Reset()
         {
