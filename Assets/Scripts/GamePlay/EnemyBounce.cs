@@ -11,7 +11,11 @@ namespace GamePlay
         [SerializeField]
         private float _initialMovingDegree = 0.0f;
 
-        public float initialMovingDegree => _initialMovingDegree;
+        public float initialMovingDegree
+        {
+            get => _initialMovingDegree;
+            set => _initialMovingDegree = value;
+        }
 
         private Vector3 _movingDirection;
 
