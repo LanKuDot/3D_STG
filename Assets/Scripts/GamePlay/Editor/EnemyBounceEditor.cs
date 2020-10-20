@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using LevelDesigner;
+using UnityEditor;
 using UnityEngine;
 
 namespace GamePlay.Editor
@@ -6,6 +7,9 @@ namespace GamePlay.Editor
     [CustomEditor(typeof(EnemyBounce))]
     public class EnemyBounceEditor : UnityEditor.Editor
     {
+        private static readonly Color _discHandleColor =
+            new Color(Color.gray.r, Color.gray.g, Color.gray.b, 0.8f);
+
         private void OnSceneGUI()
         {
             var enemy = target as EnemyBounce;
@@ -26,8 +30,7 @@ namespace GamePlay.Editor
                 serializedObject.FindProperty("_initialMovingDegree");
 
             // Avoid the disc line being eaten by the background plane
-            using (new Handles.DrawingScope(
-                new Color(Color.gray.r, Color.gray.g, Color.gray.b, 0.8f))) {
+            using (new Handles.DrawingScope(_discHandleColor)) {
                 Handles.DrawSolidDisc(
                     enemyPosition, Vector3.up, handleSize + 0.2f);
             }
@@ -51,8 +54,11 @@ namespace GamePlay.Editor
         {
             var position = enemy.transform.position;
             var directionDegree = enemy.initialMovingDegree;
+            var directionColor =
+                LevelDesignerSettingsManager.Get<DisplaySettings>(
+                    DisplaySettings.Key, DisplaySettings.Scope).directionColor;
 
-            using (new Handles.DrawingScope(Color.cyan)) {
+            using (new Handles.DrawingScope(directionColor)) {
                 Handles.ArrowHandleCap(
                     0,
                     position,
