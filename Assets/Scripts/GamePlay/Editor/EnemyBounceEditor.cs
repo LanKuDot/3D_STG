@@ -5,10 +5,17 @@ using UnityEngine;
 namespace GamePlay.Editor
 {
     [CustomEditor(typeof(EnemyBounce))]
-    public class EnemyBounceEditor : UnityEditor.Editor
+    public class EnemyBounceEditor : EnemyEditor
     {
         private static readonly Color _discHandleColor =
             new Color(Color.gray.r, Color.gray.g, Color.gray.b, 0.8f);
+
+        [DrawGizmo(GizmoType.Selected)]
+        private static void DrawGizmos(EnemyBounce enemy, GizmoType gizmoType)
+        {
+            var transform = enemy.transform;
+            DrawEnemyData(transform.position + transform.right, enemy.data);
+        }
 
         private void OnSceneGUI()
         {
@@ -30,10 +37,12 @@ namespace GamePlay.Editor
                 serializedObject.FindProperty("_initialMovingDegree");
 
             // Avoid the disc line being eaten by the background plane
-            using (new Handles.DrawingScope(_discHandleColor)) {
-                Handles.DrawSolidDisc(
-                    enemyPosition, Vector3.up, handleSize + 0.2f);
-            }
+            if (HandleUtilityExtension.IsMouseClosing(
+                    Event.current.mousePosition, enemyPosition, 120.0f))
+                using (new Handles.DrawingScope(_discHandleColor)) {
+                    Handles.DrawSolidDisc(
+                        enemyPosition, Vector3.up, handleSize + 0.2f);
+                }
 
             using (new Handles.DrawingScope(Color.blue)) {
                 var newQuaternion = Handles.Disc(
