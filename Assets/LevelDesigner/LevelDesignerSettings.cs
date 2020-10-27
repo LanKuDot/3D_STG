@@ -5,6 +5,17 @@ using UnityEngine;
 namespace LevelDesigner
 {
     /// <summary>
+    /// The general settings for the level designer package
+    /// </summary>
+    public class GeneralSettings
+    {
+        /// <summary>
+        /// The root path of the level designer package
+        /// </summary>
+        public const string rootPath = "Assets/LevelDesigner";
+    }
+
+    /// <summary>
     /// The additional information for the settings in the editor gui
     /// </summary>
     internal struct SettingsProperty<T>
