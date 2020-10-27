@@ -1,5 +1,4 @@
-﻿using Unity.Jobs;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -30,6 +29,9 @@ namespace LevelDesigner.Editor
             CreateUI();
         }
 
+        /// <summary>
+        /// Create the UI from the uxml
+        /// </summary>
         private void CreateUI()
         {
             var root = rootVisualElement;
@@ -40,6 +42,9 @@ namespace LevelDesigner.Editor
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
         }
 
+        /// <summary>
+        /// Load the palette data and set to the target view
+        /// </summary>
         private void LoadPalette(ScrollView paletteScrollView)
         {
             var paletteCategory = _palette.categories;
@@ -65,6 +70,10 @@ namespace LevelDesigner.Editor
             }
         }
 
+        /// <summary>
+        /// Load the palette items from the specified category and set to
+        /// the target view
+        /// </summary>
         private void LoadPaletteItem(
             string category, ScrollView scrollView, VisualTreeAsset itemAsset)
         {
