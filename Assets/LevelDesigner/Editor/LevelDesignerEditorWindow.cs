@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,7 +16,17 @@ namespace LevelDesigner.Editor
 
         private PaletteData _palette;
 
-        [MenuItem("Tool/Level Designer")]
+        private PaletteItem _selectedItem;
+        private VisualElement _selectedItemContainer;
+        private Label _selectedItemInfoLabel;
+        private IntegerField _selectedItemYPosition;
+
+        private readonly Color _unselectedColor =
+            new Color(0.6431373f, 0.6431373f, 0.6431373f);
+        private readonly Color _selectedColor =
+            new Color(0.0f, 0.6156863f, 1.0f);
+
+        [MenuItem("Tool/Level Designer %#l")]
         public static void CreateEditorWindow()
         {
             var window = GetWindow<LevelDesignerEditorWindow>();
@@ -29,6 +40,8 @@ namespace LevelDesigner.Editor
             CreateUI();
         }
 
+        #region UI Creation
+
         /// <summary>
         /// Create the UI from the uxml
         /// </summary>
@@ -40,6 +53,10 @@ namespace LevelDesigner.Editor
             visualTree.CloneTree(root);
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
+
+            // Store the reference of the frequently used elements
+            _selectedItemInfoLabel = root.Q<Label>("item-name");
+            _selectedItemYPosition = root.Q<IntegerField>("item-y-position");
         }
 
         /// <summary>
@@ -84,21 +101,53 @@ namespace LevelDesigner.Editor
             scrollView.Clear();
 
             foreach (var item in items) {
+                var prefab = item.prefab;
                 var itemElement = new VisualElement();
                 itemAsset.CloneTree(itemElement);
 
-                itemElement.tooltip = item.name;
+                itemElement.tooltip = prefab.name;
 
                 var itemNameLabel = itemElement.Q<Label>();
                 itemNameLabel.text =
-                    item.name.Length > 11 ? item.name.Substring(0, 11) : item.name;
+                    prefab.name.Length > 11 ? prefab.name.Substring(0, 11) : prefab.name;
 
-                var itemPreviewTexture = AssetPreview.GetAssetPreview(item);
+                var itemPreviewTexture = AssetPreview.GetAssetPreview(prefab);
                 var itemButton = itemElement.Q<Button>();
                 itemButton.style.backgroundImage = itemPreviewTexture;
+
+                itemButton.clicked += () =>
+                {
+                    ChangePaletteItem(
+                        item, itemElement.Q<VisualElement>("palette-item-container"));
+                };
 
                 scrollView.Add(itemElement);
             }
         }
+
+        #endregion
+
+        #region Editor Logic
+
+        /// <summary>
+        /// Change the selected palette item
+        /// </summary>
+        private void ChangePaletteItem(
+            PaletteItem newItem, VisualElement newItemContainer)
+        {
+            // Reset background color of the previous selected item
+            if (_selectedItemContainer != null) {
+                _selectedItemContainer.style.backgroundColor =
+                    new StyleColor(_unselectedColor);
+            }
+
+            _selectedItemContainer = newItemContainer;
+            _selectedItemContainer.style.backgroundColor =
+                new StyleColor(_selectedColor);
+            _selectedItemInfoLabel.text = newItem.prefab.name;
+            _selectedItemYPosition.value = newItem.yPosition;
+        }
+
+        #endregion
     }
 }
