@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +29,7 @@ namespace LevelDesigner
             _palette = new PaletteCollection();
         }
 
-        public GameObject[] GetItemsInCategory(string category)
+        public PaletteItem[] GetItemsInCategory(string category)
         {
             if (!_palette.ContainsKey(category))
                 throw new KeyNotFoundException($"{category} is not in the palette");
@@ -58,10 +57,17 @@ namespace LevelDesigner
 
     [Serializable]
     internal class PaletteCollection :
-        SerializableDictionary<string, List<GameObject>, PaletteItems>
+        SerializableDictionary<string, List<PaletteItem>, PaletteItems>
     {}
 
     [Serializable]
-    internal class PaletteItems : SerializableDictionary.Storage<List<GameObject>>
+    internal class PaletteItems : SerializableDictionary.Storage<List<PaletteItem>>
     {}
+
+    [Serializable]
+    internal class PaletteItem
+    {
+        public GameObject prefab = null;
+        public int yPosition = 0;
+    }
 }
