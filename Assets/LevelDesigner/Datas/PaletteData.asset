@@ -14,13 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _palette:
     m_keys:
-    - Some
-    - Nice
+    - Enemy
+    - Barrier
     m_values:
     - data:
-      - {fileID: 6453282471467297496, guid: 27230da4330a1b4438302148e9980c20, type: 3}
-      - {fileID: 3774977999330143361, guid: c578b9cd282f1174bb725f4e9a97979e, type: 3}
+      - prefab: {fileID: 2383850051565470559, guid: 6efb0a7db3b2e744898713f92b03f738,
+          type: 3}
+        yHeight: 0
+      - prefab: {fileID: 6453282471467297496, guid: 27230da4330a1b4438302148e9980c20,
+          type: 3}
+        yHeight: 0
+      - prefab: {fileID: 3774977999330143361, guid: c578b9cd282f1174bb725f4e9a97979e,
+          type: 3}
+        yHeight: 0
     - data:
-      - {fileID: 6453282471467297496, guid: 27230da4330a1b4438302148e9980c20, type: 3}
-      - {fileID: 3774977999330143361, guid: c578b9cd282f1174bb725f4e9a97979e, type: 3}
-      - {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838, type: 3}
+      - prefab: {fileID: 4596909120183369758, guid: 3f02d2d61cf682141a0b03db5dcb59ac,
+          type: 3}
+        yHeight: 0
+      - prefab: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+          type: 3}
+        yHeight: 0
