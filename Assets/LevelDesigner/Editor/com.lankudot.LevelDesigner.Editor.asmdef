@@ -1,7 +1,9 @@
 {
-    "name": "LevelDesigner",
+    "name": "LevelDesigner.Editor",
     "references": [
-        "Unity.Settings.Editor"
+        "LevelDesigner.Runtime",
+        "Unity.Settings.Editor",
+        "Common"
     ],
     "includePlatforms": [
         "Editor"

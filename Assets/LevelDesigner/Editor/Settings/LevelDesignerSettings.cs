@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace LevelDesigner
+namespace LevelDesigner.Editor
 {
     /// <summary>
     /// The general settings for the level designer package

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditor.SettingsManagement;
 
-namespace LevelDesigner
+namespace LevelDesigner.Editor
 {
     /// <summary>
     /// Manage settings for the level designer package

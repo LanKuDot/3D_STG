@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace LevelDesigner
+namespace LevelDesigner.Editor
 {
     [CreateAssetMenu(fileName = "PaletteData.asset", menuName = "Level Designer/Palette Data")]
     internal class PaletteData : ScriptableObject

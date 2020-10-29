@@ -2,7 +2,7 @@
 using UnityEditor.SettingsManagement;
 using UnityEngine;
 
-namespace LevelDesigner
+namespace LevelDesigner.Editor
 {
     internal static class LevelDesignerSettingsProvider
     {

@@ -1,4 +1,4 @@
-﻿using LevelDesigner;
+﻿using LevelDesigner.Editor;
 using UnityEditor;
 using UnityEngine;
 

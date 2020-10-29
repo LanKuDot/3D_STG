@@ -7,12 +7,14 @@ namespace LevelDesigner.Editor
 {
     internal class LevelDesignerEditorWindow : EditorWindow
     {
+        private const string _uiResourcePath =
+            GeneralSettings.rootPath + "/Editor/EditorResource";
         private const string _mainUIPath =
-            GeneralSettings.rootPath + "/UI/DegisnerUI_Main.uxml";
+            _uiResourcePath + "/DegisnerUI_Main.uxml";
         private const string _paletteCategoryPath =
-            GeneralSettings.rootPath + "/UI/DesignerUI_PaletteCategory.uxml";
+            _uiResourcePath + "/DesignerUI_PaletteCategory.uxml";
         private const string _paletteItemPath =
-            GeneralSettings.rootPath + "/UI/DesignerUI_PaletteItem.uxml";
+            _uiResourcePath + "/DesignerUI_PaletteItem.uxml";
 
         private PaletteData _palette;
 
