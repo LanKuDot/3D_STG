@@ -65,6 +65,15 @@ namespace LevelDesigner.Editor
                 tooltip = "The color for drawing the direction handle"
         };
 
+        public Color positionPreviewColor;
+        internal static readonly SettingsProperty<Color> positionPreviewColorProperty =
+            new SettingsProperty<Color> {
+                label = "Position Preview Color",
+                defaultValue = new Color(
+                    Color.green.r, Color.green.g, Color.green.b, 0.5f),
+                tooltip = "The color for drawing the object for the position preview"
+            };
+
         public DisplaySettings()
         {
             directionColor = directionColorProperty.defaultValue;
