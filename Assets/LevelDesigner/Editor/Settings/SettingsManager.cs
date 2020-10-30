@@ -6,7 +6,7 @@ namespace LevelDesigner.Editor
     /// <summary>
     /// Manage settings for the level designer package
     /// </summary>
-    public static class LevelDesignerSettingsManager
+    public static class SettingsManager
     {
         private const string packageName = "com.lankudot.3d-stg.level-designer";
 

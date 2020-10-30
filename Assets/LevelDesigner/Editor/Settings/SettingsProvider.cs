@@ -4,23 +4,23 @@ using UnityEngine;
 
 namespace LevelDesigner.Editor
 {
-    internal static class LevelDesignerSettingsProvider
+    internal static class SettingsProvider
     {
         private const string _preferencesPath = "Preferences/Level Designer";
 
         [SettingsProvider]
-        private static SettingsProvider CreateSettingsProvider()
+        private static UnityEditor.SettingsProvider CreateSettingsProvider()
         {
             var provider = new UserSettingsProvider(
                 _preferencesPath,
-                LevelDesignerSettingsManager.Instance,
-                new [] {typeof(LevelDesignerSettingsProvider).Assembly});
+                SettingsManager.Instance,
+                new [] {typeof(SettingsProvider).Assembly});
 
             return provider;
         }
     }
 
-    internal class LevelDesignerSettingsWindow : EditorWindow
+    internal class SettingsWindow : EditorWindow
     {
         private const string _tabTitle = "Level Designer Settings";
 
@@ -32,7 +32,7 @@ namespace LevelDesigner.Editor
         private static void ShowDisplaySettings(string searchContext)
         {
             using (var cc = new EditorGUI.ChangeCheckScope()) {
-                var settings = LevelDesignerSettingsManager.displaySettings.value;
+                var settings = SettingsManager.displaySettings.value;
 
                 settings.directionColor = ColorProperty(
                     DisplaySettings.directionColorProperty,
@@ -44,8 +44,8 @@ namespace LevelDesigner.Editor
                     searchContext);
 
                 if (cc.changed) {
-                    LevelDesignerSettingsManager.displaySettings.ApplyModifiedProperties();
-                    LevelDesignerSettingsManager.Save();
+                    SettingsManager.displaySettings.ApplyModifiedProperties();
+                    SettingsManager.Save();
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace LevelDesigner.Editor
         [MenuItem("Window/Level Designer/Settings")]
         private static void Init()
         {
-            var window = GetWindow<LevelDesignerSettingsWindow>();
+            var window = GetWindow<SettingsWindow>();
             window.titleContent = new GUIContent(_tabTitle);
         }
 

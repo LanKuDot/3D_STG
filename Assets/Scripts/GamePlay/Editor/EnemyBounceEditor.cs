@@ -64,7 +64,7 @@ namespace GamePlay.Editor
             var position = enemy.transform.position;
             var directionDegree = enemy.initialMovingDegree;
             var directionColor =
-                LevelDesignerSettingsManager.GetDisplaySettings().directionColor;
+                SettingsManager.GetDisplaySettings().directionColor;
 
             using (new Handles.DrawingScope(directionColor)) {
                 Handles.ArrowHandleCap(

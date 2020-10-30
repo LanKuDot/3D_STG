@@ -4,38 +4,6 @@ using UnityEngine;
 
 namespace LevelDesigner.Editor
 {
-    /// <summary>
-    /// The general settings for the level designer package
-    /// </summary>
-    public class GeneralSettings
-    {
-        /// <summary>
-        /// The root path of the level designer package
-        /// </summary>
-        public const string rootPath = "Assets/LevelDesigner";
-    }
-
-    /// <summary>
-    /// The additional information for the settings in the editor gui
-    /// </summary>
-    internal struct SettingsProperty<T>
-    {
-        /// <summary>
-        /// The label of the field for the setting
-        /// </summary>
-        public string label;
-
-        /// <summary>
-        /// The default value of the setting
-        /// </summary>
-        public T defaultValue;
-
-        /// <summary>
-        /// The tooltip of the field for the setting
-        /// </summary>
-        public string tooltip;
-    }
-
     [Serializable]
     public class DisplaySettings
     {
@@ -65,6 +33,9 @@ namespace LevelDesigner.Editor
                 tooltip = "The color for drawing the direction handle"
         };
 
+        /// <summary>
+        /// The color for drawing the preview position
+        /// </summary>
         public Color positionPreviewColor;
         internal static readonly SettingsProperty<Color> positionPreviewColorProperty =
             new SettingsProperty<Color> {
@@ -77,6 +48,7 @@ namespace LevelDesigner.Editor
         public DisplaySettings()
         {
             directionColor = directionColorProperty.defaultValue;
+            positionPreviewColor = directionColorProperty.defaultValue;
         }
     }
 }
