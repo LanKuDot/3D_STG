@@ -34,24 +34,46 @@ namespace LevelDesigner.Editor
             using (var cc = new EditorGUI.ChangeCheckScope()) {
                 var settings = LevelDesignerSettingsManager.displaySettings.value;
 
-                using (new EditorGUILayout.HorizontalScope()) {
-                    settings.directionColor =
-                        SettingsGUILayout.SearchableColorField(
-                            new GUIContent(
-                                DisplaySettings.directionColorProperty.label,
-                                DisplaySettings.directionColorProperty.tooltip),
-                            settings.directionColor, searchContext);
-
-                    if (GUILayout.Button("Reset", GUILayout.Width(50)))
-                        settings.directionColor =
-                            DisplaySettings.directionColorProperty.defaultValue;
-                }
+                settings.directionColor = ColorProperty(
+                    DisplaySettings.directionColorProperty,
+                    settings.directionColor,
+                    searchContext);
+                settings.positionPreviewColor = ColorProperty(
+                    DisplaySettings.positionPreviewColorProperty,
+                    settings.positionPreviewColor,
+                    searchContext);
 
                 if (cc.changed) {
                     LevelDesignerSettingsManager.displaySettings.ApplyModifiedProperties();
                     LevelDesignerSettingsManager.Save();
                 }
             }
+        }
+
+        /// <summary>
+        /// Draw a searchable color field with a reset button for a color setting
+        /// </summary>
+        /// <param name="property">The setting property of the target setting</param>
+        /// <param name="origColor">The original color value</param>
+        /// <param name="searchContext">The search context</param>
+        /// <returns>
+        /// The specified color in the color field
+        /// </returns>
+        private static Color ColorProperty(
+            SettingsProperty<Color> property, Color origColor, string searchContext)
+        {
+            var color = origColor;
+
+            using (new EditorGUILayout.HorizontalScope()) {
+                color = SettingsGUILayout.SearchableColorField(
+                    new GUIContent(property.label, property.tooltip),
+                    color, searchContext);
+
+                if (GUILayout.Button("Reset", GUILayout.Width(50)))
+                    color = property.defaultValue;
+            }
+
+            return color;
         }
 
         [MenuItem("Window/Level Designer/Settings")]
