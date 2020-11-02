@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using LevelDesigner.Runtime;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -148,6 +149,8 @@ namespace LevelDesigner.Editor
                 new StyleColor(_selectedColor);
             _selectedItemInfoLabel.text = newItem.prefab.name;
             _selectedItemYPosition.value = newItem.yPosition;
+
+            LevelPainter.Instance.SetPrefab(newItem.prefab, newItem.yPosition);
         }
 
         #endregion
