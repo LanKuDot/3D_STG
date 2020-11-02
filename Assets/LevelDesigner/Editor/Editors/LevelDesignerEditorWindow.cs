@@ -6,6 +6,9 @@ using UnityEngine.UIElements;
 
 namespace LevelDesigner.Editor
 {
+    /// <summary>
+    /// The editor window for configuring the level designer
+    /// </summary>
     internal class LevelDesignerEditorWindow : EditorWindow
     {
         private const string _uiResourcePath =
@@ -17,12 +20,31 @@ namespace LevelDesigner.Editor
         private const string _paletteItemPath =
             _uiResourcePath + "/DesignerUI_PaletteItem.uxml";
 
+        /// <summary>
+        /// The painter for spawning the selected palette item (prefab)
+        /// </summary>
         private LevelPainter _painter;
+        /// <summary>
+        /// The palette data loaded from the scriptable object
+        /// </summary>
         private PaletteData _palette;
 
+        /// <summary>
+        /// The name of the selected item in the last activated window
+        /// </summary>
         private string _previousSelectedItemName;
+
+        /// <summary>
+        /// The container element of the selected item
+        /// </summary>
         private VisualElement _selectedItemContainer;
+        /// <summary>
+        /// The title label for displaying the name of selected item
+        /// </summary>
         private Label _selectedItemInfoLabel;
+        /// <summary>
+        /// The integer field for setting the y position of the selected item
+        /// </summary>
         private IntegerField _selectedItemYPosition;
 
         private readonly Color _unselectedColor =
@@ -98,7 +120,8 @@ namespace LevelDesigner.Editor
 
         /// <summary>
         /// Load the palette items from the specified category and set to
-        /// the target view
+        /// the target view<para />
+        /// And mark the previously selected item.
         /// </summary>
         private void LoadPaletteItem(
             string category, ScrollView scrollView, VisualTreeAsset itemAsset)
@@ -145,7 +168,7 @@ namespace LevelDesigner.Editor
         #region Editor Logic
 
         /// <summary>
-        /// Change the selected palette item
+        /// Change the selected palette item and set to the painter
         /// </summary>
         private void ChangePaletteItem(
             PaletteItem newItem, VisualElement newItemContainer)

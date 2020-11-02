@@ -11,6 +11,11 @@ namespace LevelDesigner.Runtime
         public GameObject prefab { get; private set; }
         public int yPosition { get; private set; }
 
+        /// <summary>
+        /// Snap the position to the closet integer value
+        /// </summary>
+        /// <param name="position">The position to be snapped</param>
+        /// <returns>The snapped position</returns>
         public static Vector3 SnapPosition(Vector3 position)
         {
             return new Vector3(
@@ -19,6 +24,12 @@ namespace LevelDesigner.Runtime
                 SnapValue(position.z, 1));
         }
 
+        /// <summary>
+        /// Snap a value according to the snapping interval
+        /// </summary>
+        /// <param name="value">The value to be snapped</param>
+        /// <param name="interval">The snapping interval</param>
+        /// <returns>The snapped value</returns>
         public static float SnapValue(float value, float interval)
         {
             var amount = (int) (value / interval);
@@ -31,12 +42,22 @@ namespace LevelDesigner.Runtime
         }
 
 #if UNITY_EDITOR
+
+        /// <summary>
+        /// Set the prefab for spawning in the scene
+        /// </summary>
+        /// <param name="prefab">The prefab to be spawned</param>
+        /// <param name="yPosition">The y position of the prefab when it's spawned</param>
         public void SetPrefab(GameObject prefab, int yPosition)
         {
             this.prefab = prefab;
             this.yPosition = yPosition;
         }
 
+        /// <summary>
+        /// Spawn the prefab at the specified position<para />
+        /// </summary>
+        /// <param name="position">The spawning position</param>
         public void SpawnPrefab(Vector3 position)
         {
             var newObj =
@@ -45,6 +66,7 @@ namespace LevelDesigner.Runtime
             newObj.name = $"{prefab.name}-({position.x}, {position.z})";
             Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
         }
+
 #endif
     }
 }
