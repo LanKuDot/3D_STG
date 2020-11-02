@@ -9,8 +9,6 @@ namespace LevelDesigner.Runtime
     /// </summary>
     public class LevelPainter : MonoBehaviour
     {
-        public static LevelPainter Instance { get; private set; }
-
         public GameObject prefab { get; private set; }
         public int yPosition { get; private set; }
 
@@ -31,11 +29,6 @@ namespace LevelDesigner.Runtime
                 return interval * (amount + 1);
 
             return interval * amount;
-        }
-
-        private void Reset()
-        {
-            Instance = this;
         }
 
 #if UNITY_EDITOR

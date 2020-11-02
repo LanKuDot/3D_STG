@@ -17,6 +17,7 @@ namespace LevelDesigner.Editor
         private const string _paletteItemPath =
             _uiResourcePath + "/DesignerUI_PaletteItem.uxml";
 
+        private LevelPainter _painter;
         private PaletteData _palette;
 
         private PaletteItem _selectedItem;
@@ -39,7 +40,9 @@ namespace LevelDesigner.Editor
 
         private void OnEnable()
         {
+            _painter = FindObjectOfType<LevelPainter>();
             _palette = PaletteData.GetData();
+
             CreateUI();
         }
 
@@ -150,7 +153,7 @@ namespace LevelDesigner.Editor
             _selectedItemInfoLabel.text = newItem.prefab.name;
             _selectedItemYPosition.value = newItem.yPosition;
 
-            LevelPainter.Instance.SetPrefab(newItem.prefab, newItem.yPosition);
+            _painter.SetPrefab(newItem.prefab, newItem.yPosition);
         }
 
         #endregion
