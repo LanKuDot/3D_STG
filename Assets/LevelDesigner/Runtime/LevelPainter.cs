@@ -44,6 +44,7 @@ namespace LevelDesigner.Runtime
                 PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
             newObj.transform.position = position;
             newObj.name = $"{prefab.name}-({position.x}, {position.z})";
+            Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
         }
 #endif
     }
