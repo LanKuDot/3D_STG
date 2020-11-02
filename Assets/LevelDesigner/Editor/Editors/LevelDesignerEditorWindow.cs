@@ -20,7 +20,7 @@ namespace LevelDesigner.Editor
         private LevelPainter _painter;
         private PaletteData _palette;
 
-        private PaletteItem _selectedItem;
+        private string _previousSelectedItemName;
         private VisualElement _selectedItemContainer;
         private Label _selectedItemInfoLabel;
         private IntegerField _selectedItemYPosition;
@@ -41,6 +41,8 @@ namespace LevelDesigner.Editor
         private void OnEnable()
         {
             _painter = FindObjectOfType<LevelPainter>();
+            _previousSelectedItemName =
+                _painter.prefab != null ? _painter.prefab.name : "";
             _palette = PaletteData.GetData();
 
             CreateUI();
@@ -58,11 +60,11 @@ namespace LevelDesigner.Editor
                 AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(_mainUIPath);
             visualTree.CloneTree(root);
 
-            LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
-
             // Store the reference of the frequently used elements
             _selectedItemInfoLabel = root.Q<Label>("item-name");
             _selectedItemYPosition = root.Q<IntegerField>("item-y-position");
+
+            LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
         }
 
         /// <summary>
@@ -83,6 +85,7 @@ namespace LevelDesigner.Editor
             foreach (var category in paletteCategory) {
                 var categoryElement = new VisualElement();
                 categoryAsset.CloneTree(categoryElement);
+                categoryElement.viewDataKey = $"category-{category}";
 
                 LoadPaletteItem(category, categoryElement.Q<ScrollView>(), itemAsset);
 
@@ -113,9 +116,15 @@ namespace LevelDesigner.Editor
 
                 itemElement.tooltip = prefab.name;
 
+                // Mark the previous selected item
+                if (_previousSelectedItemName.Equals(prefab.name)) {
+                     ChangePaletteItem(
+                         item, itemElement.Q<VisualElement>("palette-item-container"));
+                }
+
                 var itemNameLabel = itemElement.Q<Label>();
                 itemNameLabel.text =
-                    prefab.name.Length > 11 ? prefab.name.Substring(0, 11) : prefab.name;
+                    prefab.name.Length > 10 ? prefab.name.Substring(0, 10) : prefab.name;
 
                 var itemPreviewTexture = AssetPreview.GetAssetPreview(prefab);
                 var itemButton = itemElement.Q<Button>();
@@ -143,13 +152,12 @@ namespace LevelDesigner.Editor
         {
             // Reset background color of the previous selected item
             if (_selectedItemContainer != null) {
-                _selectedItemContainer.style.backgroundColor =
-                    new StyleColor(_unselectedColor);
+                _selectedItemContainer.style.backgroundColor = _unselectedColor;
             }
 
             _selectedItemContainer = newItemContainer;
-            _selectedItemContainer.style.backgroundColor =
-                new StyleColor(_selectedColor);
+            _selectedItemContainer.style.backgroundColor = _selectedColor;
+
             _selectedItemInfoLabel.text = newItem.prefab.name;
             _selectedItemYPosition.value = newItem.yPosition;
 

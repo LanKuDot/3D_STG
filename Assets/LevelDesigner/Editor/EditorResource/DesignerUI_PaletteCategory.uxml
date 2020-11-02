@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:Template name="DesignerUI_PaletteItem" src="DesignerUI_PaletteItem.uxml" />
-    <ui:VisualElement name="palette-category-container" class="category-container" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; padding-right: 5px;">
+    <ui:VisualElement name="palette-category-container" view-data-key="palette-category" class="category-container" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; padding-right: 5px;">
         <Style src="DesignerUI_Styles.uss" />
-        <ui:Foldout text="Category Name" name="category-foldout">
-            <ui:ScrollView mode="Horizontal" name="category-scroll-view" show-horizontal-scroller="true" style="flex-direction: row; height: 110px;">
+        <ui:Foldout text="Category Name" name="category-foldout" view-data-key="category-foldout">
+            <ui:ScrollView mode="Horizontal" name="category-scroll-view" show-horizontal-scroller="true" view-data-key="category-scroll-view" style="flex-direction: row; height: 110px;">
                 <ui:Instance template="DesignerUI_PaletteItem" name="DesignerUI_PaletteItem" />
             </ui:ScrollView>
         </ui:Foldout>
