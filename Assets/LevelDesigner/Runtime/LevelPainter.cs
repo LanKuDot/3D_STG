@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace LevelDesigner.Runtime
@@ -60,11 +61,16 @@ namespace LevelDesigner.Runtime
         /// <param name="position">The spawning position</param>
         public void SpawnPrefab(Vector3 position)
         {
-            var newObj =
-                PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
-            newObj.transform.position = position;
-            newObj.name = $"{prefab.name}-({position.x}, {position.z})";
-            Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
+            try {
+                var newObj =
+                    PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
+                newObj.transform.position = position;
+                newObj.name = $"{prefab.name}-({position.x}, {position.z})";
+                Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
+            } catch (NullReferenceException) {
+                Debug.LogError(
+                    "Select the item first in the level designer editor window");
+            }
         }
 
 #endif
