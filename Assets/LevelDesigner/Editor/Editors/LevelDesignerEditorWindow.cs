@@ -11,6 +11,25 @@ namespace LevelDesigner.Editor
     /// </summary>
     internal class LevelDesignerEditorWindow : EditorWindow
     {
+        /// <summary>
+        /// Store the information of selected palette item and the element to be updated
+        /// </summary>
+        private struct SelectedItem
+        {
+            /// <summary>
+            /// The container element of the selected item
+            /// </summary>
+            public VisualElement itemContainer;
+            /// <summary>
+            /// The title label for displaying the name of selected item
+            /// </summary>
+            public Label titleLabel;
+            /// <summary>
+            /// The integer field for setting the y position of the selected item
+            /// </summary>
+            public IntegerField yPosition;
+        }
+
         private const string _uiResourcePath =
             GeneralSettings.rootPath + "/Editor/EditorResource";
         private const string _mainUIPath =
@@ -34,18 +53,7 @@ namespace LevelDesigner.Editor
         /// </summary>
         private string _previousSelectedItemName;
 
-        /// <summary>
-        /// The container element of the selected item
-        /// </summary>
-        private VisualElement _selectedItemContainer;
-        /// <summary>
-        /// The title label for displaying the name of selected item
-        /// </summary>
-        private Label _selectedItemInfoLabel;
-        /// <summary>
-        /// The integer field for setting the y position of the selected item
-        /// </summary>
-        private IntegerField _selectedItemYPosition;
+        private SelectedItem _selectedItem;
 
         private readonly Color _unselectedColor =
             new Color(0.6431373f, 0.6431373f, 0.6431373f);
@@ -83,8 +91,10 @@ namespace LevelDesigner.Editor
             visualTree.CloneTree(root);
 
             // Store the reference of the frequently used elements
-            _selectedItemInfoLabel = root.Q<Label>("item-name");
-            _selectedItemYPosition = root.Q<IntegerField>("item-y-position");
+            _selectedItem = new SelectedItem {
+                titleLabel = root.Q<Label>("selected-item-name"),
+                yPosition = root.Q<IntegerField>("selected-item-y-position")
+            };
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
         }
@@ -174,15 +184,15 @@ namespace LevelDesigner.Editor
             PaletteItem newItem, VisualElement newItemContainer)
         {
             // Reset background color of the previous selected item
-            if (_selectedItemContainer != null) {
-                _selectedItemContainer.style.backgroundColor = _unselectedColor;
+            if (_selectedItem.itemContainer != null) {
+                _selectedItem.itemContainer.style.backgroundColor = _unselectedColor;
             }
 
-            _selectedItemContainer = newItemContainer;
-            _selectedItemContainer.style.backgroundColor = _selectedColor;
+            newItemContainer.style.backgroundColor = _selectedColor;
 
-            _selectedItemInfoLabel.text = newItem.prefab.name;
-            _selectedItemYPosition.value = newItem.yPosition;
+            _selectedItem.itemContainer = newItemContainer;
+            _selectedItem.titleLabel.text = newItem.prefab.name;
+            _selectedItem.yPosition.value = newItem.yPosition;
 
             _painter.SetPrefab(newItem.prefab, newItem.yPosition);
         }
