@@ -10,7 +10,15 @@ namespace LevelDesigner.Runtime
     public class LevelPainter : MonoBehaviour
     {
         public GameObject prefab { get; private set; }
-        public int yPosition { get; private set; }
+
+        /// <summary>
+        /// The y position of the object to be spawned.<para />
+        /// This value is set from the editor window
+        /// </summary>
+        [HideInInspector]
+        [SerializeField]
+        private int _yPosition = 0;
+        public int yPosition => _yPosition;
 
         /// <summary>
         /// Snap the position to the closet integer value
@@ -48,11 +56,9 @@ namespace LevelDesigner.Runtime
         /// Set the prefab for spawning in the scene
         /// </summary>
         /// <param name="prefab">The prefab to be spawned</param>
-        /// <param name="yPosition">The y position of the prefab when it's spawned</param>
-        public void SetPrefab(GameObject prefab, int yPosition)
+        public void SetPrefab(GameObject prefab)
         {
             this.prefab = prefab;
-            this.yPosition = yPosition;
         }
 
         /// <summary>

@@ -12,20 +12,20 @@ namespace LevelDesigner.Editor
     internal class LevelDesignerEditorWindow : EditorWindow
     {
         /// <summary>
-        /// Store the information of selected palette item and the element to be updated
+        /// Store the information of selected palette item and settings
         /// </summary>
-        private struct SelectedItem
+        private struct SpawnSettingInfo
         {
             /// <summary>
-            /// The container element of the selected item
+            /// The container element of the selected item in palette
             /// </summary>
             public VisualElement itemContainer;
             /// <summary>
-            /// The title label for displaying the name of selected item
+            /// The label for displaying the name of prefab of the selected item
             /// </summary>
-            public Label titleLabel;
+            public Label infoLabel;
             /// <summary>
-            /// The integer field for setting the y position of the selected item
+            /// The integer field for setting the y position for spawning prefab
             /// </summary>
             public IntegerField yPosition;
         }
@@ -38,6 +38,8 @@ namespace LevelDesigner.Editor
             _uiResourcePath + "/DesignerUI_PaletteCategory.uxml";
         private const string _paletteItemPath =
             _uiResourcePath + "/DesignerUI_PaletteItem.uxml";
+
+        private const string _selectedPrefabPrefix = "Prefab to be spawned: ";
 
         /// <summary>
         /// The painter for spawning the selected palette item (prefab)
@@ -53,7 +55,7 @@ namespace LevelDesigner.Editor
         /// </summary>
         private string _previousSelectedItemName;
 
-        private SelectedItem _selectedItem;
+        private SpawnSettingInfo _spawnSettingInfo;
 
         private readonly Color _unselectedColor =
             new Color(0.6431373f, 0.6431373f, 0.6431373f);
@@ -91,10 +93,12 @@ namespace LevelDesigner.Editor
             visualTree.CloneTree(root);
 
             // Store the reference of the frequently used elements
-            _selectedItem = new SelectedItem {
-                titleLabel = root.Q<Label>("selected-item-name"),
-                yPosition = root.Q<IntegerField>("selected-item-y-position")
+            _spawnSettingInfo = new SpawnSettingInfo {
+                infoLabel = root.Q<Label>("selected-prefab-info"),
+                yPosition = root.Q<IntegerField>("spawn-y-position")
             };
+            _spawnSettingInfo.yPosition.bindingPath = "_yPosition";
+            _spawnSettingInfo.yPosition.Bind(new SerializedObject(_painter));
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
         }
@@ -184,17 +188,17 @@ namespace LevelDesigner.Editor
             PaletteItem newItem, VisualElement newItemContainer)
         {
             // Reset background color of the previous selected item
-            if (_selectedItem.itemContainer != null) {
-                _selectedItem.itemContainer.style.backgroundColor = _unselectedColor;
+            if (_spawnSettingInfo.itemContainer != null) {
+                _spawnSettingInfo.itemContainer.style.backgroundColor = _unselectedColor;
             }
 
             newItemContainer.style.backgroundColor = _selectedColor;
 
-            _selectedItem.itemContainer = newItemContainer;
-            _selectedItem.titleLabel.text = newItem.prefab.name;
-            _selectedItem.yPosition.value = newItem.yPosition;
+            _spawnSettingInfo.itemContainer = newItemContainer;
+            _spawnSettingInfo.infoLabel.text =
+                _selectedPrefabPrefix + newItem.prefab.name;
 
-            _painter.SetPrefab(newItem.prefab, newItem.yPosition);
+            _painter.SetPrefab(newItem.prefab);
         }
 
         #endregion

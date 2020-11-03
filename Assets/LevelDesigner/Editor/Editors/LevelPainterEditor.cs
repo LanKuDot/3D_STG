@@ -51,9 +51,7 @@ namespace LevelDesigner.Editor
         /// <param name="position">The position in the world space</param>
         private static void DrawPositionPreview(Vector3 position)
         {
-            Handles.Label(
-                position, $"({position.x}, {position.z})",
-                EditorStyles.label);
+            Handles.Label(position, $"{position}", EditorStyles.label);
         }
 
         /// <summary>

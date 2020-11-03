@@ -68,6 +68,5 @@ namespace LevelDesigner.Editor
     internal class PaletteItem
     {
         public GameObject prefab = null;
-        public int yPosition = 0;
     }
 }
