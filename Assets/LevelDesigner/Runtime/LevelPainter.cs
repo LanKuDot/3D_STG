@@ -27,10 +27,11 @@ namespace LevelDesigner.Runtime
         /// <returns>The snapped position</returns>
         public static Vector3 SnapPosition(Vector3 position)
         {
+            var positionSnap = EditorSnapSettings.move;
             return new Vector3(
-                SnapValue(position.x, 1),
-                SnapValue(position.y, 1),
-                SnapValue(position.z, 1));
+                SnapValue(position.x, positionSnap.x),
+                SnapValue(position.y, positionSnap.y),
+                SnapValue(position.z, positionSnap.z));
         }
 
         /// <summary>

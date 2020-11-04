@@ -1,4 +1,5 @@
-﻿using LevelDesigner.Runtime;
+﻿using System;
+using LevelDesigner.Runtime;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -76,6 +77,7 @@ namespace LevelDesigner.Editor
             _palette = PaletteData.GetData();
 
             CreateUI();
+            SetupSnapValueFields();
         }
 
         #region UI Creation
@@ -175,6 +177,25 @@ namespace LevelDesigner.Editor
             }
         }
 
+        /// <summary>
+        /// Set up the input fields for setting the snapping values
+        /// </summary>
+        private void SetupSnapValueFields()
+        {
+            var root = rootVisualElement;
+            var positionSnapField = root.Q<IntegerField>("position-snap");
+            var rotationSnapField = root.Q<IntegerField>("rotation-snap");
+            var scaleSnapField = root.Q<IntegerField>("scale-snap");
+
+            positionSnapField.value = (int) EditorSnapSettings.move.x;
+            rotationSnapField.value = (int) EditorSnapSettings.rotate;
+            scaleSnapField.value = (int) EditorSnapSettings.scale;
+
+            positionSnapField.RegisterValueChangedCallback(OnPositionSnapValueChanged);
+            rotationSnapField.RegisterValueChangedCallback(OnRotationSnapValueChanged);
+            scaleSnapField.RegisterValueChangedCallback(OnScaleSnapValueChanged);
+        }
+
         #endregion
 
         #region Editor Logic
@@ -196,6 +217,43 @@ namespace LevelDesigner.Editor
             _spawnSettingInfo.prefabNameLabel.text = newItem.prefab.name;
 
             _painter.SetPrefab(newItem.prefab);
+        }
+
+        /// <summary>
+        /// Callback for the value changing of the position snap<para />
+        /// The value will be in [0, Inf]
+        /// </summary>
+        private static void OnPositionSnapValueChanged(ChangeEvent<int> changeEvent)
+        {
+            var element = changeEvent.target as IntegerField;
+            var newValue = Mathf.Clamp(changeEvent.newValue, 0, Int32.MaxValue);
+            EditorSnapSettings.move = Vector3.one * newValue;
+            element.value = newValue;
+        }
+
+        /// <summary>
+        /// Callback for the value changing of the rotation snap<para/ >
+        /// The value will be in [0, 360]
+        /// </summary>
+        private static void OnRotationSnapValueChanged(ChangeEvent<int> changeEvent)
+        {
+            var element = changeEvent.target as IntegerField;
+            var newValue = Mathf.Clamp(changeEvent.newValue, 0, 360);
+            EditorSnapSettings.rotate = newValue;
+            element.value = newValue;
+        }
+
+        /// <summary>
+        /// Callback for the value changing of the scale snap<para />
+        /// The value will be in [0, Inf]
+        /// </summary>
+        /// <param name="changeEvent"></param>
+        private static void OnScaleSnapValueChanged(ChangeEvent<int> changeEvent)
+        {
+            var element = changeEvent.target as IntegerField;
+            var newValue = Mathf.Clamp(changeEvent.newValue, 0, Int32.MaxValue);
+            EditorSnapSettings.scale = newValue;
+            element.value = newValue;
         }
 
         #endregion

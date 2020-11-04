@@ -10,7 +10,7 @@
     <uie:Toolbar style="height: 10px;">
         <Style src="DesignerUI_Styles.uss" />
     </uie:Toolbar>
-    <ui:VisualElement name="prefab-spawning-settings-container" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
+    <ui:VisualElement name="prefab-spawning-settings-container" view-data-key="prefab-spawning-settings" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
         <Style src="DesignerUI_Styles.uss" />
         <ui:Label text="Prefab spawning settings" name="title" class="title-label" />
         <ui:VisualElement name="selected-prefab-name-container" style="flex-direction: row;">
@@ -18,5 +18,10 @@
             <ui:Label text="-- None --" name="selected-prefab-name" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
         <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane" />
+        <ui:Foldout text="Snap settings" name="snap-settings-container" view-data-key="snap-settings">
+            <uie:IntegerField label="Position snap" value="42" name="position-snap" tooltip="Snap value for the spawning position which is in [0, Inf]" />
+            <uie:IntegerField label="Rotation snap" value="42" name="rotation-snap" tooltip="Snap value for the rotation which is in [0, 360]" />
+            <uie:IntegerField label="Scale snap" value="42" name="scale-snap" tooltip="Snap value for the scale which is in [0, Inf]" />
+        </ui:Foldout>
     </ui:VisualElement>
 </ui:UXML>
