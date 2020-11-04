@@ -13,7 +13,10 @@
     <ui:VisualElement name="prefab-spawning-settings-container" style="margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px;">
         <Style src="DesignerUI_Styles.uss" />
         <ui:Label text="Prefab spawning settings" name="title" class="title-label" />
-        <ui:Label text="Prefab to be spawned: -- None --" name="selected-prefab-info" tooltip="The prefab to be spawned" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px;" />
+        <ui:VisualElement name="selected-prefab-name-container" style="flex-direction: row;">
+            <ui:Label text="Prefab to be spawned" name="title" tooltip="The prefab to be spawned" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px; min-width: 150px;" />
+            <ui:Label text="-- None --" name="selected-prefab-name" style="flex-grow: 1; flex-shrink: 1;" />
+        </ui:VisualElement>
         <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane" />
     </ui:VisualElement>
 </ui:UXML>

@@ -23,7 +23,7 @@ namespace LevelDesigner.Editor
             /// <summary>
             /// The label for displaying the name of prefab of the selected item
             /// </summary>
-            public Label infoLabel;
+            public Label prefabNameLabel;
             /// <summary>
             /// The integer field for setting the y position for spawning prefab
             /// </summary>
@@ -38,8 +38,6 @@ namespace LevelDesigner.Editor
             _uiResourcePath + "/DesignerUI_PaletteCategory.uxml";
         private const string _paletteItemPath =
             _uiResourcePath + "/DesignerUI_PaletteItem.uxml";
-
-        private const string _selectedPrefabPrefix = "Prefab to be spawned: ";
 
         /// <summary>
         /// The painter for spawning the selected palette item (prefab)
@@ -94,7 +92,7 @@ namespace LevelDesigner.Editor
 
             // Store the reference of the frequently used elements
             _spawnSettingInfo = new SpawnSettingInfo {
-                infoLabel = root.Q<Label>("selected-prefab-info"),
+                prefabNameLabel = root.Q<Label>("selected-prefab-name"),
                 yPosition = root.Q<IntegerField>("spawn-y-position")
             };
             _spawnSettingInfo.yPosition.bindingPath = "_yPosition";
@@ -195,8 +193,7 @@ namespace LevelDesigner.Editor
             newItemContainer.style.backgroundColor = _selectedColor;
 
             _spawnSettingInfo.itemContainer = newItemContainer;
-            _spawnSettingInfo.infoLabel.text =
-                _selectedPrefabPrefix + newItem.prefab.name;
+            _spawnSettingInfo.prefabNameLabel.text = newItem.prefab.name;
 
             _painter.SetPrefab(newItem.prefab);
         }
