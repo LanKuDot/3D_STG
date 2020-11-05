@@ -217,6 +217,9 @@ namespace LevelDesigner.Editor
             _spawnSettingInfo.prefabNameLabel.text = newItem.prefab.name;
 
             _painter.SetPrefab(newItem.prefab);
+
+            // Select the painter when the palette item changed
+            Selection.activeGameObject = _painter.gameObject;
         }
 
         /// <summary>
