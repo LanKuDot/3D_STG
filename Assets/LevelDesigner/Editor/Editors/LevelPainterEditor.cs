@@ -104,7 +104,7 @@ namespace LevelDesigner.Editor
 
             switch (e.keyCode) {
                 case KeyCode.Escape:
-                    Selection.objects = null;
+                    Selection.activeGameObject = null;
                     return AdditionalAction.QUIT;
 
                 default:
