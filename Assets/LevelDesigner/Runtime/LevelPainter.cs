@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace LevelDesigner.Runtime
@@ -10,6 +9,7 @@ namespace LevelDesigner.Runtime
     public class LevelPainter : MonoBehaviour
     {
         public GameObject prefab { get; private set; }
+        public Sector sector { get; private set; }
 
         /// <summary>
         /// The y position of the object to be spawned.<para />
@@ -63,20 +63,24 @@ namespace LevelDesigner.Runtime
         }
 
         /// <summary>
-        /// Spawn the prefab at the specified position<para />
+        /// Set the sector for spawning the game objects
         /// </summary>
-        /// <param name="position">The spawning position</param>
-        public void SpawnPrefab(Vector3 position)
+        /// <param name="sector">The sector for holding spawned game object</param>
+        public void SetSector(Sector sector)
         {
-            try {
-                var newObj =
-                    PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
-                newObj.transform.position = position;
-                newObj.name = $"{prefab.name}-({position.x}, {position.z})";
-                Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
-            } catch (NullReferenceException) {
+            this.sector = sector;
+        }
+
+        /// <summary>
+        /// Spawn a game object in the selected sector at the specified position
+        /// </summary>
+        /// <param name="worldPosition">The spawning position in the world space</param>
+        public void SpawnGameObject(Vector3 worldPosition)
+        {
+            if (prefab == null) {
                 Debug.LogError(
                     "Select the item first in the level designer editor window");
+                return;
             }
         }
 

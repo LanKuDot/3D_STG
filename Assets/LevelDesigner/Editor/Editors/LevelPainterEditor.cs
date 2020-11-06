@@ -83,7 +83,7 @@ namespace LevelDesigner.Editor
                 SettingsManager.GetDisplaySettings().positionPreviewColor)) {
                 if (Handles.Button(
                     position, Quaternion.identity, size, size, Handles.CubeHandleCap)) {
-                    painter.SpawnPrefab(position);
+                    painter.SpawnGameObject(position);
                 }
             }
         }
@@ -111,5 +111,35 @@ namespace LevelDesigner.Editor
                     return AdditionalAction.NONE;
             }
         }
+
+        #region Sector Creation
+
+        /// <summary>
+        /// Create a new sector as the child object of the level painter
+        /// </summary>
+        [MenuItem("GameObject/LevelDesigner/Sector", false, 10)]
+        private static void CreateSector(MenuCommand menuCommand)
+        {
+            var context = menuCommand.context as GameObject;
+            var numOfExistingSector =
+                context.GetComponentsInChildren<Sector>(true).Length;
+            var newSector = new GameObject(
+                $"Sector {numOfExistingSector + 1}", typeof(Sector));
+
+            GameObjectUtility.SetParentAndAlign(newSector, context);
+            Undo.RegisterCreatedObjectUndo(newSector, "Create new sector");
+        }
+
+        /// <summary>
+        /// Check if the selected game object has Level Painter component
+        /// </summary>
+        [MenuItem("GameObject/LevelDesigner/Sector", true)]
+        private static bool CreateSectorValidate(MenuCommand menuCommand)
+        {
+            var context = menuCommand.context as GameObject;
+            return context && context.GetComponent<LevelPainter>();
+        }
+
+        #endregion
     }
 }
