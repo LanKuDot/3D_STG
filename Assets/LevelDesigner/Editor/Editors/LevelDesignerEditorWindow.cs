@@ -64,8 +64,7 @@ namespace LevelDesigner.Editor
         [MenuItem("Tool/Level Designer %#l")]
         public static void CreateEditorWindow()
         {
-            var window = GetWindow<LevelDesignerEditorWindow>();
-            window.titleContent = new GUIContent("Level Designer");
+            var window = GetWindow<LevelDesignerEditorWindow>("Level Designer");
             window.minSize = new Vector2(350, 250);
         }
 
