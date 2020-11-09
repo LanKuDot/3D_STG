@@ -31,8 +31,8 @@ namespace LevelDesigner.Editor
 
         public static DisplaySettings GetDisplaySettings()
         {
-            return Instance.Get<DisplaySettings>(
-                DisplaySettings.Key, DisplaySettings.Scope);
+            return Instance.Get(
+                DisplaySettings.Key, DisplaySettings.Scope, new DisplaySettings());
         }
     }
 }

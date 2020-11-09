@@ -31,7 +31,7 @@ namespace LevelDesigner.Editor
                 label = "Direction Color",
                 defaultValue = Color.cyan,
                 tooltip = "The color for drawing the direction handle"
-        };
+            };
 
         /// <summary>
         /// The color for drawing the preview position
@@ -48,7 +48,7 @@ namespace LevelDesigner.Editor
         public DisplaySettings()
         {
             directionColor = directionColorProperty.defaultValue;
-            positionPreviewColor = directionColorProperty.defaultValue;
+            positionPreviewColor = positionPreviewColorProperty.defaultValue;
         }
     }
 }
