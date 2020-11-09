@@ -49,11 +49,6 @@ namespace LevelDesigner.Editor
         /// </summary>
         private PaletteData _palette;
 
-        /// <summary>
-        /// The name of the selected item in the last activated window
-        /// </summary>
-        private string _previousSelectedItemName;
-
         private SpawnSettingInfo _spawnSettingInfo;
 
         private readonly Color _unselectedColor =
@@ -71,8 +66,6 @@ namespace LevelDesigner.Editor
         private void OnEnable()
         {
             _painter = FindObjectOfType<LevelPainter>();
-            _previousSelectedItemName =
-                _painter.prefab != null ? _painter.prefab.name : "";
             _palette = PaletteData.GetData();
 
             CreateUI();
@@ -153,8 +146,9 @@ namespace LevelDesigner.Editor
 
                 itemElement.tooltip = prefab.name;
 
-                // Mark the previous selected item
-                if (_previousSelectedItemName.Equals(prefab.name)) {
+                // If there is no prefab set in the painter object,
+                // set to the first palette item. Or set the previous selected item
+                if (_painter.prefab == null || _painter.prefab == prefab) {
                     ChangePaletteItem(
                         item, itemElement.Q<VisualElement>("palette-item-container"));
                 }
