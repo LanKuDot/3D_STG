@@ -77,7 +77,6 @@ namespace LevelDesigner.Editor
             _palette = PaletteData.GetData();
 
             CreateUI();
-            SetupSnapValueFields();
         }
 
         #region UI Creation
@@ -101,6 +100,8 @@ namespace LevelDesigner.Editor
             _spawnSettingInfo.yPosition.Bind(new SerializedObject(_painter));
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
+            SetupSectorSelectionField();
+            SetupSnapValueFields();
         }
 
         /// <summary>
@@ -155,8 +156,8 @@ namespace LevelDesigner.Editor
 
                 // Mark the previous selected item
                 if (_previousSelectedItemName.Equals(prefab.name)) {
-                     ChangePaletteItem(
-                         item, itemElement.Q<VisualElement>("palette-item-container"));
+                    ChangePaletteItem(
+                        item, itemElement.Q<VisualElement>("palette-item-container"));
                 }
 
                 var itemNameLabel = itemElement.Q<Label>();
@@ -175,6 +176,32 @@ namespace LevelDesigner.Editor
 
                 scrollView.Add(itemElement);
             }
+        }
+
+        /// <summary>
+        /// Set up the object fields for selecting the target sector
+        /// </summary>
+        private void SetupSectorSelectionField()
+        {
+            var field = rootVisualElement.Q<ObjectField>("sector-selection-field");
+            field.objectType = typeof(Sector);
+            field.RegisterValueChangedCallback(OnSectorChanged);
+
+            // If the sector is not set in the painter,
+            // pick the first one as the default sector.
+            if (_painter.sector == null) {
+                var defaultSector = _painter.GetComponentInChildren<Sector>();
+
+                if (defaultSector == null) {
+                    Debug.LogError("There has no sector in the child object " +
+                                   "of the level painter object. Please create one.");
+                    return;
+                }
+
+                field.value = defaultSector;
+                _painter.SetSector(defaultSector);
+            } else
+                field.value = _painter.sector;
         }
 
         /// <summary>
@@ -220,6 +247,16 @@ namespace LevelDesigner.Editor
 
             // Select the painter when the palette item changed
             Selection.activeGameObject = _painter.gameObject;
+        }
+
+        /// <summary>
+        /// Callback for the changing of the sector<para/>
+        /// It will change the target sector of the painter
+        /// </summary>
+        private void OnSectorChanged(ChangeEvent<UnityEngine.Object> changeEvent)
+        {
+            var sector = changeEvent.newValue as Sector;
+            _painter.SetSector(sector);
         }
 
         /// <summary>

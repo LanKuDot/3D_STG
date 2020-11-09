@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace LevelDesigner.Runtime
@@ -65,7 +66,7 @@ namespace LevelDesigner.Runtime
         /// <summary>
         /// Set the sector for spawning the game objects
         /// </summary>
-        /// <param name="sector">The sector for holding spawned game object</param>
+        /// <param name="sector">The target sector</param>
         public void SetSector(Sector sector)
         {
             this.sector = sector;
