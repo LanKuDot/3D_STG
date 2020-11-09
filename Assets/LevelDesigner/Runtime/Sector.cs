@@ -8,6 +8,9 @@ namespace LevelDesigner.Runtime
     /// </summary>
     public class Sector : MonoBehaviour
     {
+
+#if UNITY_EDITOR
+
         /// <summary>
         /// Try to spawn a game object from a prefab at the given world position
         /// if there has no object at that position in this sector.
@@ -48,5 +51,8 @@ namespace LevelDesigner.Runtime
 
             return false;
         }
+
+#endif
+
     }
 }
