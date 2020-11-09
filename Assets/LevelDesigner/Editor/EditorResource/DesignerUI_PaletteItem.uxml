@@ -2,6 +2,6 @@
     <ui:VisualElement name="palette-item-container" class="palette-item">
         <Style src="DesignerUI_Styles.uss" />
         <ui:Button name="palette-item" style="width: 60px; height: 60px;" />
-        <ui:Label name="palette-item-name" text="Label" style="align-items: stretch; width: 80px; -unity-text-align: middle-center; white-space: normal;" />
+        <ui:Label name="palette-item-name" text="Label" style="align-items: stretch; width: 80px; -unity-text-align: middle-center; white-space: normal; color: rgba(0, 0, 0, 255);" />
     </ui:VisualElement>
 </ui:UXML>
