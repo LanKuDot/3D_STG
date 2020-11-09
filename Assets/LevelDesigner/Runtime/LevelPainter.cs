@@ -78,11 +78,13 @@ namespace LevelDesigner.Runtime
         /// <param name="worldPosition">The spawning position in the world space</param>
         public void SpawnGameObject(Vector3 worldPosition)
         {
-            if (prefab == null) {
+            if (prefab == null || sector == null) {
                 Debug.LogError(
                     "Select the item first in the level designer editor window");
                 return;
             }
+
+            sector.SpawnGameObject(prefab, worldPosition);
         }
 
 #endif
