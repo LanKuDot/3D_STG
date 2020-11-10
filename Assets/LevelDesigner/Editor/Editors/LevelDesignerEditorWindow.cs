@@ -69,6 +69,12 @@ namespace LevelDesigner.Editor
             _palette = PaletteData.GetData();
 
             CreateUI();
+            SceneView.duringSceneGui += HandleEvent;
+        }
+
+        private void OnDisable()
+        {
+            SceneView.duringSceneGui -= HandleEvent;
         }
 
         #region UI Creation
@@ -218,7 +224,7 @@ namespace LevelDesigner.Editor
 
         #endregion
 
-        #region Editor Logic
+        #region Value Changing Event
 
         /// <summary>
         /// Change the selected palette item and set to the painter
@@ -280,13 +286,25 @@ namespace LevelDesigner.Editor
         /// Callback for the value changing of the scale snap<para />
         /// The value will be in [0, Inf]
         /// </summary>
-        /// <param name="changeEvent"></param>
         private static void OnScaleSnapValueChanged(ChangeEvent<int> changeEvent)
         {
             var element = changeEvent.target as IntegerField;
             var newValue = Mathf.Clamp(changeEvent.newValue, 0, Int32.MaxValue);
             EditorSnapSettings.scale = newValue;
             element.value = newValue;
+        }
+
+        #endregion
+
+        #region Editor Logic
+
+        /// <summary>
+        /// Handle the event when the editor window is activated<para />
+        /// This function is registered to the event of SceneView.duringSceneGui
+        /// </summary>
+        private void HandleEvent(SceneView sceneView)
+        {
+            LevelPainterEvent.HandleSceneEvent(_painter);
         }
 
         #endregion
