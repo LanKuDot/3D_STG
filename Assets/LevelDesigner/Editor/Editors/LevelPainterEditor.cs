@@ -117,7 +117,7 @@ namespace LevelDesigner.Editor
         /// <summary>
         /// Create a new sector as the child object of the level painter
         /// </summary>
-        [MenuItem("GameObject/LevelDesigner/Sector", false, 10)]
+        [MenuItem("GameObject/Sector", false, 10)]
         private static void CreateSector(MenuCommand menuCommand)
         {
             var context = menuCommand.context as GameObject;
@@ -133,11 +133,11 @@ namespace LevelDesigner.Editor
         /// <summary>
         /// Check if the selected game object has Level Painter component
         /// </summary>
-        [MenuItem("GameObject/LevelDesigner/Sector", true)]
-        private static bool CreateSectorValidate(MenuCommand menuCommand)
+        [MenuItem("GameObject/Sector", true)]
+        private static bool CreateSectorValidate()
         {
-            var context = menuCommand.context as GameObject;
-            return context && context.GetComponent<LevelPainter>();
+            var selection = Selection.activeGameObject;
+            return selection && selection.GetComponent<LevelPainter>();
         }
 
         #endregion
