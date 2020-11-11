@@ -25,10 +25,6 @@ namespace LevelDesigner.Editor
             /// The label for displaying the name of prefab of the selected item
             /// </summary>
             public Label prefabNameLabel;
-            /// <summary>
-            /// The integer field for setting the y position for spawning prefab
-            /// </summary>
-            public IntegerField yPosition;
         }
 
         private const string _uiResourcePath =
@@ -92,14 +88,11 @@ namespace LevelDesigner.Editor
             // Store the reference of the frequently used elements
             _spawnSettingInfo = new SpawnSettingInfo {
                 prefabNameLabel = root.Q<Label>("selected-prefab-name"),
-                yPosition = root.Q<IntegerField>("spawn-y-position")
             };
-            _spawnSettingInfo.yPosition.bindingPath = "_yPosition";
-            _spawnSettingInfo.yPosition.Bind(new SerializedObject(_painter));
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
             SetupSectorSelectionField();
-            SetupSnapValueFields();
+            SetupValueFields();
         }
 
         /// <summary>
@@ -204,19 +197,22 @@ namespace LevelDesigner.Editor
         }
 
         /// <summary>
-        /// Set up the input fields for setting the snapping values
+        /// Set up the input fields for setting the values
         /// </summary>
-        private void SetupSnapValueFields()
+        private void SetupValueFields()
         {
             var root = rootVisualElement;
+            var yPositionField = root.Q<IntegerField>("spawn-y-position");
             var positionSnapField = root.Q<IntegerField>("position-snap");
             var rotationSnapField = root.Q<IntegerField>("rotation-snap");
             var scaleSnapField = root.Q<IntegerField>("scale-snap");
 
+            yPositionField.value = _painter.yPosition;
             positionSnapField.value = (int) EditorSnapSettings.move.x;
             rotationSnapField.value = (int) EditorSnapSettings.rotate;
             scaleSnapField.value = (int) EditorSnapSettings.scale;
 
+            yPositionField.RegisterValueChangedCallback(OnYPositionValueChanged);
             positionSnapField.RegisterValueChangedCallback(OnPositionSnapValueChanged);
             rotationSnapField.RegisterValueChangedCallback(OnRotationSnapValueChanged);
             scaleSnapField.RegisterValueChangedCallback(OnScaleSnapValueChanged);
@@ -256,6 +252,14 @@ namespace LevelDesigner.Editor
         {
             var sector = changeEvent.newValue as Sector;
             _painter.SetSector(sector);
+        }
+
+        /// <summary>
+        /// Callback for the changing of the y position value
+        /// </summary>
+        private void OnYPositionValueChanged(ChangeEvent<int> changeEvent)
+        {
+            _painter.SetYPosition(changeEvent.newValue);
         }
 
         /// <summary>

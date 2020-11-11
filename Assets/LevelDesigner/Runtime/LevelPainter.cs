@@ -9,17 +9,14 @@ namespace LevelDesigner.Runtime
     /// </summary>
     public class LevelPainter : MonoBehaviour
     {
+#if UNITY_EDITOR
+
         public GameObject prefab { get; private set; }
         public Sector sector { get; private set; }
-
         /// <summary>
-        /// The y position of the object to be spawned.<para />
-        /// This value is set from the editor window
+        /// The y position of the object to be spawned
         /// </summary>
-        [HideInInspector]
-        [SerializeField]
-        private int _yPosition = 0;
-        public int yPosition => _yPosition;
+        public int yPosition { get; private set; }
 
         /// <summary>
         /// Snap the position to the closet integer value
@@ -52,8 +49,6 @@ namespace LevelDesigner.Runtime
             return interval * amount;
         }
 
-#if UNITY_EDITOR
-
         /// <summary>
         /// Set the prefab for spawning in the scene
         /// </summary>
@@ -70,6 +65,14 @@ namespace LevelDesigner.Runtime
         public void SetSector(Sector sector)
         {
             this.sector = sector;
+        }
+
+        /// <summary>
+        /// Set the value of the y position for spawning object
+        /// </summary>
+        public void SetYPosition(int value)
+        {
+            yPosition = value;
         }
 
         /// <summary>
