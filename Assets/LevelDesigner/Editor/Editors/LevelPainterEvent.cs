@@ -38,7 +38,7 @@ namespace LevelDesigner.Editor
             LevelPainter painter, Vector3 mouseScreenPos)
         {
             var operatingPlane = new Plane(
-                Vector3.up, new Vector3(0, painter.yPosition, 0));
+                Vector3.up, new Vector3(0, painter.spawnConfig.yPosition, 0));
             var ray = Camera.current.ScreenPointToRay(mouseScreenPos);
 
             operatingPlane.Raycast(ray, out var enterValue);

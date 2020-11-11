@@ -13,9 +13,9 @@ namespace LevelDesigner.Editor
     internal class LevelDesignerEditorWindow : EditorWindow
     {
         /// <summary>
-        /// Store the information of selected palette item and settings
+        /// Store the information of selected palette item and spawning configuration
         /// </summary>
-        private struct SpawnSettingInfo
+        private struct SpawnConfigInfo
         {
             /// <summary>
             /// The container element of the selected item in palette
@@ -25,6 +25,10 @@ namespace LevelDesigner.Editor
             /// The label for displaying the name of prefab of the selected item
             /// </summary>
             public Label prefabNameLabel;
+            /// <summary>
+            /// The field for specifying the y position of the spawning object
+            /// </summary>
+            public IntegerField yPositionField;
         }
 
         private const string _uiResourcePath =
@@ -45,7 +49,7 @@ namespace LevelDesigner.Editor
         /// </summary>
         private PaletteData _palette;
 
-        private SpawnSettingInfo _spawnSettingInfo;
+        private SpawnConfigInfo _spawnConfigInfo;
 
         private readonly Color _unselectedColor =
             new Color(0.6431373f, 0.6431373f, 0.6431373f);
@@ -86,8 +90,9 @@ namespace LevelDesigner.Editor
             visualTree.CloneTree(root);
 
             // Store the reference of the frequently used elements
-            _spawnSettingInfo = new SpawnSettingInfo {
+            _spawnConfigInfo = new SpawnConfigInfo {
                 prefabNameLabel = root.Q<Label>("selected-prefab-name"),
+                yPositionField = root.Q<IntegerField>("spawn-y-position"),
             };
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
@@ -147,7 +152,8 @@ namespace LevelDesigner.Editor
 
                 // If there is no prefab set in the painter object,
                 // set to the first palette item. Or set the previous selected item
-                if (_painter.prefab == null || _painter.prefab == prefab) {
+                if (_painter.spawnConfig.prefab == null ||
+                    _painter.spawnConfig.prefab == prefab) {
                     ChangePaletteItem(
                         item, itemElement.Q<VisualElement>("palette-item-container"));
                 }
@@ -181,7 +187,7 @@ namespace LevelDesigner.Editor
 
             // If the sector is not set in the painter,
             // pick the first one as the default sector.
-            if (_painter.sector == null) {
+            if (_painter.spawnConfig.sector == null) {
                 var defaultSector = _painter.GetComponentInChildren<Sector>();
 
                 if (defaultSector == null) {
@@ -191,9 +197,9 @@ namespace LevelDesigner.Editor
                 }
 
                 field.value = defaultSector;
-                _painter.SetSector(defaultSector);
+                _painter.spawnConfig.sector = defaultSector;
             } else
-                field.value = _painter.sector;
+                field.value = _painter.spawnConfig.sector;
         }
 
         /// <summary>
@@ -202,12 +208,12 @@ namespace LevelDesigner.Editor
         private void SetupValueFields()
         {
             var root = rootVisualElement;
-            var yPositionField = root.Q<IntegerField>("spawn-y-position");
+            var yPositionField = _spawnConfigInfo.yPositionField;
             var positionSnapField = root.Q<IntegerField>("position-snap");
             var rotationSnapField = root.Q<IntegerField>("rotation-snap");
             var scaleSnapField = root.Q<IntegerField>("scale-snap");
 
-            yPositionField.value = _painter.yPosition;
+            yPositionField.value = _painter.spawnConfig.yPosition;
             positionSnapField.value = (int) EditorSnapSettings.move.x;
             rotationSnapField.value = (int) EditorSnapSettings.rotate;
             scaleSnapField.value = (int) EditorSnapSettings.scale;
@@ -229,16 +235,16 @@ namespace LevelDesigner.Editor
             PaletteItem newItem, VisualElement newItemContainer)
         {
             // Reset background color of the previous selected item
-            if (_spawnSettingInfo.itemContainer != null) {
-                _spawnSettingInfo.itemContainer.style.backgroundColor = _unselectedColor;
+            if (_spawnConfigInfo.itemContainer != null) {
+                _spawnConfigInfo.itemContainer.style.backgroundColor = _unselectedColor;
             }
 
             newItemContainer.style.backgroundColor = _selectedColor;
 
-            _spawnSettingInfo.itemContainer = newItemContainer;
-            _spawnSettingInfo.prefabNameLabel.text = newItem.prefab.name;
+            _spawnConfigInfo.itemContainer = newItemContainer;
+            _spawnConfigInfo.prefabNameLabel.text = newItem.prefab.name;
 
-            _painter.SetPrefab(newItem.prefab);
+            _painter.spawnConfig.prefab = newItem.prefab;
 
             // Select the painter when the palette item changed
             Selection.activeGameObject = _painter.gameObject;
@@ -251,7 +257,7 @@ namespace LevelDesigner.Editor
         private void OnSectorChanged(ChangeEvent<UnityEngine.Object> changeEvent)
         {
             var sector = changeEvent.newValue as Sector;
-            _painter.SetSector(sector);
+            _painter.spawnConfig.sector = sector;
         }
 
         /// <summary>
@@ -259,7 +265,7 @@ namespace LevelDesigner.Editor
         /// </summary>
         private void OnYPositionValueChanged(ChangeEvent<int> changeEvent)
         {
-            _painter.SetYPosition(changeEvent.newValue);
+            _painter.spawnConfig.yPosition = changeEvent.newValue;
         }
 
         /// <summary>
