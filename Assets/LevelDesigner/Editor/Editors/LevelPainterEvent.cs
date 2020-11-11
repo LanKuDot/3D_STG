@@ -9,12 +9,6 @@ namespace LevelDesigner.Editor
     /// </summary>
     public static class LevelPainterEvent
     {
-        private enum AdditionalAction
-        {
-            NONE,
-            QUIT,
-        }
-
         /// <summary>
         /// Handle the event in the scene for the level painter
         /// </summary>
@@ -71,11 +65,6 @@ namespace LevelDesigner.Editor
         /// </param>
         private static void HandleEvent(LevelPainter painter, Vector3 position)
         {
-            var additionalAction = HandleKeyboardEvent(painter);
-
-            if (additionalAction == AdditionalAction.QUIT)
-                return;
-
             var size = HandleUtility.GetHandleSize(position) / 1.5f;
 
             // Make a 3D button following the cursor
@@ -86,30 +75,6 @@ namespace LevelDesigner.Editor
                     position, Quaternion.identity, size, size, Handles.CubeHandleCap)) {
                     painter.SpawnGameObject(position);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Handle the keyboard event and do the relative action
-        /// </summary>
-        /// <param name="painter">The painter object</param>
-        /// <returns>The additional action to be done</returns>
-        private static AdditionalAction HandleKeyboardEvent(LevelPainter painter)
-        {
-            var e = Event.current;
-            var eventType = e.GetTypeForControl(
-                GUIUtility.GetControlID(FocusType.Passive));
-
-            if (eventType != EventType.KeyDown)
-                return AdditionalAction.NONE;
-
-            switch (e.keyCode) {
-                case KeyCode.Escape:
-                    Selection.activeGameObject = null;
-                    return AdditionalAction.QUIT;
-
-                default:
-                    return AdditionalAction.NONE;
             }
         }
     }

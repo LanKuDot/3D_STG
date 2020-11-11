@@ -69,12 +69,12 @@ namespace LevelDesigner.Editor
             _palette = PaletteData.GetData();
 
             CreateUI();
-            SceneView.duringSceneGui += HandleEvent;
+            SceneView.duringSceneGui += OnSceneGUI;
         }
 
         private void OnDisable()
         {
-            SceneView.duringSceneGui -= HandleEvent;
+            SceneView.duringSceneGui -= OnSceneGUI;
         }
 
         #region UI Creation
@@ -299,12 +299,39 @@ namespace LevelDesigner.Editor
         #region Editor Logic
 
         /// <summary>
-        /// Handle the event when the editor window is activated<para />
+        /// Handle the event when the editor window is opened
+        /// and focus on the scene<para />
         /// This function is registered to the event of SceneView.duringSceneGui
         /// </summary>
-        private void HandleEvent(SceneView sceneView)
+        private void OnSceneGUI(SceneView sceneView)
         {
-            LevelPainterEvent.HandleSceneEvent(_painter);
+            var closeWindow = HandleKeyboardEvent();
+
+            if (closeWindow)
+                Close();
+            else
+                LevelPainterEvent.HandleSceneEvent(_painter);
+        }
+
+        /// <summary>
+        /// Handle the keyboard event
+        /// </summary>
+        /// <returns>Is the window closing event occurred?</returns>
+        private bool HandleKeyboardEvent()
+        {
+            var e = Event.current;
+            var eventType = e.GetTypeForControl(
+                GUIUtility.GetControlID(FocusType.Passive));
+
+            if (eventType != EventType.KeyDown)
+                return false;
+
+            switch (e.keyCode) {
+                case KeyCode.Escape:
+                    return true;
+            }
+
+            return false;
         }
 
         #endregion
