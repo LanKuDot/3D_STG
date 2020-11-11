@@ -298,6 +298,8 @@ namespace LevelDesigner.Editor
 
         #region Editor Logic
 
+        private bool _inEditingMode = true;
+
         /// <summary>
         /// Handle the event when the editor window is opened
         /// and focus on the scene<para />
@@ -309,7 +311,7 @@ namespace LevelDesigner.Editor
 
             if (closeWindow)
                 Close();
-            else
+            else if (_inEditingMode)
                 LevelPainterEvent.HandleSceneEvent(_painter);
         }
 
@@ -327,8 +329,13 @@ namespace LevelDesigner.Editor
                 return false;
 
             switch (e.keyCode) {
+                // Close the editor window
                 case KeyCode.Escape:
                     return true;
+                // Turn on/off the editing mode
+                case KeyCode.Tab:
+                    _inEditingMode = !_inEditingMode;
+                    break;
             }
 
             return false;
