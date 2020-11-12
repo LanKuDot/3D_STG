@@ -17,6 +17,8 @@ namespace LevelDesigner.Runtime
             public GameObject prefab;
             public Sector sector;
             public int yPosition;
+            public int yRotation;
+            public Vector3 globalScale = Vector3.one;
         }
 
         private SpawnConfig _spawnConfig = new SpawnConfig();
@@ -65,7 +67,9 @@ namespace LevelDesigner.Runtime
                 return;
             }
 
-            _spawnConfig.sector.SpawnGameObject(_spawnConfig.prefab, worldPosition);
+            _spawnConfig.sector.SpawnGameObject(
+                _spawnConfig.prefab, worldPosition,
+                _spawnConfig.yRotation, _spawnConfig.globalScale);
         }
 
 #endif

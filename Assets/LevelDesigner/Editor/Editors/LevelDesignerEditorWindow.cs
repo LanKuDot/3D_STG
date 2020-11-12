@@ -29,6 +29,14 @@ namespace LevelDesigner.Editor
             /// The field for specifying the y position of the spawning object
             /// </summary>
             public IntegerField yPositionField;
+            /// <summary>
+            /// The field for specifying the degree of y rotation of the spawning object
+            /// </summary>
+            public IntegerField yRotationField;
+            /// <summary>
+            /// The field for specifying the global scale of the spawning object
+            /// </summary>
+            public Vector3Field globalScaleField;
         }
 
         private const string _uiResourcePath =
@@ -60,7 +68,7 @@ namespace LevelDesigner.Editor
         public static void CreateEditorWindow()
         {
             var window = GetWindow<LevelDesignerEditorWindow>("Level Designer");
-            window.minSize = new Vector2(350, 250);
+            window.minSize = new Vector2(350, 450);
         }
 
         private void OnEnable()
@@ -93,6 +101,8 @@ namespace LevelDesigner.Editor
             _spawnConfigInfo = new SpawnConfigInfo {
                 prefabNameLabel = root.Q<Label>("selected-prefab-name"),
                 yPositionField = root.Q<IntegerField>("spawn-y-position"),
+                yRotationField = root.Q<IntegerField>("spawn-y-rotation"),
+                globalScaleField = root.Q<Vector3Field>("spawn-global-scale")
             };
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
@@ -209,19 +219,27 @@ namespace LevelDesigner.Editor
         {
             var root = rootVisualElement;
             var yPositionField = _spawnConfigInfo.yPositionField;
+            var yRotationField = _spawnConfigInfo.yRotationField;
+            var globalScaleField = _spawnConfigInfo.globalScaleField;
+            var resetButton = root.Q<Button>("reset-spawn-property-btn");
             var positionSnapField = root.Q<IntegerField>("position-snap");
             var rotationSnapField = root.Q<IntegerField>("rotation-snap");
             var scaleSnapField = root.Q<IntegerField>("scale-snap");
 
             yPositionField.value = _painter.spawnConfig.yPosition;
+            yRotationField.value = _painter.spawnConfig.yRotation;
+            globalScaleField.value = _painter.spawnConfig.globalScale;
             positionSnapField.value = (int) EditorSnapSettings.move.x;
             rotationSnapField.value = (int) EditorSnapSettings.rotate;
             scaleSnapField.value = (int) EditorSnapSettings.scale;
 
             yPositionField.RegisterValueChangedCallback(OnYPositionValueChanged);
+            yRotationField.RegisterValueChangedCallback(OnYRotationValueChanged);
+            globalScaleField.RegisterValueChangedCallback(OnGlobalScaleValueChanged);
             positionSnapField.RegisterValueChangedCallback(OnPositionSnapValueChanged);
             rotationSnapField.RegisterValueChangedCallback(OnRotationSnapValueChanged);
             scaleSnapField.RegisterValueChangedCallback(OnScaleSnapValueChanged);
+            resetButton.clicked += ResetSpawnProperty;
         }
 
         #endregion
@@ -266,6 +284,34 @@ namespace LevelDesigner.Editor
         private void OnYPositionValueChanged(ChangeEvent<int> changeEvent)
         {
             _painter.spawnConfig.yPosition = changeEvent.newValue;
+        }
+
+        /// <summary>
+        /// Callback for the changing of the y rotation degree
+        /// </summary>
+        private void OnYRotationValueChanged(ChangeEvent<int> changeEvent)
+        {
+            var newValue = Mathf.Clamp(changeEvent.newValue, 0, 360);
+            _painter.spawnConfig.yRotation = newValue;
+            _spawnConfigInfo.yRotationField.value = newValue;
+        }
+
+        /// <summary>
+        /// Callback for the changing of the global scale
+        /// </summary>
+        private void OnGlobalScaleValueChanged(ChangeEvent<Vector3> changeEvent)
+        {
+            _painter.spawnConfig.globalScale = changeEvent.newValue;
+        }
+
+        /// <summary>
+        /// Reset the properties for spawning object
+        /// </summary>
+        private void ResetSpawnProperty()
+        {
+            _spawnConfigInfo.yPositionField.value = 0;
+            _spawnConfigInfo.yRotationField.value = 0;
+            _spawnConfigInfo.globalScaleField.value = Vector3.one;
         }
 
         /// <summary>

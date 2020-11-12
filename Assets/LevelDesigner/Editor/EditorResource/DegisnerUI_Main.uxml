@@ -14,11 +14,14 @@
         <Style src="DesignerUI_Styles.uss" />
         <ui:Label text="Prefab spawning settings" name="title" class="title-label" />
         <uie:ObjectField label="Terget Sector" name="sector-selection-field" />
-        <ui:VisualElement name="selected-prefab-name-container" style="flex-direction: row;">
+        <ui:VisualElement name="selected-prefab-name-container" style="flex-direction: row; height: 21px; align-items: center;">
             <ui:Label text="Prefab to be spawned" name="title" tooltip="The prefab to be spawned" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px; min-width: 150px;" />
             <ui:Label text="-- None --" name="selected-prefab-name" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
         <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane" />
+        <uie:IntegerField label="Y Rotation" value="0" name="spawn-y-rotation" tooltip="The degree of the y rotation of the object to be spawned" />
+        <uie:Vector3Field label="Global Scale" name="spawn-global-scale" x="1" y="1" z="1" tooltip="The global scale of the object to be spawned" />
+        <ui:Button text="Reset" name="reset-spawn-property-btn" tooltip="Reset the property for spawning the object" style="height: 21px;" />
         <ui:Foldout text="Snap settings" name="snap-settings-container" view-data-key="snap-settings">
             <uie:IntegerField label="Position snap" value="42" name="position-snap" tooltip="Snap value for the spawning position which is in [0, Inf]" />
             <uie:IntegerField label="Rotation snap" value="42" name="rotation-snap" tooltip="Snap value for the rotation which is in [0, 360]" />

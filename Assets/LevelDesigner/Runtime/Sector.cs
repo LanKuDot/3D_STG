@@ -17,15 +17,22 @@ namespace LevelDesigner.Runtime
         /// </summary>
         /// <param name="prefab">The prefab for spawning a game object</param>
         /// <param name="worldPosition">The spawning position</param>
+        /// <param name="yRotation">The degree of the y global rotation</param>
+        /// <param name="globalScale">The scale of the object</param>
         /// <returns>True, if the game object is successfully spawned</returns>
-        public bool SpawnGameObject(GameObject prefab, Vector3 worldPosition)
+        public bool SpawnGameObject(GameObject prefab, Vector3 worldPosition,
+            int yRotation, Vector3 globalScale)
         {
             if (HasObjectAt(worldPosition))
                 return false;
 
             var newObj =
-                PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
-            newObj.transform.position = worldPosition;
+                PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+            var objTransform = newObj.transform;
+            objTransform.position = worldPosition;
+            objTransform.eulerAngles = Vector3.up * yRotation;
+            objTransform.localScale = globalScale;
+            objTransform.SetParent(transform, true);
             newObj.name = $"{prefab.name}-({worldPosition.x}, {worldPosition.z})";
             Undo.RegisterCreatedObjectUndo(newObj, $"Create {prefab.name}");
 
