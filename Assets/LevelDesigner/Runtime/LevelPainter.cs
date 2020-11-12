@@ -49,8 +49,9 @@ namespace LevelDesigner.Runtime
             var amount = (int) (value / interval);
             var remain = value - interval * amount;
 
-            if (remain > interval / 2)
-                return interval * (amount + 1);
+            // Away from 0
+            if (Mathf.Abs(remain) > interval / 2)
+                return interval * (value < 0 ? amount - 1 : amount + 1);
 
             return interval * amount;
         }
