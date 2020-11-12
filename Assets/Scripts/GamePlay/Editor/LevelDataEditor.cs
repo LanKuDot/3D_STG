@@ -18,6 +18,13 @@ namespace GamePlay.Editor
         {
             var levelID = int.Parse(label.text.Split(' ')[1]);
             var levelData = property.serializedObject.targetObject as LevelData;
+
+            // If the element is not created on time, give the default name first.
+            if (levelID >= levelData.Length) {
+                EditorGUI.PropertyField(position, property, label, true);
+                return;
+            }
+
             var pathSegments = levelData.GetLevelScenePath(levelID).Split('/');
             var levelName = pathSegments[pathSegments.Length - 1];
 
