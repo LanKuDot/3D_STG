@@ -292,7 +292,7 @@ namespace LevelDesigner.Editor
         /// </summary>
         private void OnYRotationValueChanged(ChangeEvent<int> changeEvent)
         {
-            var newValue = Mathf.Clamp(changeEvent.newValue, 0, 360);
+            var newValue = (int) Mathf.Repeat(changeEvent.newValue, 360);
             _painter.spawnConfig.yRotation = newValue;
             _spawnConfigInfo.yRotationField.value = newValue;
         }
@@ -334,7 +334,7 @@ namespace LevelDesigner.Editor
         private static void OnRotationSnapValueChanged(ChangeEvent<int> changeEvent)
         {
             var element = changeEvent.target as IntegerField;
-            var newValue = Mathf.Clamp(changeEvent.newValue, 0, 360);
+            var newValue = (int) Mathf.Repeat(changeEvent.newValue, 360);
             EditorSnapSettings.rotate = newValue;
             element.value = newValue;
         }
