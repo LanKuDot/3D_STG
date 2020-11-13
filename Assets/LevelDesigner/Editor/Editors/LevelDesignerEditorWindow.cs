@@ -388,9 +388,11 @@ namespace LevelDesigner.Editor
             switch (e.keyCode) {
                 // Close the editor window
                 case KeyCode.Escape:
+                    e.Use();
                     return true;
                 // Turn on/off the editing mode
                 case KeyCode.Tab:
+                    e.Use();
                     _inEditingMode = !_inEditingMode;
                     break;
             }
