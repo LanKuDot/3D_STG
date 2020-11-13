@@ -355,7 +355,7 @@ namespace LevelDesigner.Editor
 
         #region Editor Logic
 
-        private bool _inEditingMode = true;
+        private bool _inDrawingMode = true;
 
         /// <summary>
         /// Handle the event when the editor window is opened
@@ -368,7 +368,7 @@ namespace LevelDesigner.Editor
 
             if (closeWindow)
                 Close();
-            else if (_inEditingMode)
+            else if (_inDrawingMode)
                 LevelPainterEvent.HandleSceneEvent(_painter);
         }
 
@@ -393,11 +393,54 @@ namespace LevelDesigner.Editor
                 // Toggle the editing mode
                 case KeyCode.Q:
                     e.Use();
-                    _inEditingMode = !_inEditingMode;
+                    _inDrawingMode = !_inDrawingMode;
                     break;
             }
 
+            if (_inDrawingMode && !e.control) {
+                HandleDrawModeKeyboardEvent(e);
+                // Eat all keyboard events in the drawing mode even they are not used.
+                e.Use();
+            }
+
             return false;
+        }
+
+        /// <summary>
+        /// Handle the keyboard event that is only for the drawing mode
+        /// </summary>
+        private void HandleDrawModeKeyboardEvent(Event e)
+        {
+            var factor = e.shift ? -1 : 1;
+
+            switch (e.keyCode) {
+                // Increase/Decrease the y rotation degree
+                case KeyCode.R:
+                    _spawnConfigInfo.yRotationField.value +=
+                        (int) EditorSnapSettings.rotate * factor;
+                    break;
+                // Increase/Decrease the y position
+                case KeyCode.T:
+                    _spawnConfigInfo.yPositionField.value += factor;
+                    break;
+                // Increase/Decrease the global scale value
+                case KeyCode.X:
+                    _spawnConfigInfo.globalScaleField.value +=
+                        factor * EditorSnapSettings.scale * Vector3.right;
+                    break;
+                case KeyCode.Y:
+                    _spawnConfigInfo.globalScaleField.value +=
+                        factor * EditorSnapSettings.scale * Vector3.up;
+                    break;
+                case KeyCode.Z:
+                    _spawnConfigInfo.globalScaleField.value +=
+                        factor * EditorSnapSettings.scale * Vector3.forward;
+                    break;
+                // Reset the spawn property
+                case KeyCode.E:
+                    ResetSpawnProperty();
+                    break;
+            }
         }
 
         #endregion

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:Template name="DesignerUI_PaletteCategory" src="DesignerUI_PaletteCategory.uxml" />
-    <ui:VisualElement name="palette-container" view-data-key="palette" tooltip="Pick the gameobject to be drawn" style="margin-left: 2px; margin-right: 5px; margin-top: 2px; margin-bottom: 2px;">
+    <ui:VisualElement name="palette-container" view-data-key="palette" tooltip="Pick the gameobject to be drawn (Q key to toggle drawing mode)" style="margin-left: 2px; margin-right: 5px; margin-top: 2px; margin-bottom: 2px;">
         <Style src="DesignerUI_Styles.uss" />
         <ui:Label text="Palette" name="palette-title" class="title-label" />
         <ui:ScrollView name="palette-scroll-view" view-data-key="scroll-view" style="height: 140px;">
@@ -18,10 +18,10 @@
             <ui:Label text="Prefab to be spawned" name="title" tooltip="The prefab to be spawned" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px; min-width: 150px;" />
             <ui:Label text="-- None --" name="selected-prefab-name" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
-        <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane" />
-        <uie:IntegerField label="Y Rotation" value="0" name="spawn-y-rotation" tooltip="The degree of the y rotation of the object to be spawned" />
-        <uie:Vector3Field label="Global Scale" name="spawn-global-scale" x="1" y="1" z="1" tooltip="The global scale of the object to be spawned" />
-        <ui:Button text="Reset" name="reset-spawn-property-btn" tooltip="Reset the property for spawning the object" style="height: 21px;" />
+        <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane (t/T)" />
+        <uie:IntegerField label="Y Rotation" value="0" name="spawn-y-rotation" tooltip="The degree of the y rotation of the object to be spawned (r/R)" />
+        <uie:Vector3Field label="Global Scale" name="spawn-global-scale" x="1" y="1" z="1" tooltip="The global scale of the object to be spawned (x/y/z/X/Y/Z)" />
+        <ui:Button text="Reset" name="reset-spawn-property-btn" tooltip="Reset the property for spawning the object (e/E)" style="height: 21px;" />
         <ui:Foldout text="Snap settings" name="snap-settings-container" view-data-key="snap-settings">
             <uie:IntegerField label="Position snap" value="42" name="position-snap" tooltip="Snap value for the spawning position which is in [0, Inf]" />
             <uie:IntegerField label="Rotation snap" value="42" name="rotation-snap" tooltip="Snap value for the rotation which is in [0, 360]" />
