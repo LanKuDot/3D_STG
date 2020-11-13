@@ -390,8 +390,8 @@ namespace LevelDesigner.Editor
                 case KeyCode.Escape:
                     e.Use();
                     return true;
-                // Turn on/off the editing mode
-                case KeyCode.Tab:
+                // Toggle the editing mode
+                case KeyCode.Q:
                     e.Use();
                     _inEditingMode = !_inEditingMode;
                     break;
