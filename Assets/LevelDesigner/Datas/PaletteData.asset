@@ -20,14 +20,20 @@ MonoBehaviour:
     - data:
       - prefab: {fileID: 2383850051565470559, guid: 6efb0a7db3b2e744898713f92b03f738,
           type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
       - prefab: {fileID: 6453282471467297496, guid: 27230da4330a1b4438302148e9980c20,
           type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
       - prefab: {fileID: 3774977999330143361, guid: c578b9cd282f1174bb725f4e9a97979e,
           type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
     - data:
       - prefab: {fileID: 4596909120183369758, guid: 3f02d2d61cf682141a0b03db5dcb59ac,
           type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
       - prefab: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
           type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
       - prefab: {fileID: 2508005783301189008, guid: f864d8296951b6642a8b03a0a70277a1,
           type: 3}
+        unitScaleSize: {x: 10, y: 1, z: 10}
