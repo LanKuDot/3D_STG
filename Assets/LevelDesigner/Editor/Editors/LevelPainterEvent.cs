@@ -65,23 +65,27 @@ namespace LevelDesigner.Editor
         /// </param>
         private static void HandleEvent(LevelPainter painter, Vector3 position)
         {
+            var spawnConfig = painter.spawnConfig;
+            var matrix = Matrix4x4.TRS(
+                position, Quaternion.Euler(0, spawnConfig.yRotation, 0),
+                Vector3.Scale(spawnConfig.globalScale, spawnConfig.unitScaleSize));
+
             // Make a 3D button following the cursor
             // If it's clicked, spawn a object at the specified position
             using (new Handles.DrawingScope(
-                SettingsManager.GetDisplaySettings().positionPreviewColor)) {
+                SettingsManager.GetDisplaySettings().positionPreviewColor, matrix)) {
                 if (Handles.Button(
-                    position, Quaternion.identity, 1, 1.5f, Handles.CubeHandleCap)) {
+                    Vector3.zero, Quaternion.identity, 1, -1, Handles.CubeHandleCap)) {
                     painter.SpawnGameObject(position);
                 }
             }
 
             // Drawing the object looking direction
             var size = HandleUtility.GetHandleSize(position) / 1.5f;
-
             using (new Handles.DrawingScope(
                 SettingsManager.GetDisplaySettings().directionColor)) {
                 Handles.ArrowHandleCap(
-                    0, position, Quaternion.Euler(0, painter.spawnConfig.yRotation, 0),
+                    0, position, Quaternion.Euler(0, spawnConfig.yRotation, 0),
                     size, EventType.Repaint);
             }
         }

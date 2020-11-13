@@ -68,5 +68,6 @@ namespace LevelDesigner.Editor
     internal class PaletteItem
     {
         public GameObject prefab = null;
+        public Vector3 unitScaleSize = Vector3.one;
     }
 }

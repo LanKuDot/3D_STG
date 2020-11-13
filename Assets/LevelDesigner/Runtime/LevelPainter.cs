@@ -19,6 +19,7 @@ namespace LevelDesigner.Runtime
             public int yPosition;
             public int yRotation;
             public Vector3 globalScale = Vector3.one;
+            public Vector3 unitScaleSize = Vector3.one;
         }
 
         private SpawnConfig _spawnConfig = new SpawnConfig();

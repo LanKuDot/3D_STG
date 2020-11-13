@@ -263,6 +263,7 @@ namespace LevelDesigner.Editor
             _spawnConfigInfo.prefabNameLabel.text = newItem.prefab.name;
 
             _painter.spawnConfig.prefab = newItem.prefab;
+            _painter.spawnConfig.unitScaleSize = newItem.unitScaleSize;
 
             // Select the painter when the palette item changed
             Selection.activeGameObject = _painter.gameObject;
