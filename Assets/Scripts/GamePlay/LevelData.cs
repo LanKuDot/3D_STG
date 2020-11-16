@@ -14,7 +14,8 @@ namespace GamePlay
         private int _defaultLevelID = 0;
         [SerializeField]
         private Level[] _levels = { new Level() };
-        private const string _levelSceneDir = "Assets/Scenes/Levels";
+        public const string levelSceneDirPath = "Assets/Scenes/Levels";
+        public const string gamePlayScenePath = "Assets/Scenes/GamePlay.unity";
 
         public int defaultLevelID => _defaultLevelID;
         public int Length => _levels.Length;
@@ -54,7 +55,7 @@ namespace GamePlay
             for (foundID = 0; foundID < loadedSceneCount; ++foundID) {
                 var scene = SceneManager.GetSceneAt(foundID);
 
-                if (!scene.isLoaded || !scene.path.Contains(_levelSceneDir))
+                if (!scene.isLoaded || !scene.path.Contains(levelSceneDirPath))
                     continue;
 
                 loadedLevelScenePath = scene.path;

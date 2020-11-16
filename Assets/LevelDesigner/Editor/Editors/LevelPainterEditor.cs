@@ -10,7 +10,7 @@ namespace LevelDesigner.Editor
         /// Create a level painter with a sector to the scene
         /// </summary>
         [MenuItem("GameObject/LevelDesigner/LevelPainter", false, 10)]
-        private static void CreateLevelDesigner(MenuCommand menuCommand)
+        public static void CreateLevelDesigner(MenuCommand menuCommand)
         {
             var newObj = new GameObject("Level Painter", typeof(LevelPainter));
             var newSector = new GameObject("Sector 1", typeof(Sector));
