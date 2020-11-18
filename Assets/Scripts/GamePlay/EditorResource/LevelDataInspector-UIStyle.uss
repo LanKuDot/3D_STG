@@ -1,0 +1,27 @@
+.label {
+    padding-left: 1px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    -unity-font-style: bold;
+}
+
+.unity-list-view__item {
+    background-color: rgba(164, 164, 164, 255);
+}
+
+.unity-list-view__item:hover {
+    background-color: rgba(180, 180, 180, 255);
+}
+
+.unity-list-view__item--selected {
+    background-color: rgba(111, 180, 238, 255);
+}
+
+.unity-list-view__item--selected:hover {
+    background-color: rgb(141, 202, 255);
+}

@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Button text="Add current level to data" name="add-current-level-button" tooltip="Add current level to the level data">
+        <Style src="LevelDataInspector-UIStyle.uss" />
+    </ui:Button>
+    <ui:Button text="Update player respawn point" name="update-spawn-point-button" tooltip="Update the player spawn point of current level to the level data">
+        <Style src="LevelDataInspector-UIStyle.uss" />
+    </ui:Button>
+    <ui:VisualElement name="seperator" style="height: 5px;">
+        <Style src="LevelDataInspector-UIStyle.uss" />
+    </ui:VisualElement>
+    <uie:IntegerField label="Default Level ID" value="42" name="default-level-id-field" tooltip="The first level to be loaded when no level opened" binding-path="_defaultLevelID">
+        <Style src="LevelDataInspector-UIStyle.uss" />
+    </uie:IntegerField>
+    <ui:VisualElement name="level-data-container" view-data-key="level-data-container" style="background-color: rgb(173, 171, 171); margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; padding-left: 1px; padding-right: 2px; padding-top: 2px;">
+        <Style src="LevelDataInspector-UIStyle.uss" />
+        <ui:VisualElement name="level-data-title-container" style="flex-direction: row; align-items: center;">
+            <ui:Label text="Levels" name="level-data-title" class="label" style="flex-grow: 1; color: rgb(0, 0, 0);" />
+            <ui:Button text="+" name="add-level-button" style="-unity-font-style: bold;" />
+            <ui:Button text="-" name="delete-level-button" style="-unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:ListView focusable="True" name="level-data-list-view" view-data-key="level-data-list-view" item-height="110" binding-path="_levels" style="height: 300px; margin-left: 3px; margin-right: 0; margin-top: 1px; margin-bottom: 1px;" />
+    </ui:VisualElement>
+</ui:UXML>

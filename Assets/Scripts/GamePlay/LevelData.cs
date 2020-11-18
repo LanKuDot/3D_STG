@@ -42,6 +42,17 @@ namespace GamePlay
         }
 
         /// <summary>
+        /// Get the name of the specified level scene
+        /// </summary>
+        /// <param name="levelID">The ID of the level scene</param>
+        /// <returns>The name of the level scene</returns>
+        public string GetLevelSceneName(int levelID)
+        {
+            var pathSegments = GetLevelScenePath(levelID).Split('/');
+            return pathSegments[pathSegments.Length - 1];
+        }
+
+        /// <summary>
         /// Get the ID of the currently loaded level scene
         /// </summary>
         /// <returns>The ID of the loaded level scene</returns>
