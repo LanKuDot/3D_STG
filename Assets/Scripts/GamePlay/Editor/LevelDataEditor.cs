@@ -85,6 +85,9 @@ namespace GamePlay.Editor
             return _root;
         }
 
+        /// <summary>
+        /// Set up the callback function for the button
+        /// </summary>
         private void SetupButton()
         {
             var addItemBtn = _root.Q<Button>("add-level-button");
@@ -118,10 +121,11 @@ namespace GamePlay.Editor
 
             var moveItemUpBtn = element.Q<Button>("move-item-up-button");
             var moveItemDownBtn = element.Q<Button>("move-item-down-button");
-            void MoveItemAction() => MoveItem(element);
+            void MoveItemUp() => MoveLevelItem(element, true);
+            void MoveItemDown() => MoveLevelItem(element, false);
 
-            moveItemUpBtn.clicked += MoveItemAction;
-            moveItemDownBtn.clicked += MoveItemAction;
+            moveItemUpBtn.clicked += MoveItemUp;
+            moveItemDownBtn.clicked += MoveItemDown;
 
             return element;
         }
@@ -166,8 +170,7 @@ namespace GamePlay.Editor
             _levelsProperty.InsertArrayElementAtIndex(selectedID);
             serializedObject.ApplyModifiedProperties();
 
-            _listView.selectedIndex = selectedID + 1;
-            _listView.ScrollToItem(selectedID + 1);
+            SelectLevelItem(selectedID + 1);
         }
 
         /// <summary>
@@ -185,13 +188,33 @@ namespace GamePlay.Editor
 
             // Avoid out of index exception when set new selection item
             _listView.Refresh();
-            _listView.selectedIndex = selectedID - 1;
-            _listView.ScrollToItem(selectedID - 1);
+            SelectLevelItem(selectedID - 1);
         }
 
-        private void MoveItem(VisualElement targetItem)
+        /// <summary>
+        /// Move level item up or down
+        /// </summary>
+        /// <param name="element">The visual element which receive the event</param>
+        /// <param name="moveUp">To move the item up?</param>
+        private void MoveLevelItem(VisualElement element, bool moveUp)
         {
-            Debug.Log((int) targetItem.userData);
+            var itemID = (int) element.userData;
+            var targetID = itemID + (moveUp ? -1 : 1);
+
+            _levelsProperty.MoveArrayElement(itemID, targetID);
+            serializedObject.ApplyModifiedProperties();
+
+            SelectLevelItem(targetID);
+        }
+
+        /// <summary>
+        /// Make the list view select the target level item
+        /// </summary>
+        /// <param name="index">The index of the target level item</param>
+        private void SelectLevelItem(int index)
+        {
+            _listView.selectedIndex = index;
+            _listView.ScrollToItem(index);
         }
 
         #region New Level Creation
