@@ -11,15 +11,15 @@
 }
 
 .unity-list-view__item {
-    background-color: rgba(164, 164, 164, 255);
+    background-color: rgb(164, 164, 164);
 }
 
 .unity-list-view__item:hover {
-    background-color: rgba(180, 180, 180, 255);
+    background-color: rgb(180, 180, 180);
 }
 
 .unity-list-view__item--selected {
-    background-color: rgba(111, 180, 238, 255);
+    background-color: rgb(111, 180, 238);
 }
 
 .unity-list-view__item--selected:hover {
