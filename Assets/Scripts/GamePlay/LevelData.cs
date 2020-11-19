@@ -122,36 +122,33 @@ namespace GamePlay
 #if UNITY_EDITOR
 
         /// <summary>
-        /// Update the specified level item. The spawn point of the player will
-        /// be updated in the function.
+        /// Change the level scene of the specified level data
         /// </summary>
         /// <param name="levelID">The ID of the level in the data</param>
-        /// <param name="levelScene">The level scene to be updated to</param>
-        public void UpdateLevelItem(int levelID, AssetReference levelScene)
+        /// <param name="levelScene">The new level scene</param>
+        public void ChangeLevelScene(int levelID, AssetReference levelScene)
         {
             if (levelID >= _levels.Length) {
                 Debug.LogError("The specified level ID is out of range");
                 return;
             }
 
-            var targetItem = _levels[levelID];
-            var playerTransform = GetPlayerTransform();
-
-            targetItem.levelScene = levelScene;
-            targetItem.playerSpawnPoint =
-                playerTransform == null ? Vector3.zero : playerTransform.position;
+            _levels[levelID].levelScene = levelScene;
         }
 
         /// <summary>
-        /// Get the transform of the player
+        /// Change the player spawn point of the specified level data
         /// </summary>
-        /// <returns>
-        /// The transform of the player. If it cannot find one, return null.
-        /// </returns>
-        private static Transform GetPlayerTransform()
+        /// <param name="levelID">The ID of the level in the data</param>
+        /// <param name="playerSpawnPoint">The new player spawn point</param>
+        public void ChangePlayerSpawnPoint(int levelID, Vector3 playerSpawnPoint)
         {
-            var player = FindObjectOfType<Player>();
-            return player == null ? null : player.transform;
+            if (levelID >= _levels.Length) {
+                Debug.LogError("The specified level ID is out of range");
+                return;
+            }
+
+            _levels[levelID].playerSpawnPoint = playerSpawnPoint;
         }
 
 #endif

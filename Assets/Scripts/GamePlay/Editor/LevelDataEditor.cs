@@ -91,10 +91,12 @@ namespace GamePlay.Editor
         private void SetupButton()
         {
             var addCurrentLevelBtn = _root.Q<Button>("add-current-level-button");
+            var updateSpawnPointBtn = _root.Q<Button>("update-spawn-point-button");
             var addItemBtn = _root.Q<Button>("add-level-button");
             var deleteItemBtn = _root.Q<Button>("delete-level-button");
 
             addCurrentLevelBtn.clicked += AddCurrentLevel;
+            updateSpawnPointBtn.clicked += UpdatePlayerSpawnPoint;
             addItemBtn.clicked += AddLevelItem;
             deleteItemBtn.clicked += DeleteLevelItem;
         }
@@ -162,6 +164,18 @@ namespace GamePlay.Editor
         #region Level Item Management
 
         /// <summary>
+        /// Get the transform of the player in the scene
+        /// </summary>
+        /// <returns>
+        /// The transform of the player. If there has no player, return null;
+        /// </returns>
+        private static Transform GetPlayerTransform()
+        {
+            var player = FindObjectOfType<Player>();
+            return player == null ? null : player.transform;
+        }
+
+        /// <summary>
         /// Add the current opened level to the end of data
         /// </summary>
         private void AddCurrentLevel()
@@ -174,13 +188,38 @@ namespace GamePlay.Editor
             var guid = AssetDatabase.AssetPathToGUID(loadedScenePath);
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             var assetReference = settings.CreateAssetReference(guid);
+            var playerTransform = GetPlayerTransform();
+            var respawnPosition =
+                playerTransform == null ? Vector3.zero : playerTransform.position;
 
             // Unselect the item to make it added at the end of data
             _listView.selectedIndex = -1;
             AddLevelItem();
 
-            _levelData.UpdateLevelItem(_listView.selectedIndex, assetReference);
+            var levelID = _listView.selectedIndex;
+            _levelData.ChangeLevelScene(levelID, assetReference);
+            _levelData.ChangePlayerSpawnPoint(levelID, respawnPosition);
             serializedObject.ApplyModifiedProperties();
+        }
+
+        /// <summary>
+        /// Update the player spawn point to the opened level
+        /// </summary>
+        private void UpdatePlayerSpawnPoint()
+        {
+            var levelID = _levelData.GetLoadedLevelID();
+
+            if (levelID == -1)
+                return;
+
+            var playerTransform = GetPlayerTransform();
+            var respawnPosition =
+                playerTransform == null ? Vector3.zero : playerTransform.position;
+
+            _levelData.ChangePlayerSpawnPoint(levelID, respawnPosition);
+            serializedObject.ApplyModifiedProperties();
+
+            SelectLevelItem(levelID);
         }
 
         /// <summary>
