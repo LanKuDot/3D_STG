@@ -118,6 +118,43 @@ namespace GamePlay
         {
             return _levels[levelID].playerSpawnPoint;
         }
+
+#if UNITY_EDITOR
+
+        /// <summary>
+        /// Update the specified level item. The spawn point of the player will
+        /// be updated in the function.
+        /// </summary>
+        /// <param name="levelID">The ID of the level in the data</param>
+        /// <param name="levelScene">The level scene to be updated to</param>
+        public void UpdateLevelItem(int levelID, AssetReference levelScene)
+        {
+            if (levelID >= _levels.Length) {
+                Debug.LogError("The specified level ID is out of range");
+                return;
+            }
+
+            var targetItem = _levels[levelID];
+            var playerTransform = GetPlayerTransform();
+
+            targetItem.levelScene = levelScene;
+            targetItem.playerSpawnPoint =
+                playerTransform == null ? Vector3.zero : playerTransform.position;
+        }
+
+        /// <summary>
+        /// Get the transform of the player
+        /// </summary>
+        /// <returns>
+        /// The transform of the player. If it cannot find one, return null.
+        /// </returns>
+        private static Transform GetPlayerTransform()
+        {
+            var player = FindObjectOfType<Player>();
+            return player == null ? null : player.transform;
+        }
+
+#endif
     }
 
     [Serializable]

@@ -90,9 +90,11 @@ namespace GamePlay.Editor
         /// </summary>
         private void SetupButton()
         {
+            var addCurrentLevelBtn = _root.Q<Button>("add-current-level-button");
             var addItemBtn = _root.Q<Button>("add-level-button");
             var deleteItemBtn = _root.Q<Button>("delete-level-button");
 
+            addCurrentLevelBtn.clicked += AddCurrentLevel;
             addItemBtn.clicked += AddLevelItem;
             deleteItemBtn.clicked += DeleteLevelItem;
         }
@@ -157,6 +159,30 @@ namespace GamePlay.Editor
 
         #endregion
 
+        #region Level Item Management
+
+        /// <summary>
+        /// Add the current opened level to the end of data
+        /// </summary>
+        private void AddCurrentLevel()
+        {
+            var loadedScenePath = LevelData.GetLoadedLevelScenePath();
+
+            if (string.IsNullOrEmpty(loadedScenePath))
+                return;
+
+            var guid = AssetDatabase.AssetPathToGUID(loadedScenePath);
+            var settings = AddressableAssetSettingsDefaultObject.Settings;
+            var assetReference = settings.CreateAssetReference(guid);
+
+            // Unselect the item to make it added at the end of data
+            _listView.selectedIndex = -1;
+            AddLevelItem();
+
+            _levelData.UpdateLevelItem(_listView.selectedIndex, assetReference);
+            serializedObject.ApplyModifiedProperties();
+        }
+
         /// <summary>
         /// Add new level item to data
         /// </summary>
@@ -216,6 +242,8 @@ namespace GamePlay.Editor
             _listView.selectedIndex = index;
             _listView.ScrollToItem(index);
         }
+
+        #endregion
 
         #region New Level Creation
 
