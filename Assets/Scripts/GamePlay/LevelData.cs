@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace GamePlay
         private int _defaultLevelID = 0;
         [SerializeField]
         private Level[] _levels = { new Level() };
+
         public const string levelSceneDirPath = "Assets/Scenes/Levels";
         public const string gamePlayScenePath = "Assets/Scenes/GamePlay.unity";
 
@@ -53,18 +55,19 @@ namespace GamePlay
         }
 
         /// <summary>
-        /// Get the ID of the currently loaded level scene
+        /// Get the asset path of the loaded level scene
         /// </summary>
-        /// <returns>The ID of the loaded level scene</returns>
-        public int GetLoadedLevelID()
+        /// <returns>
+        /// The loaded level scene path. If there has no level scene loaded,
+        /// return an empty string.
+        /// </returns>
+        public static string GetLoadedLevelScenePath()
         {
-            var loadedSceneCount = SceneManager.sceneCount;
+            var loadedSceneCount = EditorSceneManager.loadedSceneCount;
             var loadedLevelScenePath = "";
-            var foundID = 0;
 
-            // Search for the level scene in the loaded scenes
-            for (foundID = 0; foundID < loadedSceneCount; ++foundID) {
-                var scene = SceneManager.GetSceneAt(foundID);
+            for (var i = 0; i < loadedSceneCount; ++i) {
+                var scene = SceneManager.GetSceneAt(i);
 
                 if (!scene.isLoaded || !scene.path.Contains(levelSceneDirPath))
                     continue;
@@ -73,11 +76,26 @@ namespace GamePlay
                 break;
             }
 
+            return loadedLevelScenePath;
+        }
+
+        /// <summary>
+        /// Get the ID of the currently loaded level scene
+        /// </summary>
+        /// <returns>
+        /// The ID of the loaded level scene. If there has no level loaded or
+        /// the loaded level is not registered in the level data, return -1.
+        /// </returns>
+        public int GetLoadedLevelID()
+        {
+            var loadedLevelScenePath = GetLoadedLevelScenePath();
+
             // No level scene loaded
-            if (foundID == loadedSceneCount)
+            if (string.IsNullOrEmpty(loadedLevelScenePath))
                 return -1;
 
             // Search for the level scene in the level data
+            var foundID = 0;
             var levelCount = _levels.Length;
 
             for (foundID = 0; foundID < levelCount; ++foundID) {
@@ -90,7 +108,7 @@ namespace GamePlay
             // The loaded level is not in the level data
             if (foundID == levelCount) {
                 Debug.LogError("The loaded level is not in the level data");
-                return -2;
+                return -1;
             }
 
             return foundID;
