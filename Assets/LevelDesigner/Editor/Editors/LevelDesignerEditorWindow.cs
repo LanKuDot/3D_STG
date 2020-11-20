@@ -74,10 +74,14 @@ namespace LevelDesigner.Editor
         private void OnEnable()
         {
             _painter = FindObjectOfType<LevelPainter>();
-            _palette = PaletteData.GetData();
 
-            CreateUI();
-            SceneView.duringSceneGui += OnSceneGUI;
+            if (_painter == null)
+                CreateInactivateUI();
+            else {
+                _palette = PaletteData.GetData();
+                CreateUI();
+                SceneView.duringSceneGui += OnSceneGUI;
+            }
         }
 
         private void OnDisable()
@@ -85,7 +89,34 @@ namespace LevelDesigner.Editor
             SceneView.duringSceneGui -= OnSceneGUI;
         }
 
+        private void OnFocus()
+        {
+            if (_painter != null)
+                return;
+
+            // Try to create UI again, when the window is focused
+            OnEnable();
+        }
+
         #region UI Creation
+
+        /// <summary>
+        /// Display the message when there is no painter object in the scene
+        /// </summary>
+        private void CreateInactivateUI()
+        {
+            var label = new Label("No LevelPainter object in the level scene");
+            var container = new VisualElement();
+            var style = container.style;
+
+            style.flexGrow = 1;
+            style.alignItems = Align.Center;
+            style.justifyContent = Justify.Center;
+
+            container.Add(label);
+            rootVisualElement.Clear();
+            rootVisualElement.Add(container);
+        }
 
         /// <summary>
         /// Create the UI from the uxml
@@ -95,6 +126,8 @@ namespace LevelDesigner.Editor
             var root = rootVisualElement;
             var visualTree =
                 AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(_mainUIPath);
+
+            root.Clear();
             visualTree.CloneTree(root);
 
             // Store the reference of the frequently used elements
@@ -161,7 +194,8 @@ namespace LevelDesigner.Editor
                 itemElement.tooltip = prefab.name;
 
                 // If there is no prefab set in the painter object,
-                // set to the first palette item. Or set the previous selected item
+                // set to the first palette item.
+                // Otherwise, set to the previous selected item.
                 if (_painter.spawnConfig.prefab == null ||
                     _painter.spawnConfig.prefab == prefab) {
                     ChangePaletteItem(
