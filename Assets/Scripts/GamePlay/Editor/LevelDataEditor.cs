@@ -26,7 +26,7 @@ namespace GamePlay.Editor
             var levelID = int.Parse(label.text.Split(' ')[1]);
             var levelData = property.serializedObject.targetObject as LevelData;
             var levelTitleText = levelID >= levelData.Length ?
-                label.text : $"{levelID + 1}: {levelData.GetLevelSceneName(levelID)}";
+                label.text : $"{levelID}: {levelData.GetLevelSceneName(levelID)}";
 
             // Title
             position.height = 21;
