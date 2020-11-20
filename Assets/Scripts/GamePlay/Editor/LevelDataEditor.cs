@@ -57,12 +57,23 @@ namespace GamePlay.Editor
             _uiResourcePath + "/LevelDataInspector-Main.uxml";
         private const string _levelItemUIPath =
             _uiResourcePath + "/LevelDataInspector-LevelItem.uxml";
+        private const string _levelDataAssetPath =
+            "Assets/Datas/GamePlay/LevelData.asset";
 
         private VisualElement _root;
         private ListView _listView;
 
         private LevelData _levelData;
         private SerializedProperty _levelsProperty;
+
+        [MenuItem("Window/Level Designer/Level Data", false, 1)]
+        public static void SelectLevelData(MenuCommand menuCommand)
+        {
+            var targetData =
+                AssetDatabase.LoadAssetAtPath<LevelData>(_levelDataAssetPath);
+            Selection.activeObject = targetData;
+            EditorGUIUtility.PingObject(targetData);
+        }
 
         private void OnEnable()
         {
