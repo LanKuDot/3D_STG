@@ -38,7 +38,7 @@ namespace GamePlay.Editor
 
             // Avoid the disc line being eaten by the background plane
             if (HandleUtilityExtension.IsMouseClosing(
-                    Event.current.mousePosition, enemyPosition, 120.0f))
+                Event.current.mousePosition, enemyPosition, 120.0f))
                 using (new Handles.DrawingScope(_discHandleColor)) {
                     Handles.DrawSolidDisc(
                         enemyPosition, Vector3.up, handleSize + 0.2f);
