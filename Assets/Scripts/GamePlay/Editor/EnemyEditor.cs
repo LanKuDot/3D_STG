@@ -7,8 +7,11 @@ namespace GamePlay.Editor
     {
         protected static void DrawEnemyData(Vector3 position, EnemyData enemyData)
         {
+            var labelStyle = new GUIStyle {
+                normal = {textColor = Color.black}
+            };
             Handles.Label(
-                position, $"{enemyData.name}\nHP: {enemyData.hp}", EditorStyles.label);
+                position, $"{enemyData.name}\nHP: {enemyData.hp}", labelStyle);
         }
     }
 }
