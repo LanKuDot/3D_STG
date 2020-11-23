@@ -20,7 +20,8 @@ namespace GamePlay
         protected void OnEnable()
         {
             _hp = _data.hp;
-            StartCoroutine(FireControl());
+            if (_data.firingScript.actions.Length != 0)
+                StartCoroutine(FireControl());
         }
 
         // This event will be invoked only when it's hit by the player's bullet.
