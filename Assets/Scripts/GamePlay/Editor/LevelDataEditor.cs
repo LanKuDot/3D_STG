@@ -12,6 +12,10 @@ namespace GamePlay.Editor
     [CustomPropertyDrawer(typeof(Level))]
     public class LevelPropertyDrawer : PropertyDrawer
     {
+        private readonly GUIStyle _titleFieldStyle = new GUIStyle(EditorStyles.boldLabel) {
+            normal = {textColor = Color.black}
+        };
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return EditorGUI.GetPropertyHeight(property, label, true);
@@ -28,9 +32,12 @@ namespace GamePlay.Editor
             var levelTitleText = levelID >= levelData.Length ?
                 label.text : $"{levelID}: {levelData.GetLevelSceneName(levelID)}";
 
+            var origLabelColor = EditorStyles.label.normal.textColor;
+            EditorStyles.label.normal.textColor = Color.black;
+
             // Title
             position.height = 21;
-            EditorGUI.LabelField(position, levelTitleText, EditorStyles.boldLabel);
+            EditorGUI.LabelField(position, levelTitleText, _titleFieldStyle);
 
             // Level scene field
             position.y += 23;
@@ -45,6 +52,8 @@ namespace GamePlay.Editor
             propertyHeight = EditorGUI.GetPropertyHeight(propertyToDraw);
             position.height = propertyHeight;
             EditorGUI.PropertyField(position, propertyToDraw);
+
+            EditorStyles.label.normal.textColor = origLabelColor;
         }
     }
 

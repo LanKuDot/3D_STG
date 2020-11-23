@@ -46,13 +46,17 @@ namespace LevelDesigner.Editor
             return LevelPainter.SnapPosition(ray.GetPoint(enterValue));
         }
 
+        private static readonly GUIStyle labelStyle = new GUIStyle {
+            normal = {textColor = Color.black}
+        };
+
         /// <summary>
         /// Draw a label to mark the position in the scene view
         /// </summary>
         /// <param name="position">The position in the world space</param>
         private static void DrawPositionPreview(Vector3 position)
         {
-            Handles.Label(position, $"{position}", EditorStyles.label);
+            Handles.Label(position + Vector3.down, $"{position}", labelStyle);
         }
 
         /// <summary>
