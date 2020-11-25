@@ -1,0 +1,17 @@
+{
+    "name": "Common.Editor",
+    "references": [
+        "GUID:bfd649af4bec5a4449ff0391d0defcb4"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
