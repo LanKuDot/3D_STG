@@ -1,9 +1,10 @@
 {
     "name": "LevelDesigner.Editor",
     "references": [
-        "LevelDesigner.Runtime",
-        "Unity.Settings.Editor",
-        "Common"
+        "GUID:0dd915699d6218444840009ebf572845",
+        "GUID:49818357e697641afb75d2f8acaf1861",
+        "GUID:bfd649af4bec5a4449ff0391d0defcb4",
+        "GUID:b164caec5cdd3d54e81e2939205c35ab"
     ],
     "includePlatforms": [
         "Editor"
