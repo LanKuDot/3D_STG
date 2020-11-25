@@ -44,6 +44,8 @@ namespace GamePlay
             if (!_levelCurtain.isActiveAndEnabled)
                 _levelCurtain.gameObject.SetActive(true);
 
+#if UNITY_EDITOR
+            // Check if the game level is loaded before start play mode
             curLevelID = _levelData.GetLoadedLevelID();
             if (curLevelID >= 0) {
                 _initialLoadedScenePath = _levelData.GetLevelScenePath(curLevelID);
@@ -53,6 +55,10 @@ namespace GamePlay
                 curLevelID = _levelData.defaultLevelID;
                 LoadLevel();
             }
+#else
+            curLevelID = _levelData.defaultLevelID;
+            LoadLevel();
+#endif
         }
 
         private static void GamePause()
@@ -91,7 +97,7 @@ namespace GamePlay
             _levelCurtain.CloseCurtain("LEVEL PASSED");
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         /// <summary>
         /// Change the level immediately
@@ -108,7 +114,7 @@ namespace GamePlay
             _levelCurtain.CloseCurtain("LEVEL CHANGED");
         }
 
-        #endif
+#endif
 
         /// <summary>
         /// Load the level according to <c>_curLevelID</c>,

@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -31,6 +33,8 @@ namespace GamePlay
         {
             return _levels[levelID].levelScene;
         }
+
+#if UNITY_EDITOR
 
         /// <summary>
         /// Get the asset path of the specified level scene
@@ -113,6 +117,8 @@ namespace GamePlay
 
             return foundID;
         }
+
+#endif
 
         public Vector3 GetPlayerSpawnPoint(int levelID)
         {
