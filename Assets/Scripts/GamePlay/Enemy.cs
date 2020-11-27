@@ -27,7 +27,8 @@ namespace GamePlay
         // This event will be invoked only when it's hit by the player's bullet.
         protected void OnTriggerEnter(Collider other)
         {
-            GetDamage();
+            if (other.CompareTag("Bullet"))
+                GetDamage();
         }
 
         protected new void Move(Vector3 motion)
