@@ -703,6 +703,10 @@ MonoBehaviour:
     objectToPool: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
       type: 3}
     initialNum: 8
+  - name: HitSpark
+    objectToPool: {fileID: 3394544428883243434, guid: 74aace5aa9f708b42856890ffbfce64c,
+      type: 3}
+    initialNum: 3
 --- !u!224 &1531404082 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8465925233834436832, guid: 368acab5db7a44f4cbe3c26e6b5473f5,
