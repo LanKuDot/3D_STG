@@ -10,8 +10,12 @@ namespace GamePlay.Editor
             var labelStyle = new GUIStyle {
                 normal = {textColor = Color.black}
             };
-            Handles.Label(
-                position, $"{enemyData.name}\nHP: {enemyData.hp}", labelStyle);
+
+            var labelStr =
+                enemyData != null ?
+                    $"{enemyData.name}\nHP: {enemyData.hp}" : "No data assigned";
+
+            Handles.Label(position, labelStr, labelStyle);
         }
     }
 }
