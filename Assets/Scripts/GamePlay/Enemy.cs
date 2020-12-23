@@ -3,13 +3,22 @@ using UnityEngine;
 
 namespace GamePlay
 {
+    [RequireComponent(typeof(MaterialColorFlash))]
     public class Enemy : Character
     {
         protected EnemyData _data { set; get; }
 
         [SerializeField]
+        private MaterialColorFlash _hitFlash = null;
+        [SerializeField]
         private EnemySpawnCondition _spawnCondition = null;
         private int _hp = 0;
+
+        protected new void Reset()
+        {
+            base.Reset();
+            _hitFlash = GetComponent<MaterialColorFlash>();
+        }
 
         protected void Start()
         {
@@ -66,6 +75,7 @@ namespace GamePlay
         /// </summary>
         private void GetDamage()
         {
+            _hitFlash.Flash();
             if (--_hp == 0) {
                 EnemyManager.Instance.DestroyEnemy();
                 gameObject.SetActive(false);

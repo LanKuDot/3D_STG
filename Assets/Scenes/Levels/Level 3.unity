@@ -1874,6 +1874,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1028761108}
     m_Modifications:
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: ian.m_Curve.Array.data[2].time
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: ian.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: ian.m_Curve.Array.data[2].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: ian.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: ian.m_Curve.Array.data[2].inSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: test.m_Curve.Array.data[2].inSlope
+      value: -32.834747
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: test.m_Curve.Array.data[2].outSlope
+      value: -32.834747
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: test.m_Curve.Array.data[2].inWeight
+      value: 0.06763051
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: test.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180744865651687544, guid: 193cbf18354fbf54fad75b59b7e5cd12,
+        type: 3}
+      propertyPath: test.m_Curve.Array.data[2].time
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3344773158156205981, guid: 193cbf18354fbf54fad75b59b7e5cd12,
         type: 3}
       propertyPath: m_IsActive

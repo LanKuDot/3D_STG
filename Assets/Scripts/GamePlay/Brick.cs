@@ -2,6 +2,7 @@
 
 namespace GamePlay
 {
+    [RequireComponent(typeof(MaterialColorFlash))]
     public class Brick : MonoBehaviour
     {
         public enum DestroyableTiming
@@ -10,6 +11,8 @@ namespace GamePlay
             AtStage
         }
 
+        [SerializeField]
+        private MaterialColorFlash _hitFlash = null;
         [SerializeField]
         private int _hp = 3;
         [SerializeField]
@@ -24,6 +27,11 @@ namespace GamePlay
 
         private bool _isDestroyable = false;
         private int _playerLayer;
+
+        private void Reset()
+        {
+            _hitFlash = GetComponent<MaterialColorFlash>();
+        }
 
         private void Start()
         {
@@ -57,6 +65,7 @@ namespace GamePlay
             if (!_isDestroyable || other.gameObject.layer != _playerLayer)
                 return;
 
+            _hitFlash.Flash();
             if (--_hp == 0)
                 gameObject.SetActive(false);
         }
