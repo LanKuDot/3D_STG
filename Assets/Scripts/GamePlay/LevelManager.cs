@@ -14,7 +14,8 @@ namespace GamePlay
         public static bool isGamePaused { get; private set; }
 
         /// <summary>
-        /// The event will be invoked when the level is started
+        /// The event will be invoked when the level is started<para />
+        /// The parameter is the ID of the level started
         /// </summary>
         public event Action<int> OnLevelStarted = null;
         /// <summary>
@@ -79,7 +80,7 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
-            _levelCurtain.CloseCurtain("LEVEL FAILED");
+            _levelCurtain.CloseCurtain("LEVEL FAILED", LoadLevel);
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace GamePlay
                 return;
             }
 
-            _levelCurtain.CloseCurtain("LEVEL PASSED");
+            _levelCurtain.CloseCurtain("LEVEL PASSED", LoadLevel);
         }
 
 #if UNITY_EDITOR
@@ -111,7 +112,7 @@ namespace GamePlay
             }
 
             curLevelID = levelID;
-            _levelCurtain.CloseCurtain("LEVEL CHANGED");
+            _levelCurtain.CloseCurtain("LEVEL CHANGED", LoadLevel);
         }
 
 #endif
@@ -120,7 +121,7 @@ namespace GamePlay
         /// Load the level according to <c>_curLevelID</c>,
         /// unload the previous loaded level, and reset the static manager
         /// </summary>
-        public void LoadLevel()
+        private void LoadLevel()
         {
             // If the level is loaded before the game started, unload it by SceneManager
             // Because it's not loaded by the SceneLoader
@@ -169,13 +170,13 @@ namespace GamePlay
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
             Player.Instance.ResetPlayer(_levelData.GetPlayerSpawnPoint(curLevelID));
 
-            _levelCurtain.OpenCurtain($"LEVEL {curLevelID + 1}");
+            _levelCurtain.OpenCurtain($"LEVEL {curLevelID + 1}", StartLevel);
         }
 
         /// <summary>
         /// Start the level
         /// </summary>
-        public void StartLevel()
+        private void StartLevel()
         {
             // Set the update method back to the SmartUpdate before the game resumes.
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
