@@ -16,9 +16,12 @@ namespace GamePlay
         [SerializeField]
         private int _hp = 3;
         [SerializeField]
+        [Tooltip("The timing when the brick is destroyable")]
         private DestroyableTiming _destroyableTiming = DestroyableTiming.AtStart;
         [SerializeField]
         [Min(1)]
+        [Tooltip("The stage when the brick is destroyable. " +
+                 "Used when the timing is 'AtStage'")]
         private int _stage = 1;
 
         public int hp => _hp;
