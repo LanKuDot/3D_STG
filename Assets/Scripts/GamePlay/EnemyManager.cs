@@ -8,9 +8,17 @@ namespace GamePlay
     {
         public static EnemyManager Instance { get; private set; }
 
+        /// <summary>
+        /// The event is invoked when a stage is cleared.<para />
+        /// The parameter is the ID of the cleared stage
+        /// </summary>
         public event Action<int> OnStageCleared = null;
+        /// <summary>
+        /// The event is invoked when all stages are cleared
+        /// </summary>
+        private event Action OnAllStagesCleared = null;
 
-        private List<List<EnemySpawnCondition>> _enemyStageList =
+        private readonly List<List<EnemySpawnCondition>> _enemyStageList =
             new List<List<EnemySpawnCondition>>();
         private int _curStage = 0;
         private int _numOfStage = 0;
@@ -23,9 +31,12 @@ namespace GamePlay
 
         private void Start()
         {
-            LevelManager.Instance.OnLevelEnded += ResetData;
+            OnAllStagesCleared += LevelManager.Instance.LevelPass;
         }
 
+        /// <summary>
+        /// Clear the registered data and reset the status
+        /// </summary>
         private void ResetData()
         {
             foreach (var stage in _enemyStageList)
@@ -83,7 +94,8 @@ namespace GamePlay
             ++_curStage;
 
             if (_curStage > _numOfStage) {
-                LevelManager.Instance.LevelPass();
+                ResetData();
+                OnAllStagesCleared?.Invoke();
                 return;
             }
 
@@ -95,6 +107,9 @@ namespace GamePlay
         }
     }
 
+    /// <summary>
+    /// The spawn condition of an enemy
+    /// </summary>
     [Serializable]
     public class EnemySpawnCondition
     {
@@ -104,10 +119,15 @@ namespace GamePlay
             Others
         }
 
+        /// <summary>
+        /// The gameObject of the target enemy
+        /// </summary>
         private GameObject _gameObject;
         [SerializeField]
+        [Tooltip("The stage for activating this enemy")]
         private int _spawnStage = 0;
         [SerializeField]
+        [Tooltip("Who will wake up the enemy?")]
         private WakeBy _wakeBy = WakeBy.Manager;
 
         public GameObject gameObject
