@@ -8,32 +8,32 @@ namespace GamePlay.Editor
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var cdPropty = property.FindPropertyRelative("_coolDownTime");
             var bulletsPropty = property.FindPropertyRelative("_bullets");
-            var cdProptyHeight = EditorGUI.GetPropertyHeight(cdPropty);
+            var cdPropty = property.FindPropertyRelative("_coolDownTime");
             var bulletsProptyHeight = EditorGUI.GetPropertyHeight(bulletsPropty);
+            var cdProptyHeight = EditorGUI.GetPropertyHeight(cdPropty);
 
-            return cdProptyHeight + bulletsProptyHeight + 4;
+            return bulletsProptyHeight + cdProptyHeight + 4;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var cdPropty = property.FindPropertyRelative("_coolDownTime");
             var bulletsPropty = property.FindPropertyRelative("_bullets");
-            var cdProptyHeight = EditorGUI.GetPropertyHeight(cdPropty);
+            var cdPropty = property.FindPropertyRelative("_coolDownTime");
             var bulletsProptyHeight = EditorGUI.GetPropertyHeight(bulletsPropty);
+            var cdProptyHeight = EditorGUI.GetPropertyHeight(cdPropty);
 
             var numOfBullets = bulletsPropty.arraySize;
             var bulletLabel = $"{numOfBullets} Bullet(s)";
 
             position.y += 2;
-            position.height = cdProptyHeight;
-            EditorGUI.PropertyField(position, cdPropty);
-
-            position.y += cdProptyHeight;
             position.height = bulletsProptyHeight;
             EditorGUI.PropertyField(
                 position, bulletsPropty, new GUIContent(bulletLabel), true);
+
+            position.y += bulletsProptyHeight + 2;
+            position.height = cdProptyHeight;
+            EditorGUI.PropertyField(position, cdPropty);
         }
     }
 

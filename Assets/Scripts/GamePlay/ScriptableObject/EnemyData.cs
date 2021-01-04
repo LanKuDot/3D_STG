@@ -31,13 +31,13 @@ namespace GamePlay
     [Serializable]
     public class FiringAction
     {
-        [Tooltip("The time interval for cooling down after this action")]
-        [SerializeField] private float _coolDownTime = 0.5f;
         [Tooltip("The bullets to be fired in this action")]
         [SerializeField] private FiringBullet[] _bullets = { new FiringBullet() };
+        [Tooltip("The time interval for cooling down after this action")]
+        [SerializeField] private float _coolDownTime = 0.5f;
 
-        public float coolDownTime => _coolDownTime;
         public FiringBullet[] bullets => _bullets;
+        public float coolDownTime => _coolDownTime;
     }
 
     [Serializable]
