@@ -35,7 +35,7 @@ namespace GamePlay
             towardVector = towardVector.normalized;
 
             var towardDeg =
-                Quaternion.FromToRotation(Vector3.forward, towardVector).eulerAngles.y;
+                Vector3.SignedAngle(Vector3.forward, towardVector, Vector3.up);
 
             var deltaDistance =
                 _smoothMove.MoveDelta(
