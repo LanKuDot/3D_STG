@@ -9,8 +9,10 @@ using UnityEngine.SceneManagement;
 
 namespace GamePlay
 {
-    [CreateAssetMenu(fileName = "LevelData",
-        menuName = "Scriptable Object/Level Data", order = 5)]
+    [CreateAssetMenu(
+        fileName = "LevelData",
+        menuName = "Scriptable Object/Level Data",
+        order = 5)]
     public class LevelData : ScriptableObject
     {
         [SerializeField]

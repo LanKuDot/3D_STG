@@ -2,8 +2,10 @@
 
 namespace GamePlay
 {
-    [CreateAssetMenu(fileName = "PlayerData",
-        menuName = "Scriptable Object/Player Data", order = 1)]
+    [CreateAssetMenu(
+        fileName = "PlayerData",
+        menuName = "Scriptable Object/Player Data",
+        order = 1)]
     public class PlayerData : ScriptableObject
     {
         public int hp = 3;

@@ -5,11 +5,11 @@ namespace GamePlay
 {
     public class EnemyData : ScriptableObject
     {
+        [SerializeField]
         [Tooltip("The HP of the enemy")]
-        [SerializeField]
         private int _hp = 3;
-        [Tooltip("The firing loop")]
         [SerializeField]
+        [Tooltip("The firing loop")]
         private FiringScript _firingScript = null;
 
         public int hp => _hp;
@@ -19,10 +19,12 @@ namespace GamePlay
     [Serializable]
     public class FiringScript
     {
+        [SerializeField]
         [Tooltip("The initial delay for starting the first action")]
-        [SerializeField] private float _initialDelay = 0.1f;
+        private float _initialDelay = 0.1f;
+        [SerializeField]
         [Tooltip("The actions in the firing loop")]
-        [SerializeField] private FiringAction[] _actions = { new FiringAction() };
+        private FiringAction[] _actions = { new FiringAction() };
 
         public float initialDelay => _initialDelay;
         public FiringAction[] actions => _actions;
@@ -31,10 +33,12 @@ namespace GamePlay
     [Serializable]
     public class FiringAction
     {
+        [SerializeField]
         [Tooltip("The bullets to be fired in this action")]
-        [SerializeField] private FiringBullet[] _bullets = { new FiringBullet() };
+        private FiringBullet[] _bullets = { new FiringBullet() };
+        [SerializeField]
         [Tooltip("The time interval for cooling down after this action")]
-        [SerializeField] private float _coolDownTime = 0.5f;
+        private float _coolDownTime = 0.5f;
 
         public FiringBullet[] bullets => _bullets;
         public float coolDownTime => _coolDownTime;
@@ -43,10 +47,12 @@ namespace GamePlay
     [Serializable]
     public class FiringBullet
     {
+        [SerializeField]
         [Tooltip("The prefab of the bullet to be shot")]
-        [SerializeField] private GameObject _prefab = null;
+        private GameObject _prefab = null;
+        [SerializeField]
         [Tooltip("The shooting direction relative to the forward direction of the enemy")]
-        [SerializeField] private float _degree = 0.0f;
+        private float _degree = 0.0f;
 
         public GameObject prefab => _prefab;
         public float degree => _degree;

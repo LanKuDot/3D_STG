@@ -2,8 +2,10 @@
 
 namespace GamePlay
 {
-    [CreateAssetMenu(fileName = "BulletData",
-        menuName = "Scriptable Object/Bullet Data", order = 3)]
+    [CreateAssetMenu(
+        fileName = "BulletData",
+        menuName = "Scriptable Object/Bullet Data",
+        order = 3)]
     public class BulletData : ScriptableObject
     {
         public float velocity = 20.0f;
