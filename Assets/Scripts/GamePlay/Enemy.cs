@@ -9,6 +9,7 @@ namespace GamePlay
         protected EnemyData _data { set; get; }
 
         [SerializeField]
+        [ShowOnly]
         private MaterialColorFlash _hitFlash = null;
         [SerializeField]
         private EnemySpawnCondition _spawnCondition = null;
