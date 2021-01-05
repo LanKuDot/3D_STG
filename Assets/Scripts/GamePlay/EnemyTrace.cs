@@ -7,7 +7,7 @@ namespace GamePlay
         [SerializeField]
         private new EnemyTraceData _data = null;
 
-        private GameObject _playerTarget = null;
+        private Transform _playerTarget;
         private SmoothMove _smoothMove;
 
         private void Awake()
@@ -19,7 +19,7 @@ namespace GamePlay
 
         private new void Start()
         {
-            _playerTarget = Player.Instance.gameObject;
+            _playerTarget = Player.Instance.gameObject.transform;
             base.Start();
         }
 
@@ -30,7 +30,7 @@ namespace GamePlay
 
         private void TracePlayer()
         {
-            var towardVector = _playerTarget.transform.position - transform.position;
+            var towardVector = _playerTarget.position - transform.position;
             towardVector.y = 0.0f;
             towardVector = towardVector.normalized;
 
