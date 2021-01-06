@@ -31,6 +31,7 @@ namespace GamePlay
 
         private void Start()
         {
+            LevelManager.Instance.OnLevelEnded += ResetData;
             OnAllStagesCleared += LevelManager.Instance.LevelPass;
         }
 
@@ -94,7 +95,6 @@ namespace GamePlay
             ++_curStage;
 
             if (_curStage > _numOfStage) {
-                ResetData();
                 OnAllStagesCleared?.Invoke();
                 return;
             }

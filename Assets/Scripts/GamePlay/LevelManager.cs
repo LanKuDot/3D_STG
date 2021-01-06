@@ -20,6 +20,7 @@ namespace GamePlay
         public event Action<int> OnLevelStarted = null;
         /// <summary>
         /// The event will be invoked when the level is ended
+        /// and before loading new level
         /// </summary>
         public event Action OnLevelEnded = null;
 
