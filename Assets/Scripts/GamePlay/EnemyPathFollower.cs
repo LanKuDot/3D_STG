@@ -49,6 +49,8 @@ namespace GamePlay
         {
             base.Start();
             _playerTarget = Player.Instance.gameObject.transform;
+            // Move to the start point of the path
+            transform.position = _path.path.GetPointAtTime(0);
         }
 
         private void FixedUpdate()
