@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 739aafb087a64df4c8afc815fd4024f0, type: 3}
-  m_Name: EnemyBounce_Lv1
+  m_Name: EnemyBounce_Type1
   m_EditorClassIdentifier: 
   _hp: 3
   _firingScript:
     _initialDelay: 0.1
     _actions:
-    - _coolDownTime: 0.7
-      _bullets:
+    - _bullets:
       - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
           type: 3}
         _degree: 0
@@ -30,5 +29,5 @@ MonoBehaviour:
       - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
           type: 3}
         _degree: 270
-  _initialMovingDirection: {x: 1, y: 0, z: 1}
+      _coolDownTime: 0.7
   _movingVelocity: 15
