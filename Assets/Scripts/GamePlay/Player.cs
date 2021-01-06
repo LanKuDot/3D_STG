@@ -10,6 +10,11 @@ namespace GamePlay
     {
         public static Player Instance { get; private set; }
 
+        /// <summary>
+        /// The event will be invoked when the player's HP is changed
+        /// </summary>
+        public event Action<int> OnHPChanged;
+
         private Action<Vector2> _lookAction;
 
         [SerializeField]
@@ -110,6 +115,7 @@ namespace GamePlay
         public void ResetPlayer(Vector3 respawnPoint)
         {
             _hp = _data.hp;
+            OnHPChanged?.Invoke(_hp);
             transform.position = respawnPoint;
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             if (!isActiveAndEnabled)
@@ -146,6 +152,8 @@ namespace GamePlay
                 gameObject.SetActive(false);
             } else
                 _protector.SetActive(true);
+
+            OnHPChanged?.Invoke(_hp);
         }
 
         #endregion
