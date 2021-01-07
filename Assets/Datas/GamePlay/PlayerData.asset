@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeea7ffdb33ef2a4f9a52ea321c7931d, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  hp: 3
-  movingVelocity: 10
-  movingAccelTime: 0.1
-  rotatingAccelTime: 0.1
-  bullet: {fileID: 2844552749029423552, guid: 70aa3d25aed12fb4795eb7abdbe49384, type: 3}
-  firingInterval: 0.15
+  _hp: 3
+  _movingVelocity: 10
+  _movingAccelTime: 0.1
+  _rotatingAccelTime: 0.1
+  _bullet: {fileID: 2844552749029423552, guid: 70aa3d25aed12fb4795eb7abdbe49384, type: 3}
+  _firingInterval: 0.15
