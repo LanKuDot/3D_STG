@@ -11,6 +11,8 @@ namespace GamePlay
         [SerializeField]
         private int _hp = 3;
         [SerializeField]
+        private float _noDamageInterval = 0.2f;
+        [SerializeField]
         private float _movingVelocity = 10.0f;
         [SerializeField]
         private float _movingAccelTime = 0.1f;
@@ -22,6 +24,7 @@ namespace GamePlay
         private float _firingInterval = 0.15f;
 
         public int hp => _hp;
+        public float noDamageInterval => _noDamageInterval;
         public float movingVelocity => _movingVelocity;
         public float movingAccelTime => _movingAccelTime;
         public float rotatingAccelTime => _rotatingAccelTime;

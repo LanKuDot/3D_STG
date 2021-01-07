@@ -10,8 +10,13 @@ namespace GamePlay
     {
         [SerializeField]
         private float _glowVelocity = 1.0f;
-        [SerializeField]
-        private float _lifeTime = 3.0f;
+
+        private float _lifeTime;
+
+        public void Initialize(float lifeTime)
+        {
+            _lifeTime = lifeTime;
+        }
 
         private void OnEnable()
         {
