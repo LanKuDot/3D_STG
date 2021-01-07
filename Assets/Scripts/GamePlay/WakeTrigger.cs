@@ -22,11 +22,12 @@ namespace GamePlay
             _boxCollider.isTrigger = true;
         }
 
+        /// <summary>
+        /// This event is invoked when the player body passed it
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerExit(Collider other)
         {
-            if (!other.CompareTag("Player"))
-                return;
-
             // If the player goes through its local forward direction, treat as passed.
             var towardDirection = transform.forward;
             var objectDirection = other.transform.position - transform.position;
