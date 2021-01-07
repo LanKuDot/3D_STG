@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4357c52ea81bfbe43858aadfec915efc, type: 3}
   m_Name: EnemyBullet_Undestroyable
   m_EditorClassIdentifier: 
-  nameInPool: enemyBullet_Undestroyable
   velocity: 15
   lifeTime: 3
   isDestroyable: 0
