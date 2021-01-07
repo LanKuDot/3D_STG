@@ -20,7 +20,7 @@ namespace GamePlay
         {
             LevelManager.Instance.OnLevelEnded += () =>
             {
-                if (isActiveAndEnabled)
+                if (gameObject.activeSelf)
                     ReturnToPool();
             };
         }
