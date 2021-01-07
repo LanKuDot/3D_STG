@@ -146,6 +146,10 @@ namespace GamePlay
 
         private void GetDamage()
         {
+            // If the protector is activated, get no damage
+            if (_protector.activeSelf)
+                return;
+
             if (!takeNoDamage && --_hp == 0) {
                 LevelManager.Instance.GameOver();
                 gameObject.SetActive(false);
