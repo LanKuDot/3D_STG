@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _hp: 3
+  _noDamageInterval: 0.2
   _movingVelocity: 10
   _movingAccelTime: 0.1
-  _rotatingAccelTime: 0.1
+  _rotatingAccelTime: 0.05
   _bullet: {fileID: 2844552749029423552, guid: 70aa3d25aed12fb4795eb7abdbe49384, type: 3}
   _firingInterval: 0.15
