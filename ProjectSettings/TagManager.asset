@@ -8,6 +8,7 @@ TagManager:
   - Barrier
   - Bullet
   - Trigger
+  - Protector
   layers:
   - Default
   - TransparentFX

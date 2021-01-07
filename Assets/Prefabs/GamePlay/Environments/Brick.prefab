@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3344773158156205983}
   m_Layer: 0
   m_Name: BrickProtector
-  m_TagString: Untagged
+  m_TagString: Protector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

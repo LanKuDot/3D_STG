@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3586586608175843075}
   m_Layer: 14
   m_Name: Protector
-  m_TagString: Barrier
+  m_TagString: Protector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _glowVelocity: 50
-  _lifeTime: 0.2
 --- !u!1 &7197145423157460162
 GameObject:
   m_ObjectHideFlags: 0
