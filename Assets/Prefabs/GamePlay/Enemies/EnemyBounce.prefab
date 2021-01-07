@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2383850051565470545}
   - component: {fileID: 2383850051565470558}
   - component: {fileID: 8180695065682710419}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: EnemyBounce
   m_TagString: Enemy
   m_Icon: {fileID: 0}

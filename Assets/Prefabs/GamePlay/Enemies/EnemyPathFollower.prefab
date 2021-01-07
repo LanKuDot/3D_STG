@@ -97,7 +97,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 150
       flipNormals: 1
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 4513723110314576364}
   - component: {fileID: 7940267725238158638}
   - component: {fileID: 4513723110314576355}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

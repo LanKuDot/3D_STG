@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3801073600973559226}
   - component: {fileID: 5484495380319143687}
   - component: {fileID: 3586586608175843075}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Protector
   m_TagString: Barrier
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 7197145423157460165}
   - component: {fileID: 7197145423157460166}
   - component: {fileID: 7197145423157460167}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Aim
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 3756246815543103359}
   - component: {fileID: 7197145423520398698}
   - component: {fileID: 7197145423520398701}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
