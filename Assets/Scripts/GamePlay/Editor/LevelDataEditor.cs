@@ -145,8 +145,8 @@ namespace GamePlay.Editor
 
             var moveItemUpBtn = element.Q<Button>("move-item-up-button");
             var moveItemDownBtn = element.Q<Button>("move-item-down-button");
-            void MoveItemUp() => MoveLevelItem(element, true);
-            void MoveItemDown() => MoveLevelItem(element, false);
+            void MoveItemUp() => MoveLevelItem((int)element.userData, true);
+            void MoveItemDown() => MoveLevelItem((int)element.userData, false);
 
             moveItemUpBtn.clicked += MoveItemUp;
             moveItemDownBtn.clicked += MoveItemDown;
@@ -279,11 +279,10 @@ namespace GamePlay.Editor
         /// <summary>
         /// Move level item up or down
         /// </summary>
-        /// <param name="element">The visual element which receive the event</param>
+        /// <param name="itemID">The target item ID</param>
         /// <param name="moveUp">To move the item up?</param>
-        private void MoveLevelItem(VisualElement element, bool moveUp)
+        private void MoveLevelItem(int itemID, bool moveUp)
         {
-            var itemID = (int) element.userData;
             var targetID = itemID + (moveUp ? -1 : 1);
 
             _levelsProperty.MoveArrayElement(itemID, targetID);
