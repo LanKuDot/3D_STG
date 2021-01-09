@@ -137,7 +137,8 @@ namespace GamePlay.Editor
         /// </summary>
         private void AddCurrentLevel()
         {
-            var loadedScenePath = LevelData.GetLoadedLevelScenePath();
+            var loadedScenePath =
+                LevelSceneManagement.GetLoadedLevelScenePath();
 
             if (string.IsNullOrEmpty(loadedScenePath))
                 return;
@@ -164,7 +165,7 @@ namespace GamePlay.Editor
         /// </summary>
         private void UpdatePlayerSpawnPoint()
         {
-            var levelID = _levelData.GetLoadedLevelID();
+            var levelID = LevelSceneManagement.GetLoadedLevelID(_levelData);
 
             if (levelID == -1)
                 return;

@@ -48,7 +48,7 @@ namespace GamePlay
 
 #if UNITY_EDITOR
             // Check if the game level is loaded before start play mode
-            curLevelID = _levelData.GetLoadedLevelID();
+            curLevelID = LevelSceneRuntimeHelper.GetLoadedLevelID(_levelData);
             if (curLevelID >= 0) {
                 _initialLoadedScenePath = _levelData.GetLevelScenePath(curLevelID);
                 GamePause();

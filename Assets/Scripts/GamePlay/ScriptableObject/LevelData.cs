@@ -1,11 +1,7 @@
 ﻿using System;
 using UnityEditor;
-#if UNITY_EDITOR
-using UnityEditor.SceneManagement;
-#endif
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 namespace GamePlay
 {
@@ -58,66 +54,6 @@ namespace GamePlay
         {
             var pathSegments = GetLevelScenePath(levelID).Split('/');
             return pathSegments[pathSegments.Length - 1];
-        }
-
-        /// <summary>
-        /// Get the asset path of the loaded level scene
-        /// </summary>
-        /// <returns>
-        /// The loaded level scene path. If there has no level scene loaded,
-        /// return an empty string.
-        /// </returns>
-        public static string GetLoadedLevelScenePath()
-        {
-            var loadedSceneCount = EditorSceneManager.loadedSceneCount;
-            var loadedLevelScenePath = "";
-
-            for (var i = 0; i < loadedSceneCount; ++i) {
-                var scene = SceneManager.GetSceneAt(i);
-
-                if (!scene.isLoaded || !scene.path.Contains(levelSceneDirPath))
-                    continue;
-
-                loadedLevelScenePath = scene.path;
-                break;
-            }
-
-            return loadedLevelScenePath;
-        }
-
-        /// <summary>
-        /// Get the ID of the currently loaded level scene
-        /// </summary>
-        /// <returns>
-        /// The ID of the loaded level scene. If there has no level loaded or
-        /// the loaded level is not registered in the level data, return -1.
-        /// </returns>
-        public int GetLoadedLevelID()
-        {
-            var loadedLevelScenePath = GetLoadedLevelScenePath();
-
-            // No level scene loaded
-            if (string.IsNullOrEmpty(loadedLevelScenePath))
-                return -1;
-
-            // Search for the level scene in the level data
-            var foundID = 0;
-            var levelCount = _levels.Length;
-
-            for (foundID = 0; foundID < levelCount; ++foundID) {
-                var assetPath = GetLevelScenePath(foundID);
-
-                if (loadedLevelScenePath.Equals(assetPath))
-                    break;
-            }
-
-            // The loaded level is not in the level data
-            if (foundID == levelCount) {
-                Debug.LogError("The loaded level is not in the level data");
-                return -1;
-            }
-
-            return foundID;
         }
 
 #endif

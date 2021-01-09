@@ -77,5 +77,22 @@ namespace GamePlay.Editor
             var player = FindObjectOfType<Player>();
             return player == null ? null : player.transform;
         }
+
+        /// <summary>
+        /// Get the asset path of the loaded level scene
+        /// </summary>
+        public static string GetLoadedLevelScenePath()
+        {
+            return LevelSceneRuntimeHelper.GetLoadedLevelScenePath();
+        }
+
+        /// <summary>
+        /// Get the ID of the loaded level in the level data
+        /// </summary>
+        /// <param name="levelData">The level data</param>
+        public static int GetLoadedLevelID(LevelData levelData)
+        {
+            return LevelSceneRuntimeHelper.GetLoadedLevelID(levelData);
+        }
     }
 }
