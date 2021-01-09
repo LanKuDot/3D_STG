@@ -3,6 +3,7 @@
         <Style src="LevelDataInspector-UIStyle.uss" />
         <uie:PropertyField name="level-item-field" />
         <ui:VisualElement name="move-action-buttons-container" style="flex-direction: row; justify-content: flex-end;">
+            <ui:Button text="Open" name="open-level-button" />
             <ui:Button text="↑" name="move-item-up-button" />
             <ui:Button text="↓" name="move-item-down-button" />
         </ui:VisualElement>

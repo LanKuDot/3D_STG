@@ -94,11 +94,14 @@ namespace GamePlay.Editor
 
             var moveItemUpBtn = element.Q<Button>("move-item-up-button");
             var moveItemDownBtn = element.Q<Button>("move-item-down-button");
+            var openLevelBtn = element.Q<Button>("open-level-button");
             void MoveItemUp() => MoveLevelItem((int)element.userData, true);
             void MoveItemDown() => MoveLevelItem((int)element.userData, false);
+            void OpenLevel() => OpenLevelScene((int)element.userData);
 
             moveItemUpBtn.clicked += MoveItemUp;
             moveItemDownBtn.clicked += MoveItemDown;
+            openLevelBtn.clicked += OpenLevel;
 
             return element;
         }
@@ -237,6 +240,22 @@ namespace GamePlay.Editor
         {
             _listView.selectedIndex = index;
             _listView.ScrollToItem(index);
+        }
+
+        /// <summary>
+        /// Open the selected level scene
+        /// </summary>
+        private void OpenLevelScene(int index)
+        {
+            var curLevelID = LevelSceneManagement.GetLoadedLevelID(_levelData);
+
+            if (curLevelID == index) {
+                Debug.Log("The specified level has been already opened");
+                return;
+            }
+
+            var sceneAssetPath = _levelData.GetLevelScenePath(index);
+            LevelSceneManagement.OpenLevelScene(sceneAssetPath);
         }
 
         #endregion

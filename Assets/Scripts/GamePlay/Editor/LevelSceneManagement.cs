@@ -67,6 +67,18 @@ namespace GamePlay.Editor
         }
 
         /// <summary>
+        /// Close other level scenes and load the specified level scene
+        /// </summary>
+        /// <param name="sceneAssetPath">
+        /// The asset path of target level scene
+        /// </param>
+        public static void OpenLevelScene(string sceneAssetPath)
+        {
+            UnloadAllScenesExcept(LevelData.gamePlayScenePath);
+            EditorSceneManager.OpenScene(sceneAssetPath, OpenSceneMode.Additive);
+        }
+
+        /// <summary>
         /// Get the transform of the player in the scene
         /// </summary>
         /// <returns>
