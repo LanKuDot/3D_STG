@@ -217,8 +217,8 @@ namespace GamePlay.Editor
             AddLevelItem();
 
             var levelID = _listView.selectedIndex;
-            _levelData.ChangeLevelScene(levelID, assetReference);
-            _levelData.ChangePlayerSpawnPoint(levelID, respawnPosition);
+            _levelData.ModifyLevelScene(levelID, assetReference);
+            _levelData.ModifyPlayerSpawnPoint(levelID, respawnPosition);
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -236,7 +236,7 @@ namespace GamePlay.Editor
             var respawnPosition =
                 playerTransform == null ? Vector3.zero : playerTransform.position;
 
-            _levelData.ChangePlayerSpawnPoint(levelID, respawnPosition);
+            _levelData.ModifyPlayerSpawnPoint(levelID, respawnPosition);
             serializedObject.ApplyModifiedProperties();
 
             SelectLevelItem(levelID);

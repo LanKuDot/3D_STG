@@ -130,11 +130,11 @@ namespace GamePlay
 #if UNITY_EDITOR
 
         /// <summary>
-        /// Change the level scene of the specified level data
+        /// Modify the level scene of the specified level data
         /// </summary>
         /// <param name="levelID">The ID of the level in the data</param>
         /// <param name="levelScene">The new level scene</param>
-        public void ChangeLevelScene(int levelID, AssetReference levelScene)
+        public void ModifyLevelScene(int levelID, AssetReference levelScene)
         {
             if (levelID >= _levels.Length) {
                 Debug.LogError("The specified level ID is out of range");
@@ -145,11 +145,11 @@ namespace GamePlay
         }
 
         /// <summary>
-        /// Change the player spawn point of the specified level data
+        /// Modify the player spawn point of the specified level data
         /// </summary>
         /// <param name="levelID">The ID of the level in the data</param>
         /// <param name="playerSpawnPoint">The new player spawn point</param>
-        public void ChangePlayerSpawnPoint(int levelID, Vector3 playerSpawnPoint)
+        public void ModifyPlayerSpawnPoint(int levelID, Vector3 playerSpawnPoint)
         {
             if (levelID >= _levels.Length) {
                 Debug.LogError("The specified level ID is out of range");
