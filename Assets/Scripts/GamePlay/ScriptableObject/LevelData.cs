@@ -32,6 +32,11 @@ namespace GamePlay
             return _levels[levelID].levelScene;
         }
 
+        public Vector3 GetPlayerSpawnPoint(int levelID)
+        {
+            return _levels[levelID].playerSpawnPoint;
+        }
+
 #if UNITY_EDITOR
 
         /// <summary>
@@ -55,15 +60,6 @@ namespace GamePlay
             var pathSegments = GetLevelScenePath(levelID).Split('/');
             return pathSegments[pathSegments.Length - 1];
         }
-
-#endif
-
-        public Vector3 GetPlayerSpawnPoint(int levelID)
-        {
-            return _levels[levelID].playerSpawnPoint;
-        }
-
-#if UNITY_EDITOR
 
         /// <summary>
         /// Modify the level scene of the specified level data
