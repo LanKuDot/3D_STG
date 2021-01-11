@@ -11,7 +11,14 @@ namespace GamePlay
     public class LevelManager : MonoBehaviour
     {
         public static LevelManager Instance { get; private set; }
+        /// <summary>
+        /// Is the game paused?
+        /// </summary>
         public static bool isGamePaused { get; private set; }
+        /// <summary>
+        /// Is the manager loading the level?
+        /// </summary>
+        public static bool isLoadingLevel { get; private set; }
 
         /// <summary>
         /// The event will be invoked when the level is started<para />
@@ -63,13 +70,13 @@ namespace GamePlay
 #endif
         }
 
-        private static void GamePause()
+        public static void GamePause()
         {
             Time.timeScale = 0.0f;
             isGamePaused = true;
         }
 
-        private static void GameResume()
+        public static void GameResume()
         {
             Time.timeScale = 1.0f;
             isGamePaused = false;
@@ -82,6 +89,7 @@ namespace GamePlay
         public void GameOver()
         {
             _levelCurtain.CloseCurtain("LEVEL FAILED", LoadLevel);
+            isLoadingLevel = true;
         }
 
         /// <summary>
@@ -97,6 +105,7 @@ namespace GamePlay
             }
 
             _levelCurtain.CloseCurtain("LEVEL PASSED", LoadLevel);
+            isLoadingLevel = true;
         }
 
 #if UNITY_EDITOR
@@ -114,6 +123,7 @@ namespace GamePlay
 
             curLevelID = levelID;
             _levelCurtain.CloseCurtain("LEVEL CHANGED", LoadLevel);
+            isLoadingLevel = true;
         }
 
 #endif
@@ -179,6 +189,7 @@ namespace GamePlay
         /// </summary>
         private void StartLevel()
         {
+            isLoadingLevel = false;
             // Set the update method back to the SmartUpdate before the game resumes.
             _cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
             OnLevelStarted?.Invoke(curLevelID);
