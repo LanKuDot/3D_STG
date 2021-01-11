@@ -66,7 +66,8 @@ namespace GamePlay
 
         private void LookAtPointer(Vector2 pointerPos)
         {
-            _lookingDeg = -Vector2.SignedAngle(Vector2.up, pointerPos - _cameraCenterPos);
+            _lookingDeg = -Vector2.SignedAngle(
+                Vector2.up, pointerPos - _cameraCenterPos);
         }
 
         private void LookByStick(Vector2 direction)
