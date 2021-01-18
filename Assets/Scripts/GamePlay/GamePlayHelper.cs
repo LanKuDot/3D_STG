@@ -9,7 +9,7 @@ namespace GamePlay
     [ExecuteInEditMode]
     public class GamePlayHelper : MonoBehaviour
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         [SerializeField]
         private bool _activateAtStart = true;
@@ -45,13 +45,16 @@ namespace GamePlay
 
         private void OnGUI()
         {
-            if (_isHelperActivated)
-                DrawHelperUI();
+            if (!_isHelperActivated)
+                return;
+
+            DrawHelperUI(new Rect(10, 10, 200, 140));
+            DrawGamePlayInformation(new Rect(10, 145, 300, 110));
         }
 
-        private void DrawHelperUI()
+        private void DrawHelperUI(Rect area)
         {
-            GUILayout.BeginArea(new Rect(10, 10, 200, 200));
+            GUILayout.BeginArea(area);
             GUILayout.BeginVertical("Gameplay Helper", "box");
 
             GUILayout.Label("");
@@ -83,6 +86,24 @@ namespace GamePlay
             GUILayout.EndArea();
         }
 
-        #endif
+        /// <summary>
+        /// Show the gameplay information
+        /// </summary>
+        /// <param name="area"></param>
+        private void DrawGamePlayInformation(Rect area)
+        {
+            GUILayout.BeginArea(area);
+            GUILayout.BeginVertical("Information", "box");
+
+            GUILayout.Label("");
+            GUILayout.Label("Player");
+            GUILayout.Label($"Direction: {Player.Instance.movingDirection}");
+            GUILayout.Label($"Degree: {Player.Instance.lookingDeg}");
+
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+        }
+
+#endif
     }
 }

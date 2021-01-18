@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace GamePlay
 {
@@ -30,6 +34,12 @@ namespace GamePlay
         private Coroutine _lastFiringCoroutine;
 
         public bool takeNoDamage { set; get; } = false;
+
+#if UNITY_EDITOR
+        // The properties to be exposed for debugging
+        public Vector2 movingDirection => _movingDirection;
+        public float lookingDeg => _lookingDeg;
+#endif
 
         private void Awake()
         {
