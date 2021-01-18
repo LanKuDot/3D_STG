@@ -8,8 +8,15 @@ namespace GamePlay
         order = 3)]
     public class BulletData : ScriptableObject
     {
-        public float velocity = 20.0f;
-        public float lifeTime = 3.0f;
-        public bool isDestroyable = true;
+        [SerializeField]
+        private float _velocity = 20.0f;
+        [SerializeField]
+        private float _lifeTime = 3.0f;
+        [SerializeField]
+        private bool _isDestroyable = true;
+
+        public float velocity => _velocity;
+        public float lifeTime => _lifeTime;
+        public bool isDestroyable => _isDestroyable;
     }
 }
