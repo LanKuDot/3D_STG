@@ -76,7 +76,7 @@ namespace LevelDesigner.Editor
             return color;
         }
 
-        [MenuItem("Window/Level Designer/Settings")]
+        [MenuItem("Level Designer/Settings")]
         private static void Init()
         {
             var window = GetWindow<SettingsWindow>();

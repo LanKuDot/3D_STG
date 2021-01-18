@@ -64,7 +64,7 @@ namespace LevelDesigner.Editor
         private readonly Color _selectedColor =
             new Color(0.0f, 0.6156863f, 1.0f);
 
-        [MenuItem("Window/Level Designer/Level Designer %#l", false, 1)]
+        [MenuItem("Level Designer/Level Designer %#l", false, 1)]
         public static void CreateEditorWindow()
         {
             var window = GetWindow<LevelDesignerEditorWindow>("Level Designer");

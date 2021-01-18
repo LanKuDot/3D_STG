@@ -24,7 +24,7 @@ namespace GamePlay.Editor
         private LevelData _levelData;
         private SerializedProperty _levelsProperty;
 
-        [MenuItem("Window/Level Designer/Level Data", false, 1)]
+        [MenuItem("Level Designer/Level Data", false, 1)]
         public static void SelectLevelData(MenuCommand menuCommand)
         {
             var targetData =

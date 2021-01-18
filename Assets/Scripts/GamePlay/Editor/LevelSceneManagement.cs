@@ -76,6 +76,7 @@ namespace GamePlay.Editor
         /// Load the gameplay scene. If it has been already loaded, set to
         /// active scene
         /// </summary>
+        [MenuItem("Level Designer/Open GamePlay Scene")]
         public static void OpenGamePlayScene()
         {
             var gamePlayScene =
