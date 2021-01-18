@@ -14,7 +14,7 @@ namespace GamePlay.UI
         private void Start()
         {
             // Make the cursor be trapped in the game view
-            Cursor.lockState = CursorLockMode.Confined;
+            CursorManager.ConfineCursor(true);
         }
 
         /// <summary>
@@ -28,10 +28,10 @@ namespace GamePlay.UI
 
             if (!_pauseText.activeSelf) {
                 LevelManager.GamePause();
-                Cursor.lockState = CursorLockMode.None;
+                CursorManager.ConfineCursor(false);
             } else {
                 LevelManager.GameResume();
-                Cursor.lockState = CursorLockMode.Confined;
+                CursorManager.ConfineCursor(true);
             }
 
             _pauseText.SetActive(!_pauseText.activeSelf);
