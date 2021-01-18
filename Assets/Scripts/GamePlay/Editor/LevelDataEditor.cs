@@ -249,6 +249,8 @@ namespace GamePlay.Editor
         {
             var curLevelID = LevelSceneManagement.GetLoadedLevelID(_levelData);
 
+            LevelSceneManagement.OpenGamePlayScene();
+
             if (curLevelID == index) {
                 Debug.Log("The specified level has been already opened");
                 return;

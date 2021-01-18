@@ -47,12 +47,6 @@ namespace GamePlay.Editor
         /// <param name="levelPath">The saving path of the new level scene</param>
         private static void CreateAndLoadLevel(string levelPath)
         {
-            // Open the game play scene first if it is not opened
-            var gamePlayScene = SceneManager.GetSceneByPath(LevelData.gamePlayScenePath);
-            if (!gamePlayScene.IsValid()) {
-                EditorSceneManager.OpenScene(LevelData.gamePlayScenePath);
-            }
-
             var levelScene = EditorSceneManager.NewScene(
                 NewSceneSetup.EmptyScene, NewSceneMode.Additive);
             LevelPainterEditor.CreateLevelDesigner(null);
@@ -63,7 +57,7 @@ namespace GamePlay.Editor
             var settings = AddressableAssetSettingsDefaultObject.Settings;
             settings.CreateAssetReference(guid);
 
-            SceneManager.SetActiveScene(gamePlayScene);
+            OpenGamePlayScene();
         }
 
         /// <summary>
@@ -77,6 +71,24 @@ namespace GamePlay.Editor
             UnloadAllScenesExcept(LevelData.gamePlayScenePath);
             EditorSceneManager.OpenScene(sceneAssetPath, OpenSceneMode.Additive);
         }
+
+        /// <summary>
+        /// Load the gameplay scene. If it has been already loaded, set to
+        /// active scene
+        /// </summary>
+        public static void OpenGamePlayScene()
+        {
+            var gamePlayScene =
+                SceneManager.GetSceneByPath(LevelData.gamePlayScenePath);
+            if (!gamePlayScene.IsValid()) {
+                gamePlayScene =
+                    EditorSceneManager.OpenScene(LevelData.gamePlayScenePath);
+            }
+
+            SceneManager.SetActiveScene(gamePlayScene);
+        }
+
+        #region Data Getter
 
         /// <summary>
         /// Get the transform of the player in the scene
@@ -106,5 +118,7 @@ namespace GamePlay.Editor
         {
             return LevelSceneRuntimeHelper.GetLoadedLevelID(levelData);
         }
+
+        #endregion
     }
 }
