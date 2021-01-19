@@ -140,7 +140,7 @@ namespace LevelDesigner.Editor
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
             SetupSectorSelectionField();
-            SetupValueFields();
+            SetupInputValueFields();
         }
 
         /// <summary>
@@ -249,31 +249,53 @@ namespace LevelDesigner.Editor
         /// <summary>
         /// Set up the input fields for setting the values
         /// </summary>
-        private void SetupValueFields()
+        private void SetupInputValueFields()
         {
             var root = rootVisualElement;
-            var yPositionField = _spawnConfigInfo.yPositionField;
-            var yRotationField = _spawnConfigInfo.yRotationField;
-            var globalScaleField = _spawnConfigInfo.globalScaleField;
+
+            RegisterValueField(
+                _spawnConfigInfo.yPositionField,
+                _painter.spawnConfig.yPosition,
+                OnYPositionValueChanged);
+            RegisterValueField(
+                _spawnConfigInfo.yRotationField,
+                _painter.spawnConfig.yRotation,
+                OnYRotationValueChanged);
+            RegisterVector3Field(
+                _spawnConfigInfo.globalScaleField,
+                _painter.spawnConfig.globalScale,
+                OnGlobalScaleValueChanged);
+            RegisterValueField(
+                root.Q<IntegerField>("position-snap"),
+                (int) EditorSnapSettings.move.x,
+                OnPositionSnapValueChanged);
+            RegisterValueField(
+                root.Q<IntegerField>("rotation-snap"),
+                (int) EditorSnapSettings.rotate,
+                OnRotationSnapValueChanged);
+            RegisterValueField(
+                root.Q<IntegerField>("scale-snap"),
+                (int) EditorSnapSettings.scale,
+                OnScaleSnapValueChanged);
+
             var resetButton = root.Q<Button>("reset-spawn-property-btn");
-            var positionSnapField = root.Q<IntegerField>("position-snap");
-            var rotationSnapField = root.Q<IntegerField>("rotation-snap");
-            var scaleSnapField = root.Q<IntegerField>("scale-snap");
-
-            yPositionField.value = _painter.spawnConfig.yPosition;
-            yRotationField.value = _painter.spawnConfig.yRotation;
-            globalScaleField.value = _painter.spawnConfig.globalScale;
-            positionSnapField.value = (int) EditorSnapSettings.move.x;
-            rotationSnapField.value = (int) EditorSnapSettings.rotate;
-            scaleSnapField.value = (int) EditorSnapSettings.scale;
-
-            yPositionField.RegisterValueChangedCallback(OnYPositionValueChanged);
-            yRotationField.RegisterValueChangedCallback(OnYRotationValueChanged);
-            globalScaleField.RegisterValueChangedCallback(OnGlobalScaleValueChanged);
-            positionSnapField.RegisterValueChangedCallback(OnPositionSnapValueChanged);
-            rotationSnapField.RegisterValueChangedCallback(OnRotationSnapValueChanged);
-            scaleSnapField.RegisterValueChangedCallback(OnScaleSnapValueChanged);
             resetButton.clicked += ResetSpawnProperty;
+        }
+
+        private void RegisterValueField<TValue>(
+            TextValueField<TValue> element, TValue initialValue,
+            EventCallback<ChangeEvent<TValue>> changeEventCallback)
+        {
+            element.value = initialValue;
+            element.RegisterValueChangedCallback(changeEventCallback);
+        }
+
+        private void RegisterVector3Field(
+            Vector3Field element, Vector3 initialValue,
+            EventCallback<ChangeEvent<Vector3>> changeEventCallback)
+        {
+            element.value = initialValue;
+            element.RegisterValueChangedCallback(changeEventCallback);
         }
 
         #endregion
