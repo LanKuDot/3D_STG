@@ -37,6 +37,18 @@ namespace LevelDesigner.Editor
             /// The field for specifying the global scale of the spawning object
             /// </summary>
             public Vector3Field globalScaleField;
+            /// <summary>
+            /// The field for setting the snapping value for movement
+            /// </summary>
+            public IntegerField positionSnapField;
+            /// <summary>
+            /// The field for setting the snapping value for rotation
+            /// </summary>
+            public IntegerField rotateSnapField;
+            /// <summary>
+            /// The field for setting the snapping value for scaling
+            /// </summary>
+            public IntegerField scaleSnapField;
         }
 
         private const string _uiResourcePath =
@@ -130,17 +142,24 @@ namespace LevelDesigner.Editor
             root.Clear();
             visualTree.CloneTree(root);
 
+            var configRoot =
+                root.Q<VisualElement>("prefab-spawning-settings-container");
+
             // Store the reference of the frequently used elements
             _spawnConfigInfo = new SpawnConfigInfo {
                 prefabNameLabel = root.Q<Label>("selected-prefab-name"),
-                yPositionField = root.Q<IntegerField>("spawn-y-position"),
-                yRotationField = root.Q<IntegerField>("spawn-y-rotation"),
-                globalScaleField = root.Q<Vector3Field>("spawn-global-scale")
+                yPositionField = configRoot.Q<IntegerField>("spawn-y-position"),
+                yRotationField = configRoot.Q<IntegerField>("spawn-y-rotation"),
+                globalScaleField = configRoot.Q<Vector3Field>("spawn-global-scale"),
+                positionSnapField = configRoot.Q<IntegerField>("position-snap"),
+                rotateSnapField = configRoot.Q<IntegerField>("rotation-snap"),
+                scaleSnapField = configRoot.Q<IntegerField>("scale-snap"),
             };
 
             LoadPalette(root.Q<ScrollView>("palette-scroll-view"));
             SetupSectorSelectionField();
             SetupInputValueFields();
+            SetupValueChangingButtons();
         }
 
         /// <summary>
@@ -251,8 +270,6 @@ namespace LevelDesigner.Editor
         /// </summary>
         private void SetupInputValueFields()
         {
-            var root = rootVisualElement;
-
             RegisterValueField(
                 _spawnConfigInfo.yPositionField,
                 _painter.spawnConfig.yPosition,
@@ -266,20 +283,17 @@ namespace LevelDesigner.Editor
                 _painter.spawnConfig.globalScale,
                 OnGlobalScaleValueChanged);
             RegisterValueField(
-                root.Q<IntegerField>("position-snap"),
+                _spawnConfigInfo.positionSnapField,
                 (int) EditorSnapSettings.move.x,
                 OnPositionSnapValueChanged);
             RegisterValueField(
-                root.Q<IntegerField>("rotation-snap"),
+                _spawnConfigInfo.rotateSnapField,
                 (int) EditorSnapSettings.rotate,
                 OnRotationSnapValueChanged);
             RegisterValueField(
-                root.Q<IntegerField>("scale-snap"),
+                _spawnConfigInfo.scaleSnapField,
                 (int) EditorSnapSettings.scale,
                 OnScaleSnapValueChanged);
-
-            var resetButton = root.Q<Button>("reset-spawn-property-btn");
-            resetButton.clicked += ResetSpawnProperty;
         }
 
         private void RegisterValueField<TValue>(
@@ -296,6 +310,46 @@ namespace LevelDesigner.Editor
         {
             element.value = initialValue;
             element.RegisterValueChangedCallback(changeEventCallback);
+        }
+
+        /// <summary>
+        /// Bind the callbacks to the value changing buttons
+        /// </summary>
+        private void SetupValueChangingButtons()
+        {
+            void SetupCallback<TValue>(
+                Button button, TextInputBaseField<TValue> targetField,
+                TValue amount)
+            {
+                button.clicked += () =>
+                    targetField.value = GenericAdd(targetField.value, amount);
+            }
+
+            dynamic GenericAdd(dynamic a, dynamic b) => a + b;
+
+            var configRoot =
+                rootVisualElement.Q<VisualElement>(
+                    "prefab-spawning-settings-container");
+
+            var resetButton = configRoot.Q<Button>("reset-spawn-property-btn");
+            resetButton.clicked += ResetSpawnProperty;
+
+            SetupCallback(
+                configRoot.Q<Button>("increase-y-position-button"),
+                _spawnConfigInfo.yPositionField,
+                _spawnConfigInfo.positionSnapField.value);
+            SetupCallback(
+                configRoot.Q<Button>("decrease-y-position-button"),
+                _spawnConfigInfo.yPositionField,
+                _spawnConfigInfo.positionSnapField.value * -1);
+            SetupCallback(
+                configRoot.Q<Button>("increase-y-rotation-button"),
+                _spawnConfigInfo.yRotationField,
+                _spawnConfigInfo.rotateSnapField.value);
+            SetupCallback(
+                configRoot.Q<Button>("decrease-y-rotation-button"),
+                _spawnConfigInfo.yRotationField,
+                _spawnConfigInfo.yRotationField.value * -1);
         }
 
         #endregion
@@ -362,16 +416,6 @@ namespace LevelDesigner.Editor
         }
 
         /// <summary>
-        /// Reset the properties for spawning object
-        /// </summary>
-        private void ResetSpawnProperty()
-        {
-            _spawnConfigInfo.yPositionField.value = 0;
-            _spawnConfigInfo.yRotationField.value = 0;
-            _spawnConfigInfo.globalScaleField.value = Vector3.one;
-        }
-
-        /// <summary>
         /// Callback for the value changing of the position snap<para />
         /// The value will be in [0, Inf]
         /// </summary>
@@ -405,6 +449,20 @@ namespace LevelDesigner.Editor
             var newValue = Mathf.Clamp(changeEvent.newValue, 0, Int32.MaxValue);
             EditorSnapSettings.scale = newValue;
             element.value = newValue;
+        }
+
+        #endregion
+
+        #region Value Setters
+
+        /// <summary>
+        /// Reset the properties for spawning object
+        /// </summary>
+        private void ResetSpawnProperty()
+        {
+            _spawnConfigInfo.yPositionField.value = 0;
+            _spawnConfigInfo.yRotationField.value = 0;
+            _spawnConfigInfo.globalScaleField.value = Vector3.one;
         }
 
         #endregion

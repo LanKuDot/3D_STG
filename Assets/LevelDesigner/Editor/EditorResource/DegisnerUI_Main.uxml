@@ -18,8 +18,16 @@
             <ui:Label text="Prefab to be spawned" name="title" style="margin-left: 3px; margin-right: 3px; margin-top: 1px; margin-bottom: 1px; min-width: 150px;" />
             <ui:Label text="-- None --" name="selected-prefab-name" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
-        <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane (t/T)" />
-        <uie:IntegerField label="Y Rotation" value="0" name="spawn-y-rotation" tooltip="The degree of the y rotation of the object to be spawned (r/R)" />
+        <ui:VisualElement name="spawn-y-position-container" style="flex-direction: row; justify-content: flex-end;">
+            <uie:IntegerField label="Y Position" value="0" name="spawn-y-position" tooltip="The y position of the spawning plane (t/T)" style="flex-grow: 1;" />
+            <ui:Button text="+" name="increase-y-position-button" />
+            <ui:Button text="-" name="decrease-y-position-button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="spawn-y-rotation-container" style="flex-direction: row;">
+            <uie:IntegerField label="Y Rotation" value="0" name="spawn-y-rotation" tooltip="The degree of the y rotation of the object to be spawned (r/R)" style="flex-grow: 1;" />
+            <ui:Button text="+" name="increase-y-rotation-button" />
+            <ui:Button text="-" name="decrease-y-rotation-button" />
+        </ui:VisualElement>
         <uie:Vector3Field label="Global Scale" name="spawn-global-scale" x="1" y="1" z="1" tooltip="The global scale of the object to be spawned (x/y/z/X/Y/Z)" />
         <ui:Button text="Reset" name="reset-spawn-property-btn" tooltip="Reset the property for spawning the object (e/E)" style="height: 21px;" />
         <ui:Foldout text="Snap settings" name="snap-settings-container" view-data-key="snap-settings">
