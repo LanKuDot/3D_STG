@@ -270,6 +270,22 @@ namespace LevelDesigner.Editor
         /// </summary>
         private void SetupInputValueFields()
         {
+            void RegisterValueField<TValue>(
+                TextValueField<TValue> element, TValue initialValue,
+                EventCallback<ChangeEvent<TValue>> changeEventCallback)
+            {
+                element.value = initialValue;
+                element.RegisterValueChangedCallback(changeEventCallback);
+            }
+
+            void RegisterVector3Field(
+                Vector3Field element, Vector3 initialValue,
+                EventCallback<ChangeEvent<Vector3>> changeEventCallback)
+            {
+                element.value = initialValue;
+                element.RegisterValueChangedCallback(changeEventCallback);
+            }
+
             RegisterValueField(
                 _spawnConfigInfo.yPositionField,
                 _painter.spawnConfig.yPosition,
@@ -294,22 +310,6 @@ namespace LevelDesigner.Editor
                 _spawnConfigInfo.scaleSnapField,
                 (int) EditorSnapSettings.scale,
                 OnScaleSnapValueChanged);
-        }
-
-        private void RegisterValueField<TValue>(
-            TextValueField<TValue> element, TValue initialValue,
-            EventCallback<ChangeEvent<TValue>> changeEventCallback)
-        {
-            element.value = initialValue;
-            element.RegisterValueChangedCallback(changeEventCallback);
-        }
-
-        private void RegisterVector3Field(
-            Vector3Field element, Vector3 initialValue,
-            EventCallback<ChangeEvent<Vector3>> changeEventCallback)
-        {
-            element.value = initialValue;
-            element.RegisterValueChangedCallback(changeEventCallback);
         }
 
         /// <summary>
