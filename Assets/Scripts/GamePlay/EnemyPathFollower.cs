@@ -19,6 +19,9 @@ namespace GamePlay
             "X axis is the relative time to the moving speed, " +
             "and Y axis is the timing of anchor points")]
         private AnimationCurve _movingCurve = null;
+        [SerializeField]
+        [Tooltip("The starting time in the moving curve")]
+        private float _startCurveTime = 0f;
 
         #endregion
 
@@ -39,6 +42,7 @@ namespace GamePlay
             base._data = _data;
             _smoothMove = new SmoothMove(0, 0, _data.rotateAccelTime);
             CalculateTimeScale();
+            _curTime = _startCurveTime;
         }
 
         /// <summary>
@@ -50,12 +54,6 @@ namespace GamePlay
             var desiredTime = pathLength / _data.avgMovingVelocity;
             var curveTime = _movingCurve[_movingCurve.length - 1].time;
             _timeScale = curveTime / desiredTime;
-        }
-
-        private new void OnEnable()
-        {
-            base.OnEnable();
-            _curTime = 0;
         }
 
         private new void Start()
