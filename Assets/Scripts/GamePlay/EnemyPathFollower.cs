@@ -5,6 +5,8 @@ namespace GamePlay
 {
     public class EnemyPathFollower : Enemy
     {
+        #region Serialized Fields
+
         [SerializeField]
         [Tooltip("The initial data for this enemy")]
         private new EnemyPathFollowerData _data = null;
@@ -12,8 +14,13 @@ namespace GamePlay
         [Tooltip("The path for this enemy to follow")]
         private PathCreator _path = null;
         [SerializeField]
-        [Tooltip("The curve for defining the moving timing along the path")]
+        [Tooltip(
+            "The curve for defining the moving timing along the path. " +
+            "X axis is the relative time to the moving speed, " +
+            "and Y axis is the timing of anchor points")]
         private AnimationCurve _movingCurve = null;
+
+        #endregion
 
         private Transform _playerTarget;
         private SmoothMove _smoothMove;
