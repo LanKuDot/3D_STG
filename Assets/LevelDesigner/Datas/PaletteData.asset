@@ -27,6 +27,9 @@ MonoBehaviour:
       - prefab: {fileID: 3774977999330143361, guid: c578b9cd282f1174bb725f4e9a97979e,
           type: 3}
         unitScaleSize: {x: 1, y: 1, z: 1}
+      - prefab: {fileID: 4430236825152273187, guid: c347c02469201bc439ee9c9bca4b8169,
+          type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
     - data:
       - prefab: {fileID: 4596909120183369758, guid: 3f02d2d61cf682141a0b03db5dcb59ac,
           type: 3}
