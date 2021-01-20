@@ -25,10 +25,10 @@ MonoBehaviour:
       m_SubObjectType: 
     playerSpawnPoint: {x: 0, y: 0, z: 0}
   - levelScene:
-      m_AssetGUID: 7df928e21580d1147a54d88c689a36b3
+      m_AssetGUID: 2266c6699dcaff14f955b22a256b5fc4
       m_SubObjectName: 
       m_SubObjectType: 
-    playerSpawnPoint: {x: 0, y: 0, z: -4}
+    playerSpawnPoint: {x: 0, y: 0, z: 0}
   - levelScene:
       m_AssetGUID: 84d42a09e201d37419596108386a6b8f
       m_SubObjectName: 

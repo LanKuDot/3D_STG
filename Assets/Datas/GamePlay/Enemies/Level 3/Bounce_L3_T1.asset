@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 739aafb087a64df4c8afc815fd4024f0, type: 3}
-  m_Name: EnemyBounce_Type2
+  m_Name: Bounce_L3_T1
   m_EditorClassIdentifier: 
   _hp: 3
   _firingScript:
@@ -19,29 +19,9 @@ MonoBehaviour:
     - _bullets:
       - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
           type: 3}
-        _degree: 0
-      - _prefab: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
-          type: 3}
         _degree: 90
       - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
           type: 3}
-        _degree: 180
-      - _prefab: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
-          type: 3}
         _degree: 270
-      _coolDownTime: 0.7
-    - _bullets:
-      - _prefab: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
-          type: 3}
-        _degree: 0
-      - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
-          type: 3}
-        _degree: 90
-      - _prefab: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
-          type: 3}
-        _degree: 180
-      - _prefab: {fileID: 7780335233930568598, guid: 22d7d0bdbde7dfd4d96c688306312c82,
-          type: 3}
-        _degree: 270
-      _coolDownTime: 0.7
+      _coolDownTime: 0.47
   _movingVelocity: 15
