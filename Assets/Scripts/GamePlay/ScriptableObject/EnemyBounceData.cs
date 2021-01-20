@@ -10,7 +10,7 @@ namespace GamePlay
     {
         [SerializeField]
         [Tooltip("The moving velocity in unit per second")]
-        private float _movingVelocity = 20.0f;
+        private float _movingVelocity = 15.0f;
 
         public float movingVelocity => _movingVelocity;
     }
