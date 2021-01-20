@@ -88,6 +88,10 @@ namespace GamePlay
         /// </summary>
         public void GameOver()
         {
+            // Prevent calling GameOver after called LevelPass
+            if (isLoadingLevel)
+                return;
+
             _levelCurtain.CloseCurtain("LEVEL FAILED", LoadLevel);
             isLoadingLevel = true;
         }
@@ -99,6 +103,10 @@ namespace GamePlay
         /// </summary>
         public void LevelPass()
         {
+            // Prevent calling LevelPass after called GameOver
+            if (isLoadingLevel)
+                return;
+
             if (++curLevelID == _levelData.Length) {
                 Debug.Log("Level Passed");
                 return;
