@@ -27,6 +27,12 @@ namespace GamePlay.Editor
         private void ShowAnchorTimeInfo()
         {
             var pathFollower = target as EnemyPathFollower;
+
+            if (pathFollower.path == null) {
+                EditorGUILayout.HelpBox("No path attached", MessageType.Warning);
+                return;
+            }
+
             var bPath = pathFollower.path.bezierPath;
             var vPath = pathFollower.path.path;
             var index = 0;
