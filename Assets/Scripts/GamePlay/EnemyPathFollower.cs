@@ -21,6 +21,12 @@ namespace GamePlay
         private float _timeScale = 1;
         private float _curTime = 0;
 
+        #region Properties
+
+        public PathCreator path => _path;
+
+        #endregion
+
         private void Awake()
         {
             base._data = _data;
