@@ -33,10 +33,10 @@ MonoBehaviour:
     - data:
       - prefab: {fileID: 4596909120183369758, guid: 3f02d2d61cf682141a0b03db5dcb59ac,
           type: 3}
-        unitScaleSize: {x: 1, y: 1, z: 1}
+        unitScaleSize: {x: 1.5, y: 1.5, z: 1.5}
       - prefab: {fileID: 8488180811068834420, guid: 193cbf18354fbf54fad75b59b7e5cd12,
           type: 3}
-        unitScaleSize: {x: 1, y: 1, z: 1}
+        unitScaleSize: {x: 1.5, y: 1.5, z: 1.5}
       - prefab: {fileID: 2508005783301189008, guid: f864d8296951b6642a8b03a0a70277a1,
           type: 3}
         unitScaleSize: {x: 10, y: 1, z: 10}
