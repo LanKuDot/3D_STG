@@ -349,7 +349,7 @@ namespace LevelDesigner.Editor
             SetupCallback(
                 configRoot.Q<Button>("decrease-y-rotation-button"),
                 _spawnConfigInfo.yRotationField,
-                _spawnConfigInfo.yRotationField.value * -1);
+                _spawnConfigInfo.rotateSnapField.value * -1);
         }
 
         #endregion
