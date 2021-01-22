@@ -107,13 +107,14 @@ namespace GamePlay
             if (isLoadingLevel)
                 return;
 
+            isLoadingLevel = true;
+
             if (++curLevelID == _levelData.Length) {
                 Debug.Log("Level Passed");
                 return;
             }
 
             _levelCurtain.CloseCurtain("LEVEL PASSED", LoadLevel);
-            isLoadingLevel = true;
         }
 
 #if UNITY_EDITOR
