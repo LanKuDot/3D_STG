@@ -29,12 +29,6 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: 7df928e21580d1147a54d88c689a36b3
-    m_Address: Assets/Scenes/Levels/Level 3.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 84d42a09e201d37419596108386a6b8f
     m_Address: Assets/Scenes/Levels/Level 4.unity
     m_ReadOnly: 0
@@ -43,6 +37,18 @@ MonoBehaviour:
     m_TargetAsset: {fileID: 0}
   - m_GUID: 59674057c9917df47900025bbea1a61a
     m_Address: Assets/Scenes/Levels/Level 5.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 2266c6699dcaff14f955b22a256b5fc4
+    m_Address: Assets/Scenes/Levels/Level 3.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: ecb9d7ff095a35f42877c3af047a9700
+    m_Address: Assets/Scenes/Levels/Level 6.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
