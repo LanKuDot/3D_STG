@@ -31,11 +31,16 @@ namespace GamePlay
         private float _timeScale = 1;
         private float _curTime = 0;
 
+#if UNITY_EDITOR
+
         #region Properties
 
+        public float avgMovingVelocity => _data.avgMovingVelocity;
         public PathCreator path => _path;
 
         #endregion
+
+#endif
 
         private void Awake()
         {

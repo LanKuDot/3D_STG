@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 namespace GamePlay.Editor
 {
@@ -36,6 +37,11 @@ namespace GamePlay.Editor
             var bPath = pathFollower.path.bezierPath;
             var vPath = pathFollower.path.path;
             var index = 0;
+
+            EditorGUILayout.LabelField(
+                new GUIContent(
+                    $"Loop time\t{vPath.length / pathFollower.avgMovingVelocity}",
+                    "The estimated time to go through the loop"));
 
             for (var i = 0; i < bPath.NumPoints; i += 3) {
                 var time = vPath.GetClosestTimeOnPath(bPath[i]);
