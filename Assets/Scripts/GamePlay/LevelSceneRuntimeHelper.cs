@@ -74,7 +74,7 @@ namespace GamePlay
 
             return foundID;
         }
-    }
 
 #endif
+    }
 }
