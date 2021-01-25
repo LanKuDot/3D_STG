@@ -31,6 +31,11 @@ MonoBehaviour:
           type: 3}
         _degree: 0
       _coolDownTime: 0.15
+    - _bullets:
+      - _prefab: {fileID: 1635879971994275447, guid: df908f3edc351604090cf6f242996838,
+          type: 3}
+        _degree: 0
+      _coolDownTime: 0.15
   _movingVelocity: 0
   _movingAccelTime: 10
   _rotateAccelTime: 0.8
