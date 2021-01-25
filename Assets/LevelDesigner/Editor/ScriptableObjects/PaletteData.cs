@@ -5,7 +5,9 @@ using UnityEngine;
 
 namespace LevelDesigner.Editor
 {
-    [CreateAssetMenu(fileName = "PaletteData.asset", menuName = "Level Designer/Palette Data")]
+    [CreateAssetMenu(
+        fileName = "PaletteData.asset",
+        menuName = "Level Designer/Palette Data")]
     internal class PaletteData : ScriptableObject
     {
         private const string _dataPath =
@@ -68,6 +70,9 @@ namespace LevelDesigner.Editor
     internal class PaletteItem
     {
         public GameObject prefab = null;
+        [Tooltip("The object size in unit when the scale value is (1, 1, 1)")]
         public Vector3 unitScaleSize = Vector3.one;
+        [Tooltip("The default scale value of the object")]
+        public Vector3 defaultScale = Vector3.one;
     }
 }

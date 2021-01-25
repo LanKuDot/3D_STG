@@ -372,6 +372,9 @@ namespace LevelDesigner.Editor
             _spawnConfigInfo.itemContainer = newItemContainer;
             _spawnConfigInfo.prefabNameLabel.text = newItem.prefab.name;
 
+            ResetSpawnProperty();
+            _spawnConfigInfo.globalScaleField.value = newItem.defaultScale;
+
             _painter.spawnConfig.prefab = newItem.prefab;
             _painter.spawnConfig.unitScaleSize = newItem.unitScaleSize;
 
