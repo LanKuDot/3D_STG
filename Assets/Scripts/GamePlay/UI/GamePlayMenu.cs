@@ -23,7 +23,8 @@ namespace GamePlay.UI
         public void ToggleMenu(InputAction.CallbackContext context)
         {
             // Cannot toggle menu when the level is loading
-            if (!context.performed || LevelManager.isLoadingLevel)
+            if (!context.performed
+                || (LevelManager.isLoadingLevel && !LevelManager.allLevelsPassed))
                 return;
 
             if (!_pauseText.activeSelf) {

@@ -19,6 +19,11 @@ namespace GamePlay
         /// Is the manager loading the level?
         /// </summary>
         public static bool isLoadingLevel { get; private set; }
+        /// <summary>
+        /// Are all the levels passed?
+        /// </summary>
+        /// TODO Remove this when the level selection menu is made
+        public static bool allLevelsPassed { get; private set; }
 
         /// <summary>
         /// The event will be invoked when the level is started<para />
@@ -111,6 +116,7 @@ namespace GamePlay
 
             if (++curLevelID == _levelData.Length) {
                 Debug.Log("Level Passed");
+                allLevelsPassed = true;
                 return;
             }
 
