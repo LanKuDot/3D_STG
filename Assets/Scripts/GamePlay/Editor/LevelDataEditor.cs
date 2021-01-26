@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
+using UnityEditor.SceneManagement;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -255,6 +256,12 @@ namespace GamePlay.Editor
                 Debug.Log("The specified level has been already opened");
                 return;
             }
+
+            // If user pressed cancel while asking for saving the scene,
+            // not to load the new scene
+            if (curLevelID != -1
+                && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                return;
 
             var sceneAssetPath = _levelData.GetLevelScenePath(index);
             LevelSceneManagement.OpenLevelScene(sceneAssetPath);
