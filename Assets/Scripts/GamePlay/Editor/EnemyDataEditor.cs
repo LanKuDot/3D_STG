@@ -10,11 +10,9 @@ namespace GamePlay.Editor
             SerializedProperty property, GUIContent label)
         {
             var bulletsPropty = property.FindPropertyRelative("_bullets");
-            var cdPropty = property.FindPropertyRelative("_coolDownTime");
             var bulletsProptyHeight = EditorGUI.GetPropertyHeight(bulletsPropty);
-            var cdProptyHeight = EditorGUI.GetPropertyHeight(cdPropty);
 
-            return bulletsProptyHeight + cdProptyHeight + 4;
+            return bulletsProptyHeight + 22;
         }
 
         public override void OnGUI(
@@ -40,12 +38,7 @@ namespace GamePlay.Editor
         public override float GetPropertyHeight(
             SerializedProperty property, GUIContent label)
         {
-            var prefabPropty = property.FindPropertyRelative("_prefab");
-            var degreePropty = property.FindPropertyRelative("_degree");
-            var prefabProptyHeight = EditorGUI.GetPropertyHeight(prefabPropty);
-            var degreeProptyHeight = EditorGUI.GetPropertyHeight(degreePropty);
-
-            return prefabProptyHeight + degreeProptyHeight + 4;
+            return 40;
         }
 
         public override void OnGUI(
