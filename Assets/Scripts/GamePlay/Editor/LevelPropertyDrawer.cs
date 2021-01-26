@@ -39,19 +39,14 @@ namespace GamePlay.Editor
             position.height = 21;
             EditorGUI.LabelField(position, levelTitleText, _titleFieldStyle);
 
-            // Level scene field
             position.y += 23;
+            // Level scene field
             var propertyToDraw = property.FindPropertyRelative("levelScene");
-            var propertyHeight = EditorGUI.GetPropertyHeight(propertyToDraw);
-            position.height = propertyHeight;
-            EditorGUI.PropertyField(position, propertyToDraw);
+            PropertyDrawerHelper.DrawPropertyField(ref position, propertyToDraw);
 
             // Player spawn point field
-            position.y += propertyHeight + 2;
             propertyToDraw = property.FindPropertyRelative("playerSpawnPoint");
-            propertyHeight = EditorGUI.GetPropertyHeight(propertyToDraw);
-            position.height = propertyHeight;
-            EditorGUI.PropertyField(position, propertyToDraw);
+            PropertyDrawerHelper.DrawPropertyField(ref position, propertyToDraw);
 
             EditorStyles.label.normal.textColor = origLabelColor;
         }
