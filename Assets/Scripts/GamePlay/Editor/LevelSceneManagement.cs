@@ -58,6 +58,9 @@ namespace GamePlay.Editor
             settings.CreateAssetReference(guid);
 
             OpenGamePlayScene();
+
+            // Pop up the level data for user to add the created level
+            LevelDataEditor.SelectLevelData(null);
         }
 
         /// <summary>
