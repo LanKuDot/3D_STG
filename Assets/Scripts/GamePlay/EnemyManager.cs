@@ -69,7 +69,8 @@ namespace GamePlay
             // Store the enemy if the current stage is not its stage
             if (spawnStage > _curStage) {
                 _enemyStageList[spawnStage - 1].Add(spawnCondition);
-                spawnCondition.InactivateEnemy();
+                if (spawnCondition.wakeBy != EnemySpawnCondition.WakeBy.Start)
+                    spawnCondition.InactivateEnemy();
             } else {
                 ++_numOfCurEnemy;
             }
@@ -116,6 +117,7 @@ namespace GamePlay
         public enum WakeBy
         {
             Manager,
+            Start,
             Others
         }
 
