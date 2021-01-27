@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Quaternion = UnityEngine.Quaternion;
@@ -47,7 +46,7 @@ namespace GamePlay
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
-            _protector.GetComponent<Protector>().Initialize(_data.noDamageInterval);
+            _protector.GetComponent<PlayerProtector>().Initialize(_data.noDamageInterval);
             // Default look action is controlled by the mouse
             _lookAction = LookAtPointer;
 

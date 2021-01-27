@@ -4,9 +4,9 @@ using UnityEngine;
 namespace GamePlay
 {
     /// <summary>
-    /// Block the opposite side's bullet and character
+    /// Block the enemies' bullets for a while
     /// </summary>
-    public class Protector : MonoBehaviour
+    public class PlayerProtector : MonoBehaviour
     {
         [SerializeField]
         private float _glowVelocity = 1.0f;
