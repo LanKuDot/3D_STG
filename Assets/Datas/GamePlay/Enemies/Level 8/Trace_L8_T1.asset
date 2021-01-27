@@ -23,4 +23,4 @@ MonoBehaviour:
       _coolDownTime: 0.2
   _movingVelocity: 5
   _movingAccelTime: 3
-  _rotateAccelTime: 1
+  _rotateAccelTime: 0.3
