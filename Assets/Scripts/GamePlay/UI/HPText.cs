@@ -9,10 +9,21 @@ namespace GamePlay.UI
         [SerializeField]
         [ShowOnly]
         private TextMeshProUGUI _text = null;
+        [SerializeField]
+        private int _lowHP = 1;
+        [SerializeField]
+        private Color _lowHPColor = Color.red;
+
+        private Color _origColor;
 
         private void Reset()
         {
             _text = GetComponent<TextMeshProUGUI>();
+        }
+
+        private void Awake()
+        {
+            _origColor = _text.color;
         }
 
         private void Start()
@@ -27,6 +38,7 @@ namespace GamePlay.UI
         private void UpdateHP(int hp)
         {
             _text.text = $"HP: {hp}";
+            _text.color = hp <= _lowHP ? _lowHPColor : _origColor;
         }
     }
 }
