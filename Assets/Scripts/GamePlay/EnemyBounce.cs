@@ -11,12 +11,12 @@ namespace GamePlay
         [SerializeField]
         private float _initialMovingDegree = 0.0f;
 
+        #region Data Getters
+
         public EnemyBounceData data => _data;
-        public float initialMovingDegree
-        {
-            get => _initialMovingDegree;
-            set => _initialMovingDegree = value;
-        }
+        public float initialMovingDegree => _initialMovingDegree;
+
+        #endregion
 
         private Vector3 _movingDirection;
 
