@@ -1150,6 +1150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1595819350}
+  _lowHP: 1
+  _lowHPColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1787588082
 GameObject:
   m_ObjectHideFlags: 0
