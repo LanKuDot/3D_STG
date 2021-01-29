@@ -7,13 +7,18 @@ namespace GamePlay
     /// </summary>
     public class PlayerBullet : Bullet
     {
+        [SerializeField]
+        private GameObject _hitSpark = null;
+        [SerializeField]
+        private GameObject _hitSparkValidHit = null;
+
         private new void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Trigger"))
                 return;
 
             if (!other.CompareTag("Bullet"))
-                SpawnSpark();
+                SpawnSpark(other.CompareTag("Enemy"));
 
             base.OnTriggerEnter(other);
         }
@@ -21,9 +26,11 @@ namespace GamePlay
         /// <summary>
         /// Spawn the spark at the tip of the bullet
         /// </summary>
-        private void SpawnSpark()
+        private void SpawnSpark(bool isValidHit)
         {
-            var spark = ObjectPool.Instance.GetObject("HitSpark");
+            var spark =
+                ObjectPool.Instance.GetObject(
+                    isValidHit ? _hitSparkValidHit.name : _hitSpark.name);
             var sparkTransform = spark.transform;
             var upDirection = transform.up;
 

@@ -126,3 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8145099201200424475}
   _data: {fileID: 11400000, guid: d3796608d29ca7041badcc3640c6c953, type: 2}
+  _hitSpark: {fileID: 3394544428883243434, guid: 74aace5aa9f708b42856890ffbfce64c,
+    type: 3}
+  _hitSparkValidHit: {fileID: 3602247091366981287, guid: 3c7ca32099f55334e9394b0db4c049cb,
+    type: 3}
