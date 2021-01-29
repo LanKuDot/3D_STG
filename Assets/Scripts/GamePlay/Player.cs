@@ -20,7 +20,6 @@ namespace GamePlay
         private PlayerData _data = null;
         [SerializeField]
         private GameObject _protector = null;
-        private Vector2 _cameraCenterPos;
 
         private int _hp;
         private SmoothMove _smoothMove;
@@ -39,7 +38,6 @@ namespace GamePlay
 
         private void Awake()
         {
-            _cameraCenterPos = new Vector2(Screen.width, Screen.height) / 2;
             _smoothMove = new SmoothMove(
                 _data.movingVelocity, _data.movingAccelTime, _data.rotatingAccelTime);
             _hp = _data.hp;
@@ -73,8 +71,11 @@ namespace GamePlay
 
         private void LookAtPointer(Vector2 pointerPos)
         {
+            var playerScreenPos =
+                (Vector2) Camera.main.WorldToScreenPoint(transform.position);
+
             _lookingDeg = -Vector2.SignedAngle(
-                Vector2.up, pointerPos - _cameraCenterPos);
+                Vector2.up, pointerPos - playerScreenPos);
         }
 
         private void LookByStick(Vector2 direction)
