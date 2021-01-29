@@ -18,7 +18,7 @@ namespace GamePlay
         /// <summary>
         /// Is the manager loading the level?
         /// </summary>
-        public static bool isLoadingLevel { get; private set; }
+        public static bool isLoadingLevel { get; private set; } = true;
         /// <summary>
         /// Are all the levels passed?
         /// </summary>
