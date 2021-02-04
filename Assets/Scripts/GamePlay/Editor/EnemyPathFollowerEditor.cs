@@ -34,6 +34,7 @@ namespace GamePlay.Editor
                 return;
             }
 
+            var pathTransform = pathFollower.path.transform;
             var bPath = pathFollower.path.bezierPath;
             var vPath = pathFollower.path.path;
             var index = 0;
@@ -44,7 +45,8 @@ namespace GamePlay.Editor
                     "The estimated time to go through the loop"));
 
             for (var i = 0; i < bPath.NumPoints; i += 3) {
-                var time = vPath.GetClosestTimeOnPath(bPath[i]);
+                var worldPoint = pathTransform.TransformPoint(bPath[i]);
+                var time = vPath.GetClosestTimeOnPath(worldPoint);
                 EditorGUILayout.LabelField($"Anchor {index}\t{time}");
                 ++index;
             }
