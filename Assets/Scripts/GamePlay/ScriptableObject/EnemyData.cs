@@ -20,7 +20,8 @@ namespace GamePlay
     public class FiringScript
     {
         [SerializeField]
-        [Tooltip("The initial delay for starting the first action")]
+        [Min(0.01f)]
+        [Tooltip("The initial delay for starting the first action [0.01, Inf]")]
         private float _initialDelay = 0.1f;
         [SerializeField]
         [Tooltip("The actions in the firing loop")]
