@@ -22,6 +22,10 @@ namespace LevelDesigner.Editor
             /// </summary>
             public VisualElement itemContainer;
             /// <summary>
+            /// Currently selected palette item
+            /// </summary>
+            public PaletteItem selectedItem;
+            /// <summary>
             /// The label for displaying the name of prefab of the selected item
             /// </summary>
             public Label prefabNameLabel;
@@ -369,11 +373,11 @@ namespace LevelDesigner.Editor
 
             newItemContainer.style.backgroundColor = _selectedColor;
 
+            _spawnConfigInfo.selectedItem = newItem;
             _spawnConfigInfo.itemContainer = newItemContainer;
             _spawnConfigInfo.prefabNameLabel.text = newItem.prefab.name;
 
             ResetSpawnProperty();
-            _spawnConfigInfo.globalScaleField.value = newItem.defaultScale;
 
             _painter.spawnConfig.prefab = newItem.prefab;
             _painter.spawnConfig.unitScaleSize = newItem.unitScaleSize;
@@ -465,7 +469,8 @@ namespace LevelDesigner.Editor
         {
             _spawnConfigInfo.yPositionField.value = 0;
             _spawnConfigInfo.yRotationField.value = 0;
-            _spawnConfigInfo.globalScaleField.value = Vector3.one;
+            _spawnConfigInfo.globalScaleField.value =
+                _spawnConfigInfo.selectedItem.defaultScale;
         }
 
         #endregion
