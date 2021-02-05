@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GamePlay.Editor
 {
     [CustomEditor(typeof(EnemyPathFollower))]
-    public class EnemyPathFollowerEditor : UnityEditor.Editor
+    public class EnemyPathFollowerEditor : EnemyEditor
     {
         private bool _showAnchorInfo = true;
 
