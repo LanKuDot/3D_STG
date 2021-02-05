@@ -9,10 +9,8 @@ namespace GamePlay.Editor
         public override float GetPropertyHeight(
             SerializedProperty property, GUIContent label)
         {
-            var bulletsPropty = property.FindPropertyRelative("_bullets");
-            var bulletsProptyHeight = EditorGUI.GetPropertyHeight(bulletsPropty);
-
-            return bulletsProptyHeight + 22;
+            property.isExpanded = true;
+            return EditorGUI.GetPropertyHeight(property) - 10;
         }
 
         public override void OnGUI(
