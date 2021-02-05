@@ -159,6 +159,7 @@ namespace GamePlay.Editor
             AddLevelItem();
 
             var levelID = _listView.selectedIndex;
+            serializedObject.Update();
             _levelData.ModifyLevelScene(levelID, assetReference);
             _levelData.ModifyPlayerSpawnPoint(levelID, respawnPosition);
             serializedObject.ApplyModifiedProperties();
