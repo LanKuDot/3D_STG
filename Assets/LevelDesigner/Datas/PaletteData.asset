@@ -47,3 +47,7 @@ MonoBehaviour:
           type: 3}
         unitScaleSize: {x: 10, y: 1, z: 10}
         defaultScale: {x: 1, y: 1, z: 1}
+      - prefab: {fileID: 9025890322689891325, guid: 9b175472b5fdfd24cb5b263d82e4af43,
+          type: 3}
+        unitScaleSize: {x: 1, y: 1, z: 1}
+        defaultScale: {x: 1.5, y: 1.5, z: 1.5}
