@@ -17,6 +17,7 @@ namespace GamePlay.Editor
         public override float GetPropertyHeight(
             SerializedProperty property, GUIContent label)
         {
+            property.isExpanded = true;
             return EditorGUI.GetPropertyHeight(property, label, true);
         }
 
